@@ -9,30 +9,14 @@
                 <span class="more">查看全部 <i class="icon iconfont icon-more"></i></span>
             </div>
             <div class="tabbar-container">
-                <span class="tabbar tabbar-selected">要产品</span>
-                <span class="tabbar">要渠道</span>
+                <span class="tabbar" :class="{ 'tabbar-selected':curSelected==='demand'}" @click="curSelected='demand'">要产品</span>
+                <span class="tabbar" :class="{ 'tabbar-selected':curSelected==='supply'}" @click="curSelected='supply'">要渠道</span>
             </div>
         </div>
         <div class="item-content">
-            <div class="product-item">
-                <span class="item-title">橙皮苷 Hesperisonsf</span>
-                <span class="item-info">HS号：293293293293</span>
-            </div>
-            <div class="product-item">
-                <span class="item-title">橙皮苷 Hesperisonsf</span>
-                <span class="item-info">HS号：293293293293</span>
-            </div>
-            <div class="product-item">
-                <span class="item-title">橙皮苷 Hesperisonsf</span>
-                <span class="item-info">HS号：293293293293</span>
-            </div>
-            <div class="product-item">
-                <span class="item-title">橙皮苷 Hesperisonsf</span>
-                <span class="item-info">HS号：293293293293</span>
-            </div>
-            <div class="product-item">
-                <span class="item-title">橙皮苷 Hesperisonsf</span>
-                <span class="item-info">HS号：293293293293</span>
+            <div class="product-item" :data-foreigntradeid="item.foreigntradeid" :key="item.foreigntradeid" v-for="item in curData">
+                <p><span class="item-title">{{item.companyname}}</span></p>
+                <p><span class="item-info">HS号：{{item.hs}}</span></p>
             </div>
         </div>
 
@@ -41,9 +25,18 @@
 <script>
     export default {
         name:'waimao',
+        props:['demandData','supplyData'],
         data(){
             return{
+                curSelected:'demand'
+            }
+        },
+        mounted(){
 
+        },
+        computed:{
+            curData(){
+                return this.curSelected === 'demand'?this.demandData.list:this.supplyData.list
             }
         }
     }

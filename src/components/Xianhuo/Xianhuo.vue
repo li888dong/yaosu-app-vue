@@ -53,7 +53,6 @@
         },
         methods:{
             changeSelected(e){
-                console.log(e.srcElement.dataset.type)
                 this.curSelected = e.srcElement.dataset.type
             }
         }

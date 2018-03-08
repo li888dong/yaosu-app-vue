@@ -10,22 +10,10 @@
             </div>
         </div>
         <div class="item-content">
-            <div class="product-item">
-                <div class="item-title">己内酰胺</div>
-                <div class="item-info">纯度：99%</div>
-                <div class="item-company">西安晋级了化工有限公司</div>
-            </div><div class="product-item">
-                <div class="item-title">己内酰胺</div>
-                <div class="item-info">纯度：99%</div>
-                <div class="item-company">西安晋级了化工有限公司</div>
-            </div><div class="product-item">
-                <div class="item-title">己内酰胺</div>
-                <div class="item-info">纯度：99%</div>
-                <div class="item-company">西安晋级了化工有限公司</div>
-            </div><div class="product-item">
-                <div class="item-title">己内酰胺</div>
-                <div class="item-info">纯度：99%</div>
-                <div class="item-company">西安晋级了化工有限公司</div>
+            <div class="product-item" :data-procurementid="item.procurementid" :key="item.procurementid" v-for="item in procurement">
+                <div class="item-title">{{item.goodname}}</div>
+                <div class="item-company">{{item.companyname||'个人用户'}}</div>
+                <div class="item-info">{{item.messagevalidity}}</div>
             </div>
         </div>
 
@@ -34,6 +22,7 @@
 <script>
     export default {
         name:'caigou',
+        props:['procurement'],
         data(){
             return{
 

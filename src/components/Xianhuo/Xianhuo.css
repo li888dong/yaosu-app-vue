@@ -1,48 +1,50 @@
-.item-container.xianhuo .title .logo {
-    background-image: url("../../assets/xianhuo.gif");
+/*优质现货*/
+.item-container.xianhuo .title .logo{
+    background-image: url("../../assets/xianhuo.gif") ;
 }
 
-.item-container.xianhuo .tabbar-list {
+.item-container.xianhuo .tabbar-list{
     border-bottom: 5px solid #EFEDEE;
-    font-size: 14px;
+    font-size:14px;
 }
-
-.item-container.xianhuo .tabbar-list td {
+.item-container.xianhuo .tabbar-list td{
     text-align: center;
     border-bottom: 1px solid #eee;
     width: 25%;
 }
-
-.item-container.xianhuo .tabbar-list td:not(:nth-child(0)) {
-    border-left: 1px solid #eee;
+.item-container.xianhuo .tabbar-list td:not(:nth-child(0)){
+    border-left:1px solid #eee;
 }
-
-.item-container.xianhuo .tabbar-list td.selected {
-    background-color: #03A657;
+.item-container.xianhuo .tabbar-list td.selected{
+    background-color:#03A657;
     color: white;
 }
-
-.item-container.xianhuo .tabbar-list > span {
+.item-container.xianhuo .tabbar-list>span{
     display: inline-block;
     height: 60px;
     text-align: center;
     vertical-align: middle;
-    padding: 10px 15px;
+    padding:10px 15px;
 }
 
-.item-container.xianhuo .item-content .product-item {
+.item-container.xianhuo .item-content .product-item{
     width: 50%;
     display: inline-block;
-    padding: 10px 15px;
+    padding:10px 15px;
     box-sizing: border-box;
     border-bottom: 1px solid #eee;
-    line-height: 24px;
+    line-height:24px;
 }
-
-.item-container.xianhuo .item-content .product-item:nth-child(even) {
+.item-container.xianhuo .item-content .product-item h4.item-title{
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.item-container.xianhuo .item-content .product-item:nth-child(even){
     border-left: 1px solid #eee;
 }
 
-.item-container.xianhuo .item-company {
+.item-container.xianhuo .item-company{
     font-size: 12px;
 }
+

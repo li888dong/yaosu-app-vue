@@ -18,13 +18,13 @@
         </div>
 
         <!--热门采购-->
-        <Caigou/>
+        <Caigou :procurement="procurement"/>
         <div class="ad-logo ad02">
 
         </div>
 
         <!--优选外贸-->
-        <Waimao/>
+        <Waimao :demandData="FTN[0]" :supplyData="FTN[1]"/>
         <div class="ad-logo ad03">
 
         </div>
@@ -65,7 +65,10 @@
                 banner:[],
                 goods:[],
                 procurement:[],
-                service:[],
+                ANN:[],
+                FTN:[],
+                PNO:[],
+                TNO:[],
                 tcm:[]
             }
         },
@@ -92,7 +95,10 @@
                     _this.advertising = data.advertising;
                     _this.goods = data.goods;
                     _this.procurement = data.procurement;
-                    _this.service = data.service;
+                    _this.ANN = data.service.ANN;
+                    _this.FTN = data.service.FTN;
+                    _this.PNO = data.service.PNO;
+                    _this.TNO = data.service.TNO;
                     _this.$store.dispatch('set_advertising', data.advertising);
                     _this.$store.dispatch('set_api', data.api);
                     _this.$store.dispatch('set_banner', data.banner);
