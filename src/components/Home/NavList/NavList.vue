@@ -7,7 +7,7 @@
             <div class="nav-item-img nav-img01"></div>
             <div class="nav-title">要采购</div>
         </div>
-        <div class="nav-item" data-name="xianhuo">
+        <div class="nav-item" data-name="xianhuo" @click="$router.push('service_list')">
             <div class="nav-item-img nav-img02"></div>
             <div class="nav-title">要现货</div>
         </div>

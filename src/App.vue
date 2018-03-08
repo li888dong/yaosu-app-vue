@@ -48,4 +48,10 @@
         margin-right: 10px;
         font-size: 12px;
     }
+
+    ul,li{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
 </style>
