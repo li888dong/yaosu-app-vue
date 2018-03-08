@@ -11,7 +11,7 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 import './assets/iconfont/iconfont.css'
 const instance = axios.create({
-    baseURL: "http://localhost:3000",
+    // baseURL: "http://localhost:3000",
     timeout: 15000
 });
 Vue.http = Vue.prototype.$http = instance;

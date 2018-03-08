@@ -9,30 +9,14 @@
                 <span class="more">查看全部 <i class="icon iconfont icon-more"></i></span>
             </div>
             <div class="tabbar-container">
-                <span class="tabbar tabbar-selected">要批文</span>
-                <span class="tabbar">批文转让</span>
+                <span class="tabbar" :class="{ 'tabbar-selected':curSelected==='demand'}" @click="changeCur('demand')">要批文</span>
+                <span class="tabbar" :class="{ 'tabbar-selected':curSelected==='supply'}" @click="changeCur('supply')">批文转让</span>
             </div>
         </div>
         <div class="item-content">
-            <div class="product-item">
-                <span class="item-title">橙皮苷 Hesperisonsf</span>
-                <span class="item-info">HS号：293293293293</span>
-            </div>
-            <div class="product-item">
-                <span class="item-title">橙皮苷 Hesperisonsf</span>
-                <span class="item-info">HS号：293293293293</span>
-            </div>
-            <div class="product-item">
-                <span class="item-title">橙皮苷 Hesperisonsf</span>
-                <span class="item-info">HS号：293293293293</span>
-            </div>
-            <div class="product-item">
-                <span class="item-title">橙皮苷 Hesperisonsf</span>
-                <span class="item-info">HS号：293293293293</span>
-            </div>
-            <div class="product-item">
-                <span class="item-title">橙皮苷 Hesperisonsf</span>
-                <span class="item-info">HS号：293293293293</span>
+            <div class="product-item" :data-technologyid="item.approvalnumberid" :key="item.approvalnumberid" v-for="item in curData">
+                <div class="item-title">{{item.companyname || ''}}</div>
+                <div class="item-date">{{item.addtime || ''}}</div>
             </div>
         </div>
 
@@ -41,9 +25,23 @@
 <script>
     export default {
         name:'piwen',
+        props:['demandData','supplyData'],
         data(){
             return{
-
+                curSelected:'demand'
+            }
+        },
+        mounted(){
+            console.log(this.curData)
+        },
+        computed:{
+            curData(){
+                return this.curSelected === 'demand'?this.demandData:this.supplyData
+            }
+        },
+        methods:{
+            changeCur(cur){
+                this.curSelected = cur
             }
         }
     }

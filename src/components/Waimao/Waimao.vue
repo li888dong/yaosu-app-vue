@@ -9,8 +9,8 @@
                 <span class="more">查看全部 <i class="icon iconfont icon-more"></i></span>
             </div>
             <div class="tabbar-container">
-                <span class="tabbar" :class="{ 'tabbar-selected':curSelected==='demand'}" @click="curSelected='demand'">要产品</span>
-                <span class="tabbar" :class="{ 'tabbar-selected':curSelected==='supply'}" @click="curSelected='supply'">要渠道</span>
+                <span class="tabbar" :class="{ 'tabbar-selected':curSelected==='demand'}" @click="changeCur('demand')">要产品</span>
+                <span class="tabbar" :class="{ 'tabbar-selected':curSelected==='supply'}" @click="changeCur('supply')">要渠道</span>
             </div>
         </div>
         <div class="item-content">
@@ -31,12 +31,14 @@
                 curSelected:'demand'
             }
         },
-        mounted(){
-
-        },
         computed:{
             curData(){
-                return this.curSelected === 'demand'?this.demandData.list:this.supplyData.list
+                return this.curSelected === 'demand'?this.demandData:this.supplyData
+            }
+        },
+        methods:{
+            changeCur(cur){
+                this.curSelected = cur
             }
         }
     }

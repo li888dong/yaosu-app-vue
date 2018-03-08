@@ -24,22 +24,22 @@
         </div>
 
         <!--优选外贸-->
-        <Waimao :demandData="FTN[0]" :supplyData="FTN[1]"/>
+        <Waimao :demandData="FTN1" :supplyData="FTN2"/>
         <div class="ad-logo ad03">
 
         </div>
         <!--推荐项目-->
-        <Xiangmu/>
+        <Xiangmu :demandData="PNO1" :supplyData="PNO2"/>
         <div class="ad-logo ad04">
 
         </div>
         <!--创新技术-->
-        <Jishu/>
+        <Jishu :demandData="TNO1" :supplyData="TNO2"/>
         <div class="ad-logo ad05">
 
         </div>
         <!--人气批文-->
-        <Piwen/>
+        <Piwen :demandData="ANN1" :supplyData="ANN2"/>
         <Advertsing/>
     </div>
 </template>
@@ -65,10 +65,14 @@
                 banner:[],
                 goods:[],
                 procurement:[],
-                ANN:[],
-                FTN:[],
-                PNO:[],
-                TNO:[],
+                ANN1:[],
+                ANN2:[],
+                FTN1:[],
+                FTN2:[],
+                PNO1:[],
+                PNO2:[],
+                TNO1:[],
+                TNO2:[],
                 tcm:[]
             }
         },
@@ -86,7 +90,7 @@
         },
         mounted() {
             const _this = this;
-            this.$http.get('/app/index/list')
+            this.$http.get('../static/test.json')
                 .then(function (response) {
                     const data = response.data.data;
                     _this.banner = data.banner;
@@ -95,10 +99,14 @@
                     _this.advertising = data.advertising;
                     _this.goods = data.goods;
                     _this.procurement = data.procurement;
-                    _this.ANN = data.service.ANN;
-                    _this.FTN = data.service.FTN;
-                    _this.PNO = data.service.PNO;
-                    _this.TNO = data.service.TNO;
+                    _this.ANN1 = data.service.ANN[0].list;
+                    _this.ANN2 = data.service.ANN[1].list;
+                    _this.FTN1 = data.service.FTN[0].list;
+                    _this.FTN2 = data.service.FTN[1].list;
+                    _this.PNO1 = data.service.PNO[0].list;
+                    _this.PNO2 = data.service.PNO[1].list;
+                    _this.TNO1 = data.service.TNO[0].list;
+                    _this.TNO2 = data.service.TNO[1].list;
                     _this.$store.dispatch('set_advertising', data.advertising);
                     _this.$store.dispatch('set_api', data.api);
                     _this.$store.dispatch('set_banner', data.banner);
