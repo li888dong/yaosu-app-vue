@@ -1,124 +1,12 @@
 <template>
     <div id="app">
-        <!--顶部banner搜索框-->
-        <header>
-            <Banner :bannerData="banner"></Banner>
-        </header>
-
-        <!--导航按钮-->
-        <NavList></NavList>
-
-        <!--参考价格-->
-        <ProductPriceList :yuanliaos="api" :zhongyaos="tcm"></ProductPriceList>
-
-        <!--优质现货-->
-        <Xianhuo :goods="goods"></Xianhuo>
-        <Advertsing></Advertsing>
-
-        <!--热门采购-->
-        <Caigou :procurement="procurement"></Caigou>
-        <Advertsing></Advertsing>
-
-        <!--优选外贸-->
-        <Waimao :demandData="FTN1" :supplyData="FTN2"></Waimao>
-        <Advertsing></Advertsing>
-
-        <!--推荐项目-->
-        <Xiangmu :demandData="PNO1" :supplyData="PNO2"></Xiangmu>
-        <Advertsing></Advertsing>
-
-        <!--创新技术-->
-        <Jishu :demandData="TNO1" :supplyData="TNO2"></Jishu>
-        <Advertsing></Advertsing>
-
-        <!--人气批文-->
-        <Piwen :demandData="ANN1" :supplyData="ANN2"></Piwen>
-        <Advertsing></Advertsing>
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
-    import Banner from './components/Banner/Banner.vue'
-    import NavList from './components/NavList/NavList.vue'
-    import ProductPriceList from './components/ProductPriceList/ProductPriceList.vue'
-    import Xianhuo from './components/Xianhuo/Xianhuo.vue'
-    import Caigou from './components/Caigou/Caigou.vue'
-    import Waimao from './components/Waimao/Waimao.vue'
-    import Xiangmu from './components/Xiangmu/Xiangmu.vue'
-    import Jishu from './components/Jishu/Jishu.vue'
-    import Piwen from './components/Piwen/Piwen.vue'
-    import Advertsing from './components/Advertising/Advertising.vue'
-
     export default {
-        name: 'App',
-        data() {
-            return {
-                advertising:[],
-                api:[],
-                banner:[],
-                goods:[],
-                procurement:[],
-                ANN1:[],
-                ANN2:[],
-                FTN1:[],
-                FTN2:[],
-                PNO1:[],
-                PNO2:[],
-                TNO1:[],
-                TNO2:[],
-                tcm:[]
-            }
-        },
-        components: {
-            Banner,
-            NavList,
-            ProductPriceList,
-            Xianhuo,
-            Caigou,
-            Waimao,
-            Xiangmu,
-            Jishu,
-            Piwen,
-            Advertsing
-        },
-        mounted() {
-            const _this = this;
-            const adDoms = document.querySelectorAll('.ad-logo');
-
-            this.$http.get('../static/test.json')
-                .then(function (response) {
-                    const data = response.data.data;
-                    _this.banner = data.banner;
-                    _this.api = data.api;
-                    _this.tcm = data.tcm;
-                    _this.advertising = data.advertising;
-                    _this.goods = data.goods;
-                    _this.procurement = data.procurement;
-                    _this.ANN1 = data.service.ANN[0].list;
-                    _this.ANN2 = data.service.ANN[1].list;
-                    _this.FTN1 = data.service.FTN[0].list;
-                    _this.FTN2 = data.service.FTN[1].list;
-                    _this.PNO1 = data.service.PNO[0].list;
-                    _this.PNO2 = data.service.PNO[1].list;
-                    _this.TNO1 = data.service.TNO[0].list;
-                    _this.TNO2 = data.service.TNO[1].list;
-                    _this.$store.dispatch('set_advertising', data.advertising);
-                    _this.$store.dispatch('set_api', data.api);
-                    _this.$store.dispatch('set_banner', data.banner);
-                    _this.$store.dispatch('set_goods', data.goods);
-                    _this.$store.dispatch('set_procurement', data.procurement);
-                    _this.$store.dispatch('set_service', data.service);
-                    _this.$store.dispatch('set_tcm', data.tcm);
-
-//                    设置广告的图片链接
-                    for (let i=0;i<_this.advertising.length;i++){
-                        adDoms[i].style.backgroundImage = 'url(http://image.yaosuce.com'+_this.advertising[i].picture+')'
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        }
+        name: 'App'
     }
 </script>
 

@@ -51,7 +51,7 @@
 </template>
 <script>
     import $ from 'jquery'
-    import lunbo from '../../util/lunbo'
+    import lunbo from '../../../util/lunbo'
 
     export default {
         name: 'productpricelist',

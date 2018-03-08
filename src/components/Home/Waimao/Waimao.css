@@ -1,9 +1,9 @@
 /*优选外贸*/ /*人气批文*/
 .item-container.waimao .title .logo{
-    background-image: url("../../assets/waimao.png") ;
+    background-image: url("../../../assets/waimao.png") ;
 }
 .item-container.piwen .title .logo{
-    background-image: url("../../assets/piwen.png") ;
+    background-image: url("../../../assets/piwen.png") ;
 }
 .item-container.waimao .tabbar-container,
 .item-container.piwen .tabbar-container{
@@ -41,10 +41,10 @@
 }
 /*推荐项目*//*创新技术*/
 .item-container.xiangmu .title .logo{
-    background-image: url("../../assets/xiangmu.png") ;
+    background-image: url("../../../assets/xiangmu.png") ;
 }
 .item-container.jishu .title .logo{
-    background-image: url("../../assets/jishu.png") ;
+    background-image: url("../../../assets/jishu.png") ;
 }
 .item-container.xiangmu .tabbar-container,
 .item-container.jishu .tabbar-container{
