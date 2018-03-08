@@ -2,45 +2,38 @@
     <div id="app">
         <!--顶部banner搜索框-->
         <header>
-            <Banner :bannerData="banner"/>
+            <Banner :bannerData="banner"></Banner>
         </header>
 
         <!--导航按钮-->
-        <NavList/>
+        <NavList></NavList>
 
         <!--参考价格-->
-        <ProductPriceList :yuanliaos="api" :zhongyaos="tcm"/>
+        <ProductPriceList :yuanliaos="api" :zhongyaos="tcm"></ProductPriceList>
 
         <!--优质现货-->
-        <Xianhuo :goods="goods"/>
-        <div class="ad-logo ad01">
-
-        </div>
+        <Xianhuo :goods="goods"></Xianhuo>
+        <Advertsing></Advertsing>
 
         <!--热门采购-->
-        <Caigou :procurement="procurement"/>
-        <div class="ad-logo ad02">
-
-        </div>
+        <Caigou :procurement="procurement"></Caigou>
+        <Advertsing></Advertsing>
 
         <!--优选外贸-->
-        <Waimao :demandData="FTN1" :supplyData="FTN2"/>
-        <div class="ad-logo ad03">
+        <Waimao :demandData="FTN1" :supplyData="FTN2"></Waimao>
+        <Advertsing></Advertsing>
 
-        </div>
         <!--推荐项目-->
-        <Xiangmu :demandData="PNO1" :supplyData="PNO2"/>
-        <div class="ad-logo ad04">
+        <Xiangmu :demandData="PNO1" :supplyData="PNO2"></Xiangmu>
+        <Advertsing></Advertsing>
 
-        </div>
         <!--创新技术-->
-        <Jishu :demandData="TNO1" :supplyData="TNO2"/>
-        <div class="ad-logo ad05">
+        <Jishu :demandData="TNO1" :supplyData="TNO2"></Jishu>
+        <Advertsing></Advertsing>
 
-        </div>
         <!--人气批文-->
-        <Piwen :demandData="ANN1" :supplyData="ANN2"/>
-        <Advertsing/>
+        <Piwen :demandData="ANN1" :supplyData="ANN2"></Piwen>
+        <Advertsing></Advertsing>
     </div>
 </template>
 
@@ -90,6 +83,8 @@
         },
         mounted() {
             const _this = this;
+            const adDoms = document.querySelectorAll('.ad-logo');
+
             this.$http.get('../static/test.json')
                 .then(function (response) {
                     const data = response.data.data;
@@ -114,6 +109,11 @@
                     _this.$store.dispatch('set_procurement', data.procurement);
                     _this.$store.dispatch('set_service', data.service);
                     _this.$store.dispatch('set_tcm', data.tcm);
+
+//                    设置广告的图片链接
+                    for (let i=0;i<_this.advertising.length;i++){
+                        adDoms[i].style.backgroundImage = 'url(http://image.yaosuce.com'+_this.advertising[i].picture+')'
+                    }
                 })
                 .catch(function (error) {
                     console.log(error);

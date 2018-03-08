@@ -1,5 +1,5 @@
 <style>
-
+    @import "Adversting.css";
 </style>
 <template>
     <div class="ad-logo">
@@ -8,11 +8,6 @@
 </template>
 <script>
     export default {
-        name:'advertsing',
-        data(){
-            return{
-
-            }
-        }
+        name:'advertsing'
     }
 </script>
