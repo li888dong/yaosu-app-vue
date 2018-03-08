@@ -1,0 +1,94 @@
+/*产品参考价格*/
+.product-container .tabbar-container{
+    width: 100%;
+    height: 30px;
+    margin-top: 20px;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+}
+.product-container .tabbar{
+    font-size: 14px;
+    display: inline-block;
+    width: 33%;
+    height:30px;
+    text-align: center;
+    vertical-align: bottom;
+}
+.product-container .tabbar-selected{
+    width: 33%;
+    text-align: center;
+    color: #05a96d;
+    border-bottom: 1px solid #05a96d;
+}
+.product-container{
+    height: 130px;
+}
+.product-container .product-price{
+    padding-top: 15px;
+    height: 50px;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+}
+.product-container .price-title{
+    width: 50px;
+    margin-left: 10px;
+}
+.product-container .product-info{
+    font-size: 12px;
+    width: 100%;
+    margin: 0 0 0 10px;
+    height: 50px;
+    border-left: 1px solid #000000;
+    overflow: hidden;
+    position: relative;
+}
+.product-container .product-info .slide-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.product-container .product-info .slide-container>div{
+    height: 50px;
+    padding-left: 10px;
+}
+.product-container .product-info .slide-container.yuanliao{
+    z-index: 1;
+    box-sizing: border-box;
+    padding-top: 10px;
+}
+.product-container  .slide-container.zhongyao span{
+    display: inline-block;
+}
+.product-container  .slide-container.zhongyao .product-name{
+    margin-right: 15px;
+}
+
+.product-container .product-info .slide-container.yuanliao p{
+    white-space: nowrap;
+}
+.product-container .product-info span{
+    display: inline-block;
+    margin:0 5px;
+}
+.product-container  .markets-group span{
+    width: 47px;
+}
+.product-container .product-name,
+.product-container  .markets{
+    color: #f97433;
+}
+.product-container .product-list{
+    min-width: 56px;
+    margin-right: 10px;
+    font-size:12px;
+    text-align: center;
+}
+.product-container .product-list .btn-image{
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-size: contain;
+    background-image: url("../../assets/btn-list.gif");
+}

@@ -1,0 +1,57 @@
+/*导航按钮*/
+.nav-list{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+.nav-list div{
+    display: inline-block;
+}
+.nav-list .nav-item{
+    width: 25%;
+    height: auto;
+    margin-top: 20px;
+    text-align: center;
+}
+.nav-list .nav-item-img{
+    width: 46px;
+    height: 46px;
+    background-size: contain;
+}
+.nav-list .nav-title{
+    width: 78px;
+    height: 30px;
+    font-size: 16px;
+}
+
+.nav-list .nav-img01 {
+    background-image: url("../../assets/nav_01.gif");
+}
+
+.nav-list .nav-img02 {
+    background-image: url("../../assets/nav_02.gif");
+}
+
+.nav-list .nav-img03 {
+    background-image: url("../../assets/nav_03.gif");
+}
+
+.nav-list .nav-img04 {
+    background-image: url("../../assets/nav_04.gif");
+}
+
+.nav-list .nav-img05 {
+    background-image: url("../../assets/nav_05.png");
+}
+
+.nav-list .nav-img06 {
+    background-image: url("../../assets/nav_06.gif");
+}
+
+.nav-list .nav-img07 {
+    background-image: url("../../assets/nav_07.gif");
+}
+
+.nav-list .nav-img08 {
+    background-image: url("../../assets/nav_08.gif");
+}

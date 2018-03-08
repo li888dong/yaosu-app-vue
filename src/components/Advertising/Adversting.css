@@ -1,0 +1,22 @@
+
+.ad01{
+    background-image: url("../../assets/ad01.gif");
+}
+.ad02{
+    background-image: url("../../assets/ad02.png");
+}
+.ad03{
+    background-image: url("../../assets/ad03.png");
+}
+.ad04{
+    background-image: url("../../assets/ad04.png");
+}
+.ad05{
+    background-image: url("../../assets/ad05.png");
+}
+.ad-logo{
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 41px;
+    margin-top: 5px;
+}
