@@ -12,7 +12,7 @@
         <ProductPriceList :yuanliaos="api" :zhongyaos="tcm"/>
 
         <!--优质现货-->
-        <Xianhuo/>
+        <Xianhuo :goods="goods"/>
         <div class="ad-logo ad01">
 
         </div>

@@ -29,7 +29,6 @@
             </div>
             <div class="product-info" v-show="show === 'zhongyao'">
                 <div class="slide-container zhongyao">
-
                     <div v-for="zhongyao in zhongyaoData" :key="zhongyao.productName">
                         <p><span class="product-name">{{zhongyao.productName}}</span><span>{{zhongyao.specification}}</span>
                         </p>
@@ -83,10 +82,19 @@
             zhongyaoData() {
                 return this.zhongyaos
             },
+            $zhongyao(){
+                return $('.slide-container.zhongyao')
+            },
+            $yuanliao(){
+                return $('.slide-container.yuanliao')
+            }
         },
         mounted() {
-            lunbo($('.slide-container.zhongyao'), $('.slide-container.zhongyao>div'), 50, 2000, 'top', 1000);
-            lunbo($('.slide-container.yuanliao'), $('.slide-container.yuanliao>div'), 50, 2000, 'top', 1000);
+
+            setTimeout(()=>{
+                lunbo(this.$zhongyao, this.$zhongyao.find('div'), 50, 2000, 'top', 1000);
+                lunbo(this.$yuanliao, this.$yuanliao.find('div'), 50, 2000, 'top', 1000);
+            },1000)
         }
     }
 </script>
