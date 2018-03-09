@@ -41,7 +41,7 @@
         },
         computed:{
             imgList(){
-                return this.bannerData.map(i=> "url('http://image.yaosuce.com"+i.picture+"')")
+                return this.$store.getters.banner.map(i=> "url('http://image.yaosuce.com"+i.picture+"')")
             }
         }
     }
