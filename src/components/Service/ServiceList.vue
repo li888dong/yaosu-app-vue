@@ -76,6 +76,7 @@
 
     .list-item {
         width: 98%;
+        min-height: 80px;
         position: relative;
         margin: 10px 1% 0 1%;
         background-color: #fff;
@@ -90,7 +91,7 @@
         line-height: 28px;
     }
 
-    .list-item .type.demand{
+    .list-item .type{
         position: absolute;
         top: 1px;
         bottom: 1px;
@@ -106,15 +107,18 @@
         font-size: 14px;
         text-align: center;
     }
-
+    .list-item .type.support{
+        background-color: yellowgreen;
+    }
     .list-item .content,
     .list-item .footer{
         margin-left: 50px;
     }
-
+    .list-item .content span{
+        color: #666;
+    }
     .list-item .footer span{
         margin-left: 20px;
-        color: #666;
     }
 
 
@@ -161,7 +165,7 @@
             <ul class="list-container">
                 <li class="list-item" v-for="item in dataList">
                     <div v-if="type==='项目'">
-                        <div class="type demand">{{item.servicecategory.name}}</div>
+                        <div class="type" :class="{support:item.type==='B'}">{{item.servicecategory.name}}</div>
                         <div class="content">
                             <p class="hs-code">{{item.requirementdescription}}</p>
                             <p class="hs-code">{{item.companyname}}</p>
@@ -172,10 +176,10 @@
                         </div>
                     </div>
                     <div v-else-if="type==='外贸'">
-                        <div class="type demand">{{item.servicecategory.name}}</div>
+                        <div class="type" :class="{support:item.type==='B'}">{{item.servicecategory.name}}</div>
                         <div class="content">
-                            <p class="hs-code"><span>HS号:</span>{{item.hs}}</p>
-                            <p class="hs-code"><span>需求描述：</span>{{item.requirementdescription}}</p>
+                            <p class="hs-code">HS号:<span>{{item.hs}}</span></p>
+                            <p class="hs-code">需求描述：<span>{{item.requirementdescription}}</span></p>
                         </div>
                         <div class="footer">
                             <p class="hs-code">编号 : <span>{{item.foreigntradeno}}</span><span style="float: right;margin-right: 20px;">{{item.addtime}}</span>
@@ -183,7 +187,7 @@
                         </div>
                     </div>
                     <div v-else-if="type==='技术'">
-                        <div class="type demand">{{item.servicecategory.name}}</div>
+                        <div class="type" :class="{support:item.type==='B'}">{{item.servicecategory.name}}</div>
                         <div class="content">
                             <p class="hs-code">{{item.requirementdescription}}</p>
                             <p class="hs-code">{{item.companyname}}</p>
@@ -194,13 +198,14 @@
                         </div>
                     </div>
                     <div v-else-if="type==='批文'">
-                        <div class="type demand">{{item.servicecategory.name}}</div>
+                        <div class="type" :class="{support:item.type==='B'}">{{item.servicecategory.name}}</div>
                         <div class="content">
-                            <p class="hs-code">{{item.requirementdescription}}</p>
-                            <p class="hs-code">{{item.companyname}}</p>
+                            <p class="hs-code">需求描述：<span>{{item.requirementdescription}}</span></p>
+                            <p class="hs-code">适应症：<span>《》</span></p>
+                            <p class="hs-code"><span>{{item.companyname}}</span></p>
                         </div>
                         <div class="footer">
-                            <p class="hs-code">编号 : <span>{{item.projectno}}</span><span style="float: right;margin-right: 20px;">{{item.addtime}}</span>
+                            <p class="hs-code">编号 : <span>{{item.approvalnumberno}}</span><span style="float: right;margin-right: 20px;">{{item.addtime}}</span>
                             </p>
                         </div>
                     </div>
@@ -224,6 +229,7 @@
                 type:'',
                 reqUrl:'',
                 curCatorage: '全部分类',
+                resData:[],
                 dataList:[]
             }
         },
@@ -231,6 +237,21 @@
             changeCatorageType(type) {
                 this.curCatorage = type;
                 this.selectorIsShow = false;
+                if (type === this.demand){
+                    this.dataList = this.resData.filter((item)=>{
+                        return item.type === 'A'
+                    })
+                }
+                else if  (type === this.support){
+                    this.dataList = this.resData.filter((item)=>{
+                        return item.type === 'B'
+                    })
+                }
+                else{
+                    this.dataList = this.resData.filter((item)=>{
+                        return item
+                    });
+                }
             },
             getReqUrl(type){
                 switch (type){
@@ -238,8 +259,15 @@
                         return this.$APIs.PROJECT_LIST;
                     case '外贸':
                         return this.$APIs.FOREIGNTRADE_LIST;
+                    case '技术':
+                        return this.$APIs.TECHNOLOGY_LIST;
+                    case '批文':
+                        return this.$APIs.APPROVAL_NUMBER_LIST;
                 }
             }
+        },
+        computed:{
+
         },
         mounted() {
             this.demand = this.$route.query.demand;
@@ -248,8 +276,9 @@
             this.reqUrl = this.getReqUrl(this.type);
             this.$http.get(this.reqUrl)
                 .then((res)=>{
-                    console.log('+++',res)
-                    this.dataList = res.data.data.rows
+                    console.log('+++',res);
+                    this.resData = res.data.data.rows;
+                    this.changeCatorageType('全部分类')
                 })
                 .catch(function (error) {
                     console.log(error);
