@@ -10,10 +10,13 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 // require styles
 import 'swiper/dist/css/swiper.css'
 import './assets/iconfont/iconfont.css'
+import APIs from './API'
+
 const instance = axios.create({
-    // baseURL: "http://localhost:3000",
+    baseURL: "http://localhost:3000",
     timeout: 15000
 });
+Vue.APIs = Vue.prototype.$APIs = APIs;
 Vue.http = Vue.prototype.$http = instance;
 Vue.use(VueAwesomeSwiper, /* { default global options } */)
 

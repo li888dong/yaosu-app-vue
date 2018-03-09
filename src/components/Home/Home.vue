@@ -1,5 +1,6 @@
 <template>
     <div>
+
         <!--顶部banner搜索框-->
         <header>
             <Banner :bannerData="banner"></Banner>
@@ -85,7 +86,7 @@
             const _this = this;
             const adDoms = document.querySelectorAll('.ad-logo');
 
-            this.$http.get('../static/test.json')
+            this.$http.get(this.$APIs.INDEX_LIST)
                 .then(function (response) {
                     const data = response.data.data;
                     _this.banner = data.banner;
