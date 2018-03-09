@@ -7,7 +7,7 @@
             <div class="nav-item-img nav-img01"></div>
             <div class="nav-title">要采购</div>
         </div>
-        <div class="nav-item" data-name="xianhuo" @click="$router.push({path:'service_list',query:{type:'现货',demand:'要产品',support:'要渠道'}})">
+        <div class="nav-item" data-name="xianhuo" @click="gotoGoods()">
             <div class="nav-item-img nav-img02"></div>
             <div class="nav-title">要现货</div>
         </div>
@@ -43,6 +43,15 @@
         data(){
             return{
 
+            }
+        },
+        methods:{
+            gotoGoods(){
+                this.$http.get(this.$APIs.GOODS_LIST)
+                    .then((res)=>{
+                        this.$store.dispatch('set_goodsList',res.data.data.rows)
+                    });
+                this.$router.push({path:'goods_list',query:{type:'现货',demand:'要产品',support:'要渠道'}})
             }
         }
     }

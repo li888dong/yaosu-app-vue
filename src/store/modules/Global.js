@@ -3,6 +3,7 @@ const state = {
     api:[],
     banner:[],
     goods:[],
+    goodsList:[],
     procurement:[],
     service:[],
     tcm:[]
@@ -26,6 +27,9 @@ const mutations = {
     },
     set_goods(state, res) {
        state.goods = res
+    },
+    set_goodsList(state, res) {
+       state.goodsList = res
     },
     set_procurement(state, res) {
        state.procurement = res
@@ -56,6 +60,9 @@ const actions = {
     'set_goods': function ({commit}, res) {
         commit('set_goods', res)
     },
+    'set_goodsList': function ({commit}, res) {
+        commit('set_goodsList', res)
+    },
     'set_procurement': function ({commit}, res) {
         commit('set_procurement', res)
     },
@@ -79,6 +86,9 @@ const getters = {
     },
     goods: state => {
         return state.goods
+    },
+    goodsList: state => {
+        return state.goodsList
     },
     procurement: state => {
         return state.procurement

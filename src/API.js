@@ -1,6 +1,8 @@
 const APIs = {
     // 主页列表
     INDEX_LIST: '/app/index/list',
+    // 要现货
+    GOODS_LIST:'/app/goods/list',
     // 要项目
     PROJECT_LIST: '/app/project/list',
     // 要外贸
