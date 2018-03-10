@@ -1,23 +1,4 @@
 <style scoped>
-    .top-bar{
-        width: 100%;
-        height: 40px;
-        line-height: 40px;
-        font-size: 14px;
-        background-color:  #03A657;
-        color: #ffffff;
-        text-align: center;
-        position: relative;
-    }
-    .top-bar .icon-fanhui{
-        position: absolute;
-        left: 10px;
-    }
-    .top-bar .icon-search{
-        position: absolute;
-        top: 0;
-        right: 10px;
-    }
     .catorage-selector {
         width: 100%;
         height: 40px;
@@ -107,7 +88,7 @@
         font-size: 14px;
         text-align: center;
     }
-    .list-item .type.support{
+    .list-item .type.supply{
         background-color: yellowgreen;
     }
     .list-item .content,
@@ -157,15 +138,15 @@
                         <p :class="{curCatorage:curCatorage==='全部分类'}" @click="changeCatorageType('全部分类')">全部分类</p>
                         <p :class="{curCatorage:curCatorage===demand}" @click="changeCatorageType(demand)">
                             {{demand}}</p>
-                        <p :class="{curCatorage:curCatorage===support}" @click="changeCatorageType(support)">
-                            {{support}}</p>
+                        <p :class="{curCatorage:curCatorage===supply}" @click="changeCatorageType(supply)">
+                            {{supply}}</p>
                     </div>
                 </transition>
             </div>
             <ul class="list-container">
                 <li class="list-item" v-for="item in dataList">
                     <div v-if="type==='项目'">
-                        <div class="type" :class="{support:item.type==='B'}">{{item.servicecategory.name}}</div>
+                        <div class="type" :class="{supply:item.type==='B'}">{{item.servicecategory.name}}</div>
                         <div class="content">
                             <p class="hs-code">{{item.requirementdescription}}</p>
                             <p class="hs-code">{{item.companyname}}</p>
@@ -176,7 +157,7 @@
                         </div>
                     </div>
                     <div v-else-if="type==='外贸'">
-                        <div class="type" :class="{support:item.type==='B'}">{{item.servicecategory.name}}</div>
+                        <div class="type" :class="{supply:item.type==='B'}">{{item.servicecategory.name}}</div>
                         <div class="content">
                             <p class="hs-code">HS号:<span>{{item.hs}}</span></p>
                             <p class="hs-code">需求描述：<span>{{item.requirementdescription}}</span></p>
@@ -187,7 +168,7 @@
                         </div>
                     </div>
                     <div v-else-if="type==='技术'">
-                        <div class="type" :class="{support:item.type==='B'}">{{item.servicecategory.name}}</div>
+                        <div class="type" :class="{supply:item.type==='B'}">{{item.servicecategory.name}}</div>
                         <div class="content">
                             <p class="hs-code">{{item.requirementdescription}}</p>
                             <p class="hs-code">{{item.companyname}}</p>
@@ -198,7 +179,7 @@
                         </div>
                     </div>
                     <div v-else-if="type==='批文'">
-                        <div class="type" :class="{support:item.type==='B'}">{{item.servicecategory.name}}</div>
+                        <div class="type" :class="{supply:item.type==='B'}">{{item.servicecategory.name}}</div>
                         <div class="content">
                             <p class="hs-code">需求描述：<span>{{item.requirementdescription}}</span></p>
                             <p class="hs-code">适应症：<span>《》</span></p>
@@ -225,7 +206,7 @@
             return {
                 selectorIsShow: false,
                 demand: '',
-                support: '',
+                supply: '',
                 type:'',
                 reqUrl:'',
                 curCatorage: '全部分类',
@@ -242,7 +223,7 @@
                         return item.type === 'A'
                     })
                 }
-                else if  (type === this.support){
+                else if  (type === this.supply){
                     this.dataList = this.resData.filter((item)=>{
                         return item.type === 'B'
                     })
@@ -272,7 +253,7 @@
         mounted() {
             this.demand = this.$route.query.demand;
             this.type = this.$route.query.type;
-            this.support = this.$route.query.support;
+            this.supply = this.$route.query.supply;
             this.reqUrl = this.getReqUrl(this.type);
             this.$http.get(this.reqUrl)
                 .then((res)=>{

@@ -54,4 +54,47 @@
         padding: 0;
         list-style: none;
     }
+
+    .top-bar{
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        font-size: 14px;
+        background-color:  #03A657;
+        color: #ffffff;
+        text-align: center;
+        position: relative;
+    }
+    .top-bar .icon-fanhui{
+        position: absolute;
+        left: 10px;
+    }
+    .top-bar .icon-search{
+        position: absolute;
+        top: 0;
+        right: 10px;
+    }
+
+    .tabbar-container{
+        width: 100%;
+        height: 30px;
+        margin-top: 20px;
+        display: flex;
+        flex-flow: row;
+        justify-content: space-around;
+    }
+    .tabbar{
+        font-size: 14px;
+        display: inline-block;
+        width: 33%;
+        height:30px;
+        text-align: center;
+        vertical-align: bottom;
+    }
+    .tabbar-selected{
+        width: 33%;
+        text-align: center;
+        color: #05a96d;
+        border-bottom: 1px solid #05a96d;
+    }
 </style>

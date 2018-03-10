@@ -7,25 +7,7 @@
         top: 0;
         bottom: 0;
     }
-    .top-bar{
-        width: 100%;
-        height: 40px;
-        line-height: 40px;
-        font-size: 14px;
-        background-color:  #03A657;
-        color: #ffffff;
-        text-align: center;
-        position: relative;
-    }
-    .top-bar .icon-fanhui{
-        position: absolute;
-        left: 10px;
-    }
-    .top-bar .icon-search{
-        position: absolute;
-        top: 0;
-        right: 10px;
-    }
+
      .tabbar-list{
         border-bottom: 5px solid #EFEDEE;
         font-size:14px;
