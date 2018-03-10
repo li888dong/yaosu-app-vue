@@ -3,7 +3,7 @@
 </style>
 <template>
     <div class="nav-list pannel">
-        <div class="nav-item" data-name="caigou">
+        <div class="nav-item" data-name="caigou" @click="$router.push({path:'procurement',query:{type:'采购'}})">
             <div class="nav-item-img nav-img01"></div>
             <div class="nav-title">要采购</div>
         </div>

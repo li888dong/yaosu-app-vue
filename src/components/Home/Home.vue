@@ -82,6 +82,9 @@
             Piwen,
             Advertsing
         },
+        beforeMount(){
+
+        },
         mounted() {
             const _this = this;
             const adDoms = document.querySelectorAll('.ad-logo');

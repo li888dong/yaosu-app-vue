@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../components/Home/Home.vue'
+import Procurement from '../components/Procurement/Procurement.vue'
 import Goods from '../components/Goods/Goods.vue'
 import Finance from '../components/Finance/Finance.vue'
 import ServiceList from '../components/Service/ServiceList.vue'
@@ -13,6 +14,11 @@ export default new Router({
           path: '/',
           name: 'Home',
           component: Home
+        },
+        {
+          path: '/procurement',
+          name: 'caigou',
+          component: Procurement
         },
         {
             path:'/goods_list',
