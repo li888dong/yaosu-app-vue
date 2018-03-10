@@ -22,10 +22,14 @@
 <script>
     export default {
         name:'caigou',
-        props:['procurement'],
         data(){
             return{
 
+            }
+        },
+        computed:{
+            procurement(){
+                return this.$store.getters.procurement
             }
         }
     }

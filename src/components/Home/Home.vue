@@ -3,37 +3,37 @@
 
         <!--顶部banner搜索框-->
         <header>
-            <Banner :bannerData="banner"></Banner>
+            <Banner></Banner>
         </header>
 
         <!--导航按钮-->
         <NavList></NavList>
 
         <!--参考价格-->
-        <ProductPriceList :yuanliaos="api" :zhongyaos="tcm"></ProductPriceList>
+        <ProductPriceList></ProductPriceList>
 
         <!--优质现货-->
-        <Xianhuo :goods="goods"></Xianhuo>
+        <Xianhuo></Xianhuo>
         <Advertsing></Advertsing>
 
         <!--热门采购-->
-        <Caigou :procurement="procurement"></Caigou>
+        <Caigou></Caigou>
         <Advertsing></Advertsing>
 
         <!--优选外贸-->
-        <Waimao :demandData="FTN1" :supplyData="FTN2"></Waimao>
+        <Waimao></Waimao>
         <Advertsing></Advertsing>
 
         <!--推荐项目-->
-        <Xiangmu :demandData="PNO1" :supplyData="PNO2"></Xiangmu>
+        <Xiangmu></Xiangmu>
         <Advertsing></Advertsing>
 
         <!--创新技术-->
-        <Jishu :demandData="TNO1" :supplyData="TNO2"></Jishu>
+        <Jishu></Jishu>
         <Advertsing></Advertsing>
 
         <!--人气批文-->
-        <Piwen :demandData="ANN1" :supplyData="ANN2"></Piwen>
+        <Piwen></Piwen>
         <Advertsing></Advertsing>
     </div>
 </template>
@@ -55,10 +55,6 @@
         data() {
             return {
                 advertising:[],
-                api:[],
-                banner:[],
-                goods:[],
-                procurement:[],
                 ANN1:[],
                 ANN2:[],
                 FTN1:[],
@@ -66,8 +62,7 @@
                 PNO1:[],
                 PNO2:[],
                 TNO1:[],
-                TNO2:[],
-                tcm:[]
+                TNO2:[]
             }
         },
         components: {
@@ -92,12 +87,7 @@
             this.$http.get(this.$APIs.INDEX_LIST)
                 .then(function (response) {
                     const data = response.data.data;
-                    _this.banner = data.banner;
-                    _this.api = data.api;
-                    _this.tcm = data.tcm;
                     _this.advertising = data.advertising;
-                    _this.goods = data.goods;
-                    _this.procurement = data.procurement;
                     _this.ANN1 = data.service.ANN[0].list;
                     _this.ANN2 = data.service.ANN[1].list;
                     _this.FTN1 = data.service.FTN[0].list;
@@ -111,7 +101,14 @@
                     _this.$store.dispatch('set_banner', data.banner);
                     _this.$store.dispatch('set_goods', data.goods);
                     _this.$store.dispatch('set_procurement', data.procurement);
-                    _this.$store.dispatch('set_service', data.service);
+                    _this.$store.dispatch('set_ANN1', _this.ANN1);
+                    _this.$store.dispatch('set_ANN2', _this.ANN2);
+                    _this.$store.dispatch('set_FTN1', _this.FTN1);
+                    _this.$store.dispatch('set_FTN2', _this.FTN2);
+                    _this.$store.dispatch('set_ANN1', _this.PNO1);
+                    _this.$store.dispatch('set_ANN1', _this.PNO2);
+                    _this.$store.dispatch('set_TNO1', _this.TNO1);
+                    _this.$store.dispatch('set_TNO2', _this.TNO2);
                     _this.$store.dispatch('set_tcm', data.tcm);
 
 //                    设置广告的图片链接

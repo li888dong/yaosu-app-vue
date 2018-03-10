@@ -55,7 +55,6 @@
 
     export default {
         name: 'productpricelist',
-        props: ['yuanliaos', 'zhongyaos'],
         data() {
             return {
                 show: 'yuanliao',
@@ -72,6 +71,9 @@
             }
         },
         computed: {
+            yuanliaos(){
+                return this.$store.getters.api
+            },
             yuanliaoData() {
                 const temp = [];
                 for (let i = 0; i < this.yuanliaos.length; i += 2) {
@@ -80,7 +82,7 @@
                 return temp
             },
             zhongyaoData() {
-                return this.zhongyaos
+                return this.$store.getters.tcm
             },
             $zhongyao(){
                 return $('.slide-container.zhongyao')
@@ -90,7 +92,6 @@
             }
         },
         mounted() {
-
             setTimeout(()=>{
                 lunbo(this.$zhongyao, this.$zhongyao.find('div'), 50, 2000, 'top', 1000);
                 lunbo(this.$yuanliao, this.$yuanliao.find('div'), 50, 2000, 'top', 1000);

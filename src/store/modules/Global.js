@@ -5,7 +5,14 @@ const state = {
     goods:[],
     goodsList:[],
     procurement:[],
-    service:[],
+    ANN1:[],
+    ANN2:[],
+    FTN1:[],
+    FTN2:[],
+    PNO1:[],
+    PNO2:[],
+    TNO1:[],
+    TNO2:[],
     tcm:[]
 }
 
@@ -34,8 +41,29 @@ const mutations = {
     set_procurement(state, res) {
        state.procurement = res
     },
-    set_service(state, res) {
-       state.service = res
+    set_ANN1(state, res) {
+       state.ANN1 = res
+    },
+    set_ANN2(state, res) {
+       state.ANN2 = res
+    },
+    set_FTN1(state, res) {
+       state.FTN1 = res
+    },
+    set_FTN2(state, res) {
+       state.FTN2 = res
+    },
+    set_PNO1(state, res) {
+       state.PNO1 = res
+    },
+    set_PNO2(state, res) {
+       state.PNO2 = res
+    },
+    set_TNO1(state, res) {
+       state.TNO1 = res
+    },
+    set_TNO2(state, res) {
+       state.TNO2 = res
     },
     set_tcm(state, res) {
        state.tcm = res
@@ -66,8 +94,29 @@ const actions = {
     'set_procurement': function ({commit}, res) {
         commit('set_procurement', res)
     },
-    'set_service': function ({commit}, res) {
-        commit('set_service', res)
+    'set_ANN1': function ({commit}, res) {
+        commit('set_ANN1', res)
+    },
+    'set_ANN2': function ({commit}, res) {
+        commit('set_ANN2', res)
+    },
+    'set_FTN1': function ({commit}, res) {
+        commit('set_FTN1', res)
+    },
+    'set_FTN2': function ({commit}, res) {
+        commit('set_FTN2', res)
+    },
+    'set_PNO1': function ({commit}, res) {
+        commit('set_PNO1', res)
+    },
+    'set_PNO2': function ({commit}, res) {
+        commit('set_PNO2', res)
+    },
+    'set_TNO1': function ({commit}, res) {
+        commit('set_TNO1', res)
+    },
+    'set_TNO2': function ({commit}, res) {
+        commit('set_TNO2', res)
     },
     'set_tcm': function ({commit}, res) {
         commit('set_tcm', res)
@@ -93,8 +142,29 @@ const getters = {
     procurement: state => {
         return state.procurement
     },
-    service: state => {
-        return state.service
+    ANN1: state => {
+        return state.ANN1
+    },
+    ANN2: state => {
+        return state.ANN2
+    },
+    FTN1: state => {
+        return state.FTN1
+    },
+    FTN2: state => {
+        return state.FTN2
+    },
+    PNO1: state => {
+        return state.PNO1
+    },
+    PNO2: state => {
+        return state.PNO2
+    },
+    TNO1: state => {
+        return state.TNO1
+    },
+    TNO2: state => {
+        return state.TNO2
     },
     tcm: state => {
         return state.tcm

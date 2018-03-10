@@ -25,13 +25,18 @@
 <script>
     export default {
         name:'waimao',
-        props:['demandData','supplyData'],
         data(){
             return{
                 curSelected:'demand'
             }
         },
         computed:{
+            demandData(){
+                return this.$store.getters.FTN1
+            },
+            supplyData(){
+                return this.$store.getters.FTN2
+            },
             curData(){
                 return this.curSelected === 'demand'?this.demandData:this.supplyData
             }

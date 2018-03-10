@@ -25,7 +25,6 @@
 <script>
     export default {
         name:'xiangmu',
-        props:['demandData','supplyData'],
         data(){
             return{
                 curSelected:'demand'
@@ -35,6 +34,12 @@
 
         },
         computed:{
+            demandData(){
+                return this.$store.getters.PNO1
+            },
+            supplyData(){
+                return this.$store.getters.PNO2
+            },
             curData(){
                 return this.curSelected === 'demand'?this.demandData:this.supplyData
             }
