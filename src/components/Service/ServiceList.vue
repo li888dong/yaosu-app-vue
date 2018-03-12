@@ -1,28 +1,4 @@
 <style scoped>
-    .catorage-selector {
-        width: 100%;
-        height: 40px;
-        font-size: 14px;
-        background-color: #fff;
-        text-align: center;
-        line-height: 40px;
-        position: relative;
-        overflow: hidden;
-        border-bottom: 1px solid #ccc;
-    }
-
-    .icon-more {
-        position: absolute;
-        right: 5px;
-        font-size: 10px;
-        font-weight: bold;
-        transform: rotate(90deg);
-        transition: all 0.5s ease;
-    }
-
-    .reverse {
-        transform: rotate(-90deg);
-    }
 
     .fade-enter-active {
         transition: all .8s;
@@ -30,11 +6,6 @@
 
     .fade-enter, .fade-leave-to {
         opacity: 0;
-    }
-
-
-    .greenFont {
-        color: #03A657;
     }
 
     .list-item {
@@ -45,7 +16,7 @@
         background-color: #fff;
         border-radius: 4px;
         box-shadow: 0 0 5px #888888;
-        font-size: 12px;
+        font-size: 14px;
         color: #000;
     }
 
@@ -107,7 +78,7 @@
             <div class="top-bar">
                 <i class="icon iconfont icon-fanhui" @click="$router.go(-1)"></i>
                 <p>{{type}}</p>
-                <i class="icon iconfont icon-search"></i>
+                <i class="icon iconfont icon-search right"></i>
             </div>
             <div class="catorage-selector" @click="selectorIsShow = !selectorIsShow"
                  :class="{greenFont:selectorIsShow}">
@@ -126,7 +97,7 @@
                 </transition>
             </div>
             <ul class="list-container">
-                <li class="list-item" v-for="item in dataList">
+                <li class="list-item" v-for="item in dataList" @click="$router.push({path:'service_detail',query:{itemData:item,catorageType:type}})">
                     <div v-if="type==='项目'">
                         <div class="type" :class="{supply:item.type==='B'}">{{item.servicecategory.name}}</div>
                         <div class="content">
@@ -183,7 +154,7 @@
 </template>
 <script>
     export default {
-        name: 'service',
+        name: 'servicelist',
         data() {
             return {
                 selectorIsShow: false,

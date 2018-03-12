@@ -1,5 +1,5 @@
-<style>
-    .tabbar-container{
+<style scoped>
+    .tabbar-container.finace{
         background-color: #fff;
         padding-top: 10px;
         margin: 0;
@@ -8,7 +8,7 @@
         position: absolute;
         left: 0;
         right: 0;
-        top: 82px;
+        top: 92px;
         bottom: 0;
     }
     .animate-item{
@@ -21,21 +21,16 @@
         background-color: #e7e1cd;
     }
 
-    .slide-fade1-enter-active ,
-    .slide-fade1-leave-active {
-        transition: all .3s ease;
-    }
-    .slide-fade1-enter,
-    .slide-fade1-leave-to{
+    .slide-fade1-enter{
         transform: translateX(100%);
         opacity: 0;
     }
-    .slide-fade2-enter-active ,
-    .slide-fade2-leave-active {
-        transition: all .3s ease;
+
+    .slide-fade1-enter-active,
+    .slide-fade2-enter-active{
+        transition: all .2s ease;
     }
-    .slide-fade2-enter,
-    .slide-fade2-leave-to{
+    .slide-fade2-enter{
         transform: translateX(-100%);
         opacity: 0;
     }
@@ -46,9 +41,9 @@
         <div class="top-bar">
             <i class="icon iconfont icon-fanhui" @click="$router.go(-1)"></i>
             <p>现货</p>
-            <i class="icon iconfont icon-search"></i>
+            <i class="icon iconfont icon-search right"></i>
         </div>
-        <div class="tabbar-container">
+        <div class="tabbar-container finace">
             <span class="tabbar" :class="{ 'tabbar-selected':curSelected==='demand'}" @click="changeCur('demand')">资金方</span>
             <span class="tabbar" :class="{ 'tabbar-selected':curSelected==='supply'}" @click="changeCur('supply')">资产方</span>
         </div>
