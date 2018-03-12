@@ -105,7 +105,7 @@
                             <p class="hs-code">{{item.companyname}}</p>
                         </div>
                         <div class="footer">
-                            <p class="hs-code">编号 : <span>{{item.projectno}}</span><span style="float: right;margin-right: 20px;">{{item.addtime}}</span>
+                            <p class="hs-code">编号 : <span>{{item.projectno}}</span><span style="margin-right: 20px;">{{item.addtime}}</span>
                             </p>
                         </div>
                     </div>

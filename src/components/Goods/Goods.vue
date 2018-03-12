@@ -51,9 +51,11 @@
     }
 
     .item-content.goods-list .icon-more {
+        transform: rotate(0);
         position: absolute;
         right: 0;
         font-weight: bolder;
+        font-size: 16px;
     }
 
     .item-content.goods-list span {
@@ -88,7 +90,7 @@
         <div class="top-bar" v-if="$route.path==='/goods_list'">
             <i class="icon iconfont icon-fanhui" @click="$router.go(-1)"></i>
             <p>现货</p>
-            <i class="icon iconfont icon-search"></i>
+            <i class="icon iconfont icon-search right"></i>
         </div>
         <div class="item-header" :style="{marginTop:$route.path==='/goods_list'?'2px':0}">
             <slot></slot>
@@ -129,14 +131,14 @@
             </div>
         </div>
         <div class="item-content goods-list" v-if="$route.path==='/goods_list'">
-            <div v-for="good in goodsList">
+            <div v-for="good in goodsList" @click="$router.push({path:'goods_detail',query:{goodsId:good.goodId}})">
                 <p>{{good.goodName}} <i class="icon iconfont icon-more"></i></p>
                 <p>{{good.purity}}</p>
                 <p><span>{{good.qiymc}}</span></p>
             </div>
         </div>
         <div class="item-content" v-else>
-            <div class="product-item" :key="good.goodsID" v-for="good in curGoods">
+            <div class="product-item" :key="good.goodsID" v-for="good in curGoods" @click="$router.push({path:'goods_detail',query:{goodsId:good.goodsID}})">
                 <h4 class="item-title">{{good.chanpmc}}</h4>
                 <div class="item-info">{{good.chund}}</div>
                 <div class="item-company">{{good.qiymc}}</div>

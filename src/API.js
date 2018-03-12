@@ -5,6 +5,8 @@ const APIs = {
     PROCUREMENT_LIST:'/app/member/procurementList',
     // 要现货
     GOODS_LIST:'/app/goods/list',
+    // 商品详情
+    GOODS_DETAIL:'/app/goods/details',
     // 要项目
     PROJECT_LIST: '/app/project/list',
     // 要外贸
@@ -12,6 +14,7 @@ const APIs = {
     // 要技术
     TECHNOLOGY_LIST: '/app/technology/list',
     // 要批文
-    APPROVAL_NUMBER_LIST: '/app/approvalNumber/list'
+    APPROVAL_NUMBER_LIST: '/app/approvalNumber/list',
+
 };
 export default APIs
