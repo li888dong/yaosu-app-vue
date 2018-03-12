@@ -57,8 +57,8 @@
 
     .top-bar{
         width: 100%;
-        height: 40px;
-        line-height: 40px;
+        height: 50px;
+        line-height: 50px;
         font-size: 14px;
         background-color:  #03A657;
         color: #ffffff;
@@ -73,6 +73,24 @@
         position: absolute;
         top: 0;
         right: 10px;
+    }
+    .catorage-list {
+        width: 100%;
+        background-color: #fff;
+        text-align: center;
+        font-size: 12px;
+        line-height: 40px;
+        position: absolute;
+        z-index: 11;
+    }
+
+    .catorage-list p {
+        border-bottom: 1px solid #ccc;
+    }
+
+    .curCatorage {
+        color: #03A657;
+        background-color: #f1f1f1;
     }
 
     .tabbar-container{

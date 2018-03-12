@@ -32,24 +32,6 @@
         opacity: 0;
     }
 
-    .catorage-list {
-        width: 100%;
-        background-color: #fff;
-        text-align: center;
-        font-size: 12px;
-        line-height: 30px;
-        position: absolute;
-        z-index: 11;
-    }
-
-    .catorage-list p {
-        border-bottom: 1px solid #ccc;
-    }
-
-    .curCatorage {
-        color: #03A657;
-        background-color: #f1f1f1;
-    }
 
     .greenFont {
         color: #03A657;

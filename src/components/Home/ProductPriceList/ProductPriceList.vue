@@ -11,7 +11,7 @@
         <div class="product-price">
             <h4 class="price-title">参考价格</h4>
             <div class="product-info" v-show="show === 'yuanliao'">
-                <div class="slide-container yuanliao">
+                <div class="slide-container yuanliao" ref="zhongyao" v-if="zhongyaoData.length>0">
 
                     <div v-for="yuanliao in yuanliaoData" :key="yuanliao[0].productname">
                         <p>
@@ -27,8 +27,8 @@
                     </div>
                 </div>
             </div>
-            <div class="product-info" v-show="show === 'zhongyao'">
-                <div class="slide-container zhongyao">
+            <div class="product-info" v-show="show === 'zhongyao'" v-if="zhongyaoData.length>0">
+                <div class="slide-container zhongyao" ref="yuanliao">
                     <div v-for="zhongyao in zhongyaoData" :key="zhongyao.productName">
                         <p><span class="product-name">{{zhongyao.productName}}</span><span>{{zhongyao.specification}}</span>
                         </p>
@@ -57,6 +57,7 @@
         name: 'productpricelist',
         data() {
             return {
+                timer:{},
                 show: 'yuanliao',
                 swiperOption: {
                     direction: 'vertical',
@@ -85,17 +86,21 @@
                 return this.$store.getters.tcm
             },
             $zhongyao(){
-                return $('.slide-container.zhongyao')
+                return $(this.$refs.zhongyao)
             },
             $yuanliao(){
-                return $('.slide-container.yuanliao')
+                return $(this.$refs.yuanliao)
             }
         },
         mounted() {
             setTimeout(()=>{
-                lunbo(this.$zhongyao, this.$zhongyao.find('div'), 50, 2000, 'top', 1000);
-                lunbo(this.$yuanliao, this.$yuanliao.find('div'), 50, 2000, 'top', 1000);
-            },1000)
+                this.timer.zhongyao = lunbo(this.$zhongyao, this.$zhongyao.find('div'), 50, 2000, 'top', 1000);
+                this.timer.yuanliao = lunbo(this.$yuanliao, this.$yuanliao.find('div'), 50, 2000, 'top', 1000);
+            },2000)
+        },
+        beforeDestroy(){
+            clearInterval(this.timer.zhongyao);
+            clearInterval(this.timer.yuanliao);
         }
     }
 </script>

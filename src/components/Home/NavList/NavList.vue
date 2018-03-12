@@ -7,7 +7,7 @@
             <div class="nav-item-img nav-img01"></div>
             <div class="nav-title">要采购</div>
         </div>
-        <div class="nav-item" data-name="xianhuo" @click="gotoGoods()">
+        <div class="nav-item" data-name="xianhuo" @click="gotoGoods">
             <div class="nav-item-img nav-img02"></div>
             <div class="nav-title">要现货</div>
         </div>
@@ -49,7 +49,7 @@
             return {}
         },
         methods: {
-            gotoGoods() {
+            gotoGoods(e) {
                 this.$http.get(this.$APIs.GOODS_LIST+'?categoryID=1')
                     .then((res) => {
                         if (res.data.status === 200){
