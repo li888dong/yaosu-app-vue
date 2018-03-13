@@ -41,7 +41,7 @@
         <div class="top-bar">
             <i class="icon iconfont icon-fanhui" @click="$router.go(-1)"></i>
             <p>采购信息</p>
-            <i class="icon iconfont icon-search"></i>
+            <i class="icon iconfont icon-search right"></i>
         </div>
         <div class="list-container">
             <div class="list-item pannel" v-for="item in dataList">

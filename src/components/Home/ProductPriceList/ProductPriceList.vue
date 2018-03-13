@@ -5,13 +5,13 @@
     <!--参考价格-->
     <div id="price" class="product-container pannel">
         <div class="tabbar-container">
-            <span class="tabbar" :class="{'tabbar-selected':show==='yuanliao'}" @click="show='yuanliao'">原料药</span>
-            <span class="tabbar" :class="{'tabbar-selected':show==='zhongyao'}" @click="show='zhongyao'">中药材</span>
+            <span class="tabbar" :class="{'tabbar-selected':show==='yuanliao'}" @click="changeShow('yuanliao')">原料药</span>
+            <span class="tabbar" :class="{'tabbar-selected':show==='zhongyao'}" @click="changeShow('zhongyao')">中药材</span>
         </div>
         <div class="product-price">
             <h4 class="price-title">参考价格</h4>
             <div class="product-info" v-show="show === 'yuanliao'">
-                <div class="slide-container yuanliao" ref="zhongyao" v-if="zhongyaoData.length>0">
+                <div class="slide-container yuanliao" ref="yuanliao" v-if="zhongyaoData.length>0">
 
                     <div v-for="yuanliao in yuanliaoData" :key="yuanliao[0].productname">
                         <p>
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="product-info" v-show="show === 'zhongyao'" v-if="zhongyaoData.length>0">
-                <div class="slide-container zhongyao" ref="yuanliao">
+                <div class="slide-container zhongyao" ref="zhongyao">
                     <div v-for="zhongyao in zhongyaoData" :key="zhongyao.productName">
                         <p><span class="product-name">{{zhongyao.productName}}</span><span>{{zhongyao.specification}}</span>
                         </p>
@@ -94,9 +94,20 @@
         },
         mounted() {
             setTimeout(()=>{
-                this.timer.zhongyao = lunbo(this.$zhongyao, this.$zhongyao.find('div'), 50, 2000, 'top', 1000);
                 this.timer.yuanliao = lunbo(this.$yuanliao, this.$yuanliao.find('div'), 50, 2000, 'top', 1000);
             },2000)
+        },
+        methods:{
+            changeShow(type){
+                this.show = type;
+                if (type === 'zhongyao'){
+                    this.timer.zhongyao = lunbo(this.$zhongyao, this.$zhongyao.find('div'), 50, 2000, 'top', 1000);
+                    clearInterval(this.timer.yuanliao)
+                }else {
+                    this.timer.yuanliao = lunbo(this.$yuanliao, this.$yuanliao.find('div'), 50, 2000, 'top', 1000);
+                    clearInterval(this.timer.zhongyao)
+                }
+            }
         },
         beforeDestroy(){
             clearInterval(this.timer.zhongyao);

@@ -7,44 +7,66 @@ import GoodsDetail from '../components/Goods/GoodsDetail.vue'
 import Finance from '../components/Finance/Finance.vue'
 import ServiceList from '../components/Service/ServiceList.vue'
 import ServiceDetail from '../components/Service/ServiceDetail.vue'
+
 Vue.use(Router)
 
 export default new Router({
     routes: [
         {
-          path: '/',
-          name: 'Home',
-          component: Home
+            path: '/',
+            name: 'Home',
+            component: Home,
+            meta:{
+                title:'药素网'
+            }
         },
         {
-          path: '/procurement',
-          name: 'caigou',
-          component: Procurement
+            path: '/procurement',
+            name: 'caigou',
+            component: Procurement,
+            meta:{
+                title:'要采购'
+            }
         },
         {
-            path:'/goods_list',
-            name:'goods_list',
-            component:Goods
+            path: '/goods_list',
+            name: 'goods_list',
+            component: Goods,
+            meta:{
+                title:'要现货'
+            }
         },
         {
-            path:'/goods_detail',
-            name:'goods_detail',
-            component:GoodsDetail
+            path: '/goods_detail',
+            name: 'goods_detail',
+            component: GoodsDetail,
+            meta:{
+                title:'商品详情'
+            }
         },
         {
-            path:'/finance',
-            name:'finance',
-            component:Finance
+            path: '/finance',
+            name: 'finance',
+            component: Finance,
+            meta:{
+                title:'要金融'
+            }
         },
         {
-          path: '/service_list',
-          name: 'service_list',
-          component: ServiceList
+            path: '/service_list',
+            name: 'service_list',
+            component: ServiceList,
+            meta:{
+                title:'药素网'
+            }
         },
         {
-          path: '/service_detail',
-          name: 'service_detail',
-          component: ServiceDetail
+            path: '/service_detail',
+            name: 'service_detail',
+            component: ServiceDetail,
+            meta:{
+                title:'药素网'
+            }
         }
     ]
 })

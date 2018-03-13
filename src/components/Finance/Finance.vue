@@ -40,7 +40,7 @@
     <div>
         <div class="top-bar">
             <i class="icon iconfont icon-fanhui" @click="$router.go(-1)"></i>
-            <p>现货</p>
+            <p>金融</p>
             <i class="icon iconfont icon-search right"></i>
         </div>
         <div class="tabbar-container finace">

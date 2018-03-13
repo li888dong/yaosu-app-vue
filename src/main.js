@@ -22,6 +22,12 @@ Vue.use(VueAwesomeSwiper, /* { default global options } */)
 
 Vue.config.productionTip = false
 
+router.beforeEach((to, from, next) => {
+    if (to.meta.title) {
+        document.title = to.meta.title
+    }
+   next()
+});
 /* eslint-disable no-new */
 new Vue({
     el: '#app',
