@@ -1,11 +1,12 @@
 <style scoped>
     .goods-detail{
         font-size: 14px;
+        margin-bottom: 40px;
     }
     .fixedTop{
         position: fixed;
         top: 0;
-        z-index: 11;
+        z-index: 13;
     }
     .goods-summary{
         position: relative;
@@ -60,11 +61,15 @@
         color: #000;
         line-height: 28px;
     }
+    .goods-info p>span{
+        color: #999999;
+    }
     .footer .btn-group{
         position: fixed;
         bottom: 0;
         left: 0;
         right: 0;
+        z-index: 13;
     }
     .footer .btn-group button{
         width: 50%;
@@ -90,12 +95,63 @@
         right: 0;
         z-index: 12;
         background-color: #fff;
-        height: 50%;
+        height: 300px;
+        padding: 15px  20px;
+
     }
-    .specification .confirm-btn{
+    .specification .selected{
+        position: relative;
+    }
+    .specification .selected>div{
+        display: inline-block;
+        vertical-align: top;
+    }
+    .specification .logo{
+        width: 60px;
+        height: 60px;
+        margin-left: 20px;
+        background: url("../../assets/logo_01.png") no-repeat;
+        background-size: contain;
+    }
+    .specification .selected-info{
+        margin-left: 40px;
+        font-size: 14px;
+        line-height: 22px;
+    }
+    .specification .close-btn{
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    .specification .close-btn i{
+        font-size: 28px;
+    }
+    .specifications-btn{
+        border-radius: 4px;
+        border: none;
+        padding: 10px 8px;
+        outline: none;
+        margin-top: 20px;
+        margin-right: 10px;
+    }
+
+    .specifications-btn.current{
+        background-color: #03A657;
+        color: white;
+    }
+    .specification .amount-btn{
+        font-size: 16px;
+        margin:0 10px;
+        padding: 5px 14px;
+        background-color: #eee;
+    }
+    .specification .amount-btn.current{
+        background-color: #ccc;
+    }
+    .confirm-btn{
         position: absolute;
         bottom: 0;
-        width: 100%;
+        width: 100%!important;
         border: none;
         height: 40px;
         background-color: #03A657;
@@ -116,12 +172,15 @@
                     <swiper-slide class="banner-img" :style="{backgroundImage:url}" v-for="url in imgList" :key="url"></swiper-slide>
                     <div class="swiper-pagination" slot="pagination"></div>
                 </swiper>
+                <div class="banner-img" v-else>
+
+                </div>
             </div>
             <div class="goods-price pannel">
                 <h4>{{goodsData.chanpmc}}</h4>
                 <p style="color: #f00">￥{{goodsData.chanpdj}}</p>
             </div>
-            <div class="goods-selecetor pannel">
+            <div class="goods-selecetor pannel" @click="showSelector">
                 <i class="icon iconfont icon-xuanze"></i><span style="margin-left: 10px;">请选择规格数量</span><i class="icon iconfont icon-more"></i>
             </div>
         </div>
@@ -145,34 +204,38 @@
             <p>备货期：<span>{{   }}</span></p>
             <p>更新时间：<span>{{goodsData.updatetime}}</span></p>
         </div>
+        <div class="divide"> ———— <i class="icon iconfont icon-zan"> </i> 图文详情 ———— </div>
         <div class="footer">
             <div class="btn-group">
-                <button style="background-color: #03A657;">联系卖家</button><button style="background-color: darkorange;">加入购物车</button>
+                <button style="background-color: #03A657;" v-if="!selectorShow">联系卖家</button><button style="background-color: darkorange;" v-if="!selectorShow">加入购物车</button>
+                <button class="confirm-btn" v-if="selectorShow" @click="selectorShow = false">确认</button>
             </div>
         </div>
-        <div class="specification">
+        <div class="specification" v-if="selectorShow">
             <div class="content">
-
                 <div class="selected">
                     <div class="logo"></div>
-                    <div>
-                        <p>单价：<span>50.000</span></p>
-                        <p>库存：<span>8201</span>件</p>
-                        <p>已选：<span>20kg/件</span></p>
+                    <div class="selected-info">
+                        <p style="color: #df5000;font-size: 16px;">单价：<span>{{specification.current.danj}}</span></p>
+                        <p>库存：<span>{{specification.current.kucsl}}</span>{{specification.current.danw}}</p>
+                        <p>已选：<span>{{specification.current.guig}}</span></p>
                     </div>
+                    <div class="close-btn"><i class="icon iconfont icon-guanbi" @click="selectorShow = false"></i></div>
                 </div>
                 <p>规格</p>
-                <button>25kg/jina</button>
-                <button>25kg/jina</button>
-                <button>25kg/jina</button>
-                <hr>
-                <div>
-                    <span>购买数量</span><span><button>-</button><span>1</span><button>+</button></span>
+                <button
+                    class="specifications-btn"
+                    :class="{current:specification.index===index}"
+                    v-for="(item,index) in specification.list"
+                    @click="changeSpecification(index)">{{item.guig}}</button>
+                <hr color="#ccc">
+                <div style="margin-top: 20px;">
+                    <span style="font-size: 16px;">购买数量</span> <span style="float: right"><button class="amount-btn current" @click="decreaseAmount">-</button><span>{{amount}}</span><button class="amount-btn" @click="increaseAmount">+</button></span>
                 </div>
-                <button class="confirm-btn">确认</button>
+
             </div>
         </div>
-        <div class="model">
+        <div class="model" v-if="selectorShow" @click="selectorShow = false">
 
         </div>
     </div>
@@ -183,7 +246,15 @@
         data() {
             return {
                 goodsData: [],
+                specification:{
+                    list:[],
+                    index:0,
+                    current:{}
+                },
+                amount:1,
+                specificationsIndex:0,
                 scrollTop:0,
+                selectorShow:false,
                 swiperOption: {
                     speed:1000,
                     spaceBetween: 0,
@@ -211,7 +282,8 @@
                     if (res.data.status === 200) {
                         console.log('***', res.data.data.GoodsApi);
                         this.goodsData = res.data.data.GoodsApi;
-                        console.log(this.imgList)
+                        this.specification.list = res.data.data.GoodsApi.tbGoodsSpecifications;
+                        console.log(this.specification.list)
                     } else {
                         alert(res.data.data.msg)
                     }
@@ -222,13 +294,25 @@
             let _this = this;
             document.documentElement.scrollTop = 0;
             window.onscroll = function () {
-                if (document.documentElement.scrollTop!==0){
-                    _this.scrollTop = true
-                }else {
-                    _this.scrollTop = false
-                }
+                _this.scrollTop = document.documentElement.scrollTop !== 0;
             }
 
+        },
+        methods:{
+            changeSpecification(index){
+                this.specification.index = index;
+                this.specification.current = this.specification.list[index]
+            },
+            showSelector(){
+                this.selectorShow = true;
+                this.specification.current = this.specification.list[0]
+            },
+            increaseAmount(){
+                this.amount++
+            },
+            decreaseAmount(){
+                this.amount = Math.max(this.amount-1,1)
+            }
         }
     }
 </script>

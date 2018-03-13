@@ -22,7 +22,10 @@
         margin: 0;
         padding: 0;
     }
-
+    button{
+        border: none;
+        outline: none;
+    }
     .pannel {
         background-color: #fff;
         margin-top: 5px;
