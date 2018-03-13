@@ -11,17 +11,17 @@
 import $ from 'jquery'
 function lunbo(container, content, size, delay, direction, alternation) {
     container.append(content.eq(0).clone());
-    var len = content.length;
-    var curELe = 0;
-    var animateObj = {};
+    let len = content.length;
+    let curELe = 0;
+    let animateObj = {};
     return setInterval(function () {
         if (curELe < len - 1) {
             curELe++;
-            animateObj[direction] = -curELe * size + 'px';
+            animateObj[direction] = -(curELe * size) + 'px';
             container.animate(animateObj, alternation);
         } else {
             curELe = 0;
-            animateObj[direction] = -len * size + 'px';
+            animateObj[direction] = -(len * size) + 'px';
             container.animate(animateObj, alternation, function () {
                 $(this).css(direction, 0)
             })
