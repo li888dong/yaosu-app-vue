@@ -14,6 +14,7 @@ function lunbo(container, content, size, delay, direction, alternation) {
     let len = content.length;
     let curELe = 0;
     let animateObj = {};
+
     return setInterval(function () {
         if (curELe < len - 1) {
             curELe++;
@@ -26,6 +27,8 @@ function lunbo(container, content, size, delay, direction, alternation) {
                 $(this).css(direction, 0)
             })
         }
+        console.log(curELe)
+
     }, delay)
 }
 export default lunbo

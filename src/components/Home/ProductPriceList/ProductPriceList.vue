@@ -57,7 +57,9 @@
         name: 'productpricelist',
         data() {
             return {
-                timer:{},
+                timerzy:0,
+                timeryl:0,
+                timerdelay:0,
                 show: 'yuanliao',
                 swiperOption: {
                     direction: 'vertical',
@@ -93,25 +95,28 @@
             }
         },
         mounted() {
-            setTimeout(()=>{
-                this.timer.yuanliao = lunbo(this.$yuanliao, this.$yuanliao.find('div'), 50, 2000, 'top', 1000);
+            this.timerdelay = setTimeout(()=>{
+                this.changeShow('yuanliao');
             },2000)
         },
         methods:{
             changeShow(type){
                 this.show = type;
                 if (type === 'zhongyao'){
-                    this.timer.zhongyao = lunbo(this.$zhongyao, this.$zhongyao.find('div'), 50, 2000, 'top', 1000);
-                    clearInterval(this.timer.yuanliao)
+                    clearInterval(this.timerzy);
+                    clearInterval(this.timeryl);
+                    this.timerzy = lunbo(this.$zhongyao, this.$zhongyao.find('div'), 50, 2000, 'top', 1000);
                 }else {
-                    this.timer.yuanliao = lunbo(this.$yuanliao, this.$yuanliao.find('div'), 50, 2000, 'top', 1000);
-                    clearInterval(this.timer.zhongyao)
+                    clearInterval(this.timeryl);
+                    clearInterval(this.timerzy);
+                    this.timeryl = lunbo(this.$yuanliao, this.$yuanliao.find('div'), 50, 2000, 'top', 1000);
                 }
             }
         },
         beforeDestroy(){
-            clearInterval(this.timer.zhongyao);
-            clearInterval(this.timer.yuanliao);
+            clearInterval(this.timerzy);
+            clearInterval(this.timeryl);
+            clearTimeout(this.timerdelay)
         }
     }
 </script>
