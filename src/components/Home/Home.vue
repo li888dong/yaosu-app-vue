@@ -46,7 +46,6 @@
     const advertsing ={
         urlList: [],
         init: function (data) {
-            console.log('bbb')
             this.urlList.length = 0;
             data.map(i => {
                 this.urlList.push('http://image.yaosuce.com' + i.picture)
