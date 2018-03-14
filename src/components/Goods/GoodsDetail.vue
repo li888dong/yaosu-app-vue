@@ -178,7 +178,7 @@
             </div>
             <div class="goods-price pannel">
                 <h4>{{goodsData.chanpmc}}</h4>
-                <p style="color: #f00">￥{{goodsData.chanpdj}}</p>
+                <p style="color: #f00">￥{{specification.current.danj}}</p>
             </div>
             <div class="goods-selecetor pannel" @click="showSelector">
                 <i class="icon iconfont icon-xuanze"></i><span style="margin-left: 10px;">请选择规格数量</span><i class="icon iconfont icon-more"></i>
@@ -283,6 +283,7 @@
                         console.log('***', res.data.data.GoodsApi);
                         this.goodsData = res.data.data.GoodsApi;
                         this.specification.list = res.data.data.GoodsApi.tbGoodsSpecifications;
+                        this.specification.current = this.specification.list[0]
                         console.log(this.specification.list)
                     } else {
                         alert(res.data.data.msg)
@@ -305,7 +306,6 @@
             },
             showSelector(){
                 this.selectorShow = true;
-                this.specification.current = this.specification.list[0]
             },
             increaseAmount(){
                 this.amount++

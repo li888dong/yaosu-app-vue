@@ -111,7 +111,7 @@
         height: 40px;
     }
 
-    .icon-more {
+    .icon-more.right {
         position: absolute;
         right: 5px;
         font-size: 10px;

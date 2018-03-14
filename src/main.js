@@ -13,6 +13,7 @@ import './assets/iconfont/iconfont.css'
 import APIs from './API'
 
 const instance = axios.create({
+    // https://yxrhome.com/
     baseURL: "http://localhost:3000",
     timeout: 15000
 });
