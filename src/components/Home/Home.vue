@@ -3,6 +3,10 @@
 
         <!--顶部banner搜索框-->
         <header>
+            <div class="search-container" :class="{'top-bg':scrollTop}">
+                <i class="icon iconfont icon-search "></i>
+                <input type="text" placeholder="搜索产品/企业" class="search-input" @focus="$router.push('search')">
+            </div>
             <Banner></Banner>
         </header>
 
@@ -61,9 +65,10 @@
         }
     };
     export default {
-        name: 'App',
+        name: 'Home',
         data() {
             return {
+                scrollTop:0,
                 advertising:[],
                 ANN1:[],
                 ANN2:[],
@@ -91,7 +96,9 @@
         },
         mounted() {
             const _this = this;
-
+            window.onscroll = function () {
+                _this.scrollTop = document.documentElement.scrollTop !== 0;
+            }
             this.$http.get(this.$APIs.INDEX_LIST)
                 .then(function (response) {
                     const data = response.data.data;
@@ -179,4 +186,36 @@
         margin-right: 10px;
         font-size: 12px;
     }
+
+    header .search-container{
+        position: fixed;
+        top: 0;
+        height: 30px;
+        left: 0;
+        right: 0;
+        z-index: 11;
+        padding:10px 5% ;
+    }
+    .top-bg{
+        background-color: #03A657;
+    }
+    header input[type=text]{
+        box-sizing: border-box;
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 4px;
+        box-shadow: none;
+        outline: none;
+        border: 1px solid transparent;
+        padding-left: 40px;
+        font-size: 14px;
+    }
+    header i.icon-search{
+        position: absolute;
+        top: 16px;
+        left: 30px;
+        color: #03A657;
+    }
+
 </style>

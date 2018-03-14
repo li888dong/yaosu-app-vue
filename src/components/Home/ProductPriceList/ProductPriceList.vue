@@ -8,7 +8,7 @@
             <span class="tabbar" :class="{'tabbar-selected':show==='yuanliao'}" @click="changeShow('yuanliao')">原料药</span>
             <span class="tabbar" :class="{'tabbar-selected':show==='zhongyao'}" @click="changeShow('zhongyao')">中药材</span>
         </div>
-        <div class="product-price">
+        <div class="product-price" @click="gotoGoods">
             <h4 class="price-title">参考价格</h4>
             <div class="product-info" v-show="show === 'yuanliao'">
                 <div class="slide-container yuanliao" ref="yuanliao" v-if="zhongyaoData.length>0">
@@ -111,6 +111,22 @@
                     clearInterval(this.timerzy);
                     this.timeryl = lunbo(this.$yuanliao, this.$yuanliao.find('div'), 50, 2000, 'top', 1000);
                 }
+            },
+            gotoGoods(e) {
+                this.$http.get(this.$APIs.GOODS_LIST+'?categoryID=1')
+                    .then((res) => {
+                        if (res.data.status === 200){
+                            this.$store.dispatch('set_goodsList', res.data.data.rows);
+                            this.curSelected = e.srcElement.dataset.type;
+                        }else {
+                            alert(res.data.msg)
+                        }
+                    })
+                    .catch((err) => {
+//                        alert(err.msg)
+                        console.log(err)
+                    });
+                this.$router.push({path: 'goods_list', query: {type: '现货', demand: '要产品', supply: '要渠道'}})
             }
         },
         beforeDestroy(){

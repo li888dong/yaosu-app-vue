@@ -6,7 +6,7 @@
         <div class="item-header">
             <div class="title">
                 <span class="logo"></span>
-                <span class="more">查看全部 <i class="icon iconfont icon-more"></i></span>
+                <span class="more" @click="$router.push({path:'service_list',query:{type:'技术',demand:'要技术',supply:'技术供应'}})">查看全部 <i class="icon iconfont icon-more"></i></span>
             </div>
             <div class="tabbar-container">
                 <span class="tabbar" :class="{ 'tabbar-selected':curSelected==='demand'}" @click="changeCur('demand')">要技术</span>

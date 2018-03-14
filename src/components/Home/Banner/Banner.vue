@@ -3,10 +3,7 @@
 </style>
 <template>
     <div class="banner">
-        <div class="search-container">
-            <i class="icon iconfont icon-search "></i>
-            <input type="text" placeholder="搜索产品/企业" v-model="keyword" class="search-input">
-        </div>
+
         <div class="banner-img-container" ref="bannerImgContainer">
             <swiper v-if="imgList.length>0" :options="swiperOption">
                 <swiper-slide class="banner-img" :style="{backgroundImage:url}" v-for="(url,index) in imgList" :key="index"></swiper-slide>
@@ -22,7 +19,6 @@
         props:['bannerData'],
         data(){
             return{
-                keyword:'',
                 swiperOption: {
                     speed:1000,
                     spaceBetween: 0,

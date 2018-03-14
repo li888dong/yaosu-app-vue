@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../components/Home/Home.vue'
+import Search from '../components/Search/Search.vue'
 import Procurement from '../components/Procurement/Procurement.vue'
 import Goods from '../components/Goods/Goods.vue'
 import GoodsDetail from '../components/Goods/GoodsDetail.vue'
@@ -16,6 +17,14 @@ export default new Router({
             path: '/',
             name: 'Home',
             component: Home,
+            meta:{
+                title:'药素网'
+            }
+        },
+        {
+            path: '/search',
+            name: 'search',
+            component: Search,
             meta:{
                 title:'药素网'
             }

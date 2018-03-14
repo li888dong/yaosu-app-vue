@@ -6,7 +6,7 @@
         <div class="item-header">
             <div class="title">
                 <span class="logo"></span>
-                <span class="more">查看全部 <i class="icon iconfont icon-more"></i></span>
+                <span class="more" @click="$router.push({path:'procurement',query:{type:'采购'}})">查看全部 <i class="icon iconfont icon-more"></i></span>
             </div>
         </div>
         <div class="item-content">
