@@ -27,6 +27,7 @@ function lunbo(container, content, size, delay, direction, alternation) {
                 $(this).css(direction, 0)
             })
         }
+        console.log(curELe)
     }, delay)
 }
 export default lunbo

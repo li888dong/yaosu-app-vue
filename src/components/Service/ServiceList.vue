@@ -1,4 +1,41 @@
 <style scoped>
+    .tabbar-container {
+        background-color: #fff;
+        padding-top: 10px;
+        margin: 0;
+    }
+
+    .animate-container {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 92px;
+        bottom: 0;
+    }
+
+    .animate-item {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        vertical-align: top;
+    }
+
+    .slide-fade1-enter {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    .slide-fade1-enter-active,
+    .slide-fade2-enter-active {
+        transition: all .2s ease;
+    }
+
+    .slide-fade2-enter {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
 
     .fade-enter-active {
         transition: all .8s;
@@ -20,12 +57,11 @@
         color: #000;
     }
 
-
     .list-item p {
         line-height: 28px;
     }
 
-    .list-item .type{
+    .list-item .type {
         position: absolute;
         top: 1px;
         bottom: 1px;
@@ -41,20 +77,23 @@
         font-size: 14px;
         text-align: center;
     }
-    .list-item .type.supply{
+
+    .list-item .type.supply {
         background-color: yellowgreen;
     }
+
     .list-item .content,
-    .list-item .footer{
+    .list-item .footer {
         margin-left: 50px;
     }
-    .list-item .content span{
+
+    .list-item .content span {
         color: #666;
     }
-    .list-item .footer span{
+
+    .list-item .footer span {
         margin-left: 20px;
     }
-
 
     .add-btn {
         width: 50px;
@@ -80,74 +119,141 @@
                 <p>{{type}}</p>
                 <i class="icon iconfont icon-search right"></i>
             </div>
-            <div class="catorage-selector" @click="selectorIsShow = !selectorIsShow"
-                 :class="{greenFont:selectorIsShow}">
-                <span>{{curCatorage}}</span>
-                <i class="icon iconfont icon-more" :class="{reverse:selectorIsShow}"></i>
+            <div class="tabbar-container">
+                <span class="tabbar" :class="{ 'tabbar-selected':curSelected==='demand'}"
+                      @click="changeCatorageType('demand')">{{demand}}</span>
+                <span class="tabbar" :class="{ 'tabbar-selected':curSelected==='supply'}"
+                      @click="changeCatorageType('supply')">{{supply}}</span>
             </div>
-            <div class="catorage-list">
-                <transition name="fade">
-                    <div v-if="selectorIsShow">
-                        <p :class="{curCatorage:curCatorage==='全部分类'}" @click="changeCatorageType('全部分类')">全部分类</p>
-                        <p :class="{curCatorage:curCatorage===demand}" @click="changeCatorageType(demand)">
-                            {{demand}}</p>
-                        <p :class="{curCatorage:curCatorage===supply}" @click="changeCatorageType(supply)">
-                            {{supply}}</p>
+            <div class="animate-container">
+
+                <transition name="slide-fade1">
+                    <div class="animate-item" v-if="curSelected==='supply'">
+                        <ul class="list-container" v-if="supplyDataList.length>0">
+                            <li class="list-item" v-for="item in supplyDataList"
+                                @click="$router.push({path:'service_detail',query:{itemData:item,catorageType:type}})">
+                                <div v-if="type==='项目'">
+                                    <div class="type" :class="{supply:item.type==='B'}">{{item.servicecategory.name}}
+                                    </div>
+                                    <div class="content">
+                                        <p class="hs-code">{{item.requirementdescription}}</p>
+                                        <p class="hs-code">{{item.companyname}}</p>
+                                    </div>
+                                    <div class="footer">
+                                        <p class="hs-code">编号 : <span>{{item.projectno}}</span><span
+                                            style="margin-right: 20px;">{{item.addtime}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div v-else-if="type==='外贸'">
+                                    <div class="type" :class="{supply:item.type==='B'}">{{item.servicecategory.name}}
+                                    </div>
+                                    <div class="content">
+                                        <p class="hs-code">HS号:<span>{{item.hs}}</span></p>
+                                        <p class="hs-code">需求描述：<span>{{item.requirementdescription}}</span></p>
+                                    </div>
+                                    <div class="footer">
+                                        <p class="hs-code">编号 : <span>{{item.foreigntradeno}}</span><span
+                                            style="float: right;margin-right: 20px;">{{item.addtime}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div v-else-if="type==='技术'">
+                                    <div class="type" :class="{supply:item.type==='B'}">{{item.servicecategory.name}}
+                                    </div>
+                                    <div class="content">
+                                        <p class="hs-code">{{item.requirementdescription}}</p>
+                                        <p class="hs-code">{{item.companyname}}</p>
+                                    </div>
+                                    <div class="footer">
+                                        <p class="hs-code">编号 : <span>{{item.projectno}}</span><span
+                                            style="float: right;margin-right: 20px;">{{item.addtime}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div v-else-if="type==='批文'">
+                                    <div class="type" :class="{supply:item.type==='B'}">{{item.servicecategory.name}}
+                                    </div>
+                                    <div class="content">
+                                        <p class="hs-code">需求描述：<span>{{item.requirementdescription}}</span></p>
+                                        <p class="hs-code">适应症：<span>《》</span></p>
+                                        <p class="hs-code"><span>{{item.companyname}}</span></p>
+                                    </div>
+                                    <div class="footer">
+                                        <p class="hs-code">编号 : <span>{{item.approvalnumberno}}</span><span
+                                            style="float: right;margin-right: 20px;">{{item.addtime}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <h3 v-else>暂无数据</h3>
+                    </div>
+                </transition>
+                <transition name="slide-fade2">
+                    <div class="animate-item" v-if="curSelected==='demand'">
+                        <ul class="list-container" v-if="demandDataList.length>0">
+                            <li class="list-item" v-for="item in demandDataList"
+                                @click="$router.push({path:'service_detail',query:{itemData:item,catorageType:type}})">
+                                <div v-if="type==='项目'">
+                                    <div class="type" :class="{supply:item.type==='B'}">{{item.servicecategory.name}}
+                                    </div>
+                                    <div class="content">
+                                        <p class="hs-code">{{item.requirementdescription}}</p>
+                                        <p class="hs-code">{{item.companyname}}</p>
+                                    </div>
+                                    <div class="footer">
+                                        <p class="hs-code">编号 : <span>{{item.projectno}}</span><span
+                                            style="margin-right: 20px;">{{item.addtime}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div v-else-if="type==='外贸'">
+                                    <div class="type" :class="{supply:item.type==='B'}">{{item.servicecategory.name}}
+                                    </div>
+                                    <div class="content">
+                                        <p class="hs-code">HS号:<span>{{item.hs}}</span></p>
+                                        <p class="hs-code">需求描述：<span>{{item.requirementdescription}}</span></p>
+                                    </div>
+                                    <div class="footer">
+                                        <p class="hs-code">编号 : <span>{{item.foreigntradeno}}</span><span
+                                            style="float: right;margin-right: 20px;">{{item.addtime}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div v-else-if="type==='技术'">
+                                    <div class="type" :class="{supply:item.type==='B'}">{{item.servicecategory.name}}
+                                    </div>
+                                    <div class="content">
+                                        <p class="hs-code">{{item.requirementdescription}}</p>
+                                        <p class="hs-code">{{item.companyname}}</p>
+                                    </div>
+                                    <div class="footer">
+                                        <p class="hs-code">编号 : <span>{{item.projectno}}</span><span
+                                            style="float: right;margin-right: 20px;">{{item.addtime}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div v-else-if="type==='批文'">
+                                    <div class="type" :class="{supply:item.type==='B'}">{{item.servicecategory.name}}
+                                    </div>
+                                    <div class="content">
+                                        <p class="hs-code">需求描述：<span>{{item.requirementdescription}}</span></p>
+                                        <p class="hs-code">适应症：<span>《》</span></p>
+                                        <p class="hs-code"><span>{{item.companyname}}</span></p>
+                                    </div>
+                                    <div class="footer">
+                                        <p class="hs-code">编号 : <span>{{item.approvalnumberno}}</span><span
+                                            style="float: right;margin-right: 20px;">{{item.addtime}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <h3 v-else>暂无数据</h3>
                     </div>
                 </transition>
             </div>
-            <ul class="list-container">
-                <li class="list-item" v-for="item in dataList" @click="$router.push({path:'service_detail',query:{itemData:item,catorageType:type}})">
-                    <div v-if="type==='项目'">
-                        <div class="type" :class="{supply:item.type==='B'}">{{item.servicecategory.name}}</div>
-                        <div class="content">
-                            <p class="hs-code">{{item.requirementdescription}}</p>
-                            <p class="hs-code">{{item.companyname}}</p>
-                        </div>
-                        <div class="footer">
-                            <p class="hs-code">编号 : <span>{{item.projectno}}</span><span style="margin-right: 20px;">{{item.addtime}}</span>
-                            </p>
-                        </div>
-                    </div>
-                    <div v-else-if="type==='外贸'">
-                        <div class="type" :class="{supply:item.type==='B'}">{{item.servicecategory.name}}</div>
-                        <div class="content">
-                            <p class="hs-code">HS号:<span>{{item.hs}}</span></p>
-                            <p class="hs-code">需求描述：<span>{{item.requirementdescription}}</span></p>
-                        </div>
-                        <div class="footer">
-                            <p class="hs-code">编号 : <span>{{item.foreigntradeno}}</span><span style="float: right;margin-right: 20px;">{{item.addtime}}</span>
-                            </p>
-                        </div>
-                    </div>
-                    <div v-else-if="type==='技术'">
-                        <div class="type" :class="{supply:item.type==='B'}">{{item.servicecategory.name}}</div>
-                        <div class="content">
-                            <p class="hs-code">{{item.requirementdescription}}</p>
-                            <p class="hs-code">{{item.companyname}}</p>
-                        </div>
-                        <div class="footer">
-                            <p class="hs-code">编号 : <span>{{item.projectno}}</span><span style="float: right;margin-right: 20px;">{{item.addtime}}</span>
-                            </p>
-                        </div>
-                    </div>
-                    <div v-else-if="type==='批文'">
-                        <div class="type" :class="{supply:item.type==='B'}">{{item.servicecategory.name}}</div>
-                        <div class="content">
-                            <p class="hs-code">需求描述：<span>{{item.requirementdescription}}</span></p>
-                            <p class="hs-code">适应症：<span>《》</span></p>
-                            <p class="hs-code"><span>{{item.companyname}}</span></p>
-                        </div>
-                        <div class="footer">
-                            <p class="hs-code">编号 : <span>{{item.approvalnumberno}}</span><span style="float: right;margin-right: 20px;">{{item.addtime}}</span>
-                            </p>
-                        </div>
-                    </div>
-
-
-
-                </li>
-            </ul>
         </div>
         <div class="add-btn">+</div>
     </div>
@@ -157,38 +263,23 @@
         name: 'servicelist',
         data() {
             return {
-                selectorIsShow: false,
                 demand: '',
                 supply: '',
-                type:'',
-                reqUrl:'',
-                curCatorage: '全部分类',
-                resData:[],
-                dataList:[]
+                type: '',
+                reqUrl: '',
+                curSelected: 'demand',
+                resData: [],
+                supplyDataList:[],
+                demandDataList:[],
+                dataList: []
             }
         },
         methods: {
             changeCatorageType(type) {
-                this.curCatorage = type;
-                this.selectorIsShow = false;
-                if (type === this.demand){
-                    this.dataList = this.resData.filter((item)=>{
-                        return item.type === 'A'
-                    })
-                }
-                else if  (type === this.supply){
-                    this.dataList = this.resData.filter((item)=>{
-                        return item.type === 'B'
-                    })
-                }
-                else{
-                    this.dataList = this.resData.filter((item)=>{
-                        return item
-                    });
-                }
+                this.curSelected = type;
             },
-            getReqUrl(type){
-                switch (type){
+            getReqUrl(type) {
+                switch (type) {
                     case '项目':
                         return this.$APIs.PROJECT_LIST;
                     case '外贸':
@@ -200,19 +291,22 @@
                 }
             }
         },
-        computed:{
-
-        },
         mounted() {
             this.demand = this.$route.query.demand;
             this.type = this.$route.query.type;
             this.supply = this.$route.query.supply;
             this.reqUrl = this.getReqUrl(this.type);
             this.$http.get(this.reqUrl)
-                .then((res)=>{
-                    console.log('+++',res);
+                .then((res) => {
+                    console.log('+++', res);
                     this.resData = res.data.data.rows;
-                    this.changeCatorageType('全部分类')
+                    this.supplyDataList = this.resData.filter((item) => {
+                        return item.type === 'B'
+                    });
+                    this.demandDataList = this.resData.filter((item) => {
+                        return item.type === 'A'
+                    });
+                    this.changeCatorageType('demand')
                 })
                 .catch(function (error) {
                     console.log(error);

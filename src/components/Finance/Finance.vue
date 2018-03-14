@@ -1,5 +1,5 @@
 <style scoped>
-    .tabbar-container.finace{
+    .tabbar-container{
         background-color: #fff;
         padding-top: 10px;
         margin: 0;
