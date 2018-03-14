@@ -14,31 +14,26 @@
 
         <!--优质现货-->
         <Xianhuo></Xianhuo>
-        <Advertsing></Advertsing>
 
         <!--热门采购-->
         <Caigou></Caigou>
-        <Advertsing></Advertsing>
 
         <!--优选外贸-->
         <Waimao></Waimao>
-        <Advertsing></Advertsing>
 
         <!--推荐项目-->
         <Xiangmu></Xiangmu>
-        <Advertsing></Advertsing>
 
         <!--创新技术-->
         <Jishu></Jishu>
-        <Advertsing></Advertsing>
 
         <!--人气批文-->
         <Piwen></Piwen>
-        <Advertsing></Advertsing>
     </div>
 </template>
 
 <script>
+    import $ from 'jquery'
     import Banner from '@/components/Home/Banner/Banner.vue'
     import NavList from '@/components/Home/NavList/NavList.vue'
     import ProductPriceList from '@/components/Home/ProductPriceList/ProductPriceList.vue'
@@ -48,8 +43,24 @@
     import Xiangmu from '@/components/Home/Xiangmu/Xiangmu.vue'
     import Jishu from '@/components/Home/Jishu/Jishu.vue'
     import Piwen from '@/components/Home/Piwen/Piwen.vue'
-    import Advertsing from '@/components/Home/Advertising/Advertising.vue'
+    const advertsing ={
+        urlList: [],
+        init: function (data) {
+            console.log('bbb')
+            this.urlList.length = 0;
+            data.map(i => {
+                this.urlList.push('http://image.yaosuce.com' + i.picture)
+            });
+            this.rendererData()
 
+        },
+        rendererData: function () {
+            let $adLogoList = $('.item-container');
+            for (let i = 0; i < this.urlList.length; i++) {
+                $($adLogoList[i]).append(`<div class="ad-logo" style="background-image: url(${this.urlList[i]})"></div>`)
+            }
+        }
+    };
     export default {
         name: 'App',
         data() {
@@ -74,15 +85,13 @@
             Waimao,
             Xiangmu,
             Jishu,
-            Piwen,
-            Advertsing
+            Piwen
         },
         beforeMount(){
 
         },
         mounted() {
             const _this = this;
-            const adDoms = document.querySelectorAll('.ad-logo');
 
             this.$http.get(this.$APIs.INDEX_LIST)
                 .then(function (response) {
@@ -96,25 +105,35 @@
                     _this.PNO2 = data.service.PNO[1].list;
                     _this.TNO1 = data.service.TNO[0].list;
                     _this.TNO2 = data.service.TNO[1].list;
+//                    设置广告条幅
                     _this.$store.dispatch('set_advertising', data.advertising);
+//                    设置参考价格数据
                     _this.$store.dispatch('set_api', data.api);
+//                    设置顶部banner图
                     _this.$store.dispatch('set_banner', data.banner);
+//                    设置现货商品
                     _this.$store.dispatch('set_goods', data.goods);
+//                    设置采购数据
                     _this.$store.dispatch('set_procurement', data.procurement);
+//                    设置批文数据
                     _this.$store.dispatch('set_ANN1', _this.ANN1);
                     _this.$store.dispatch('set_ANN2', _this.ANN2);
+//                    设置外贸数据
                     _this.$store.dispatch('set_FTN1', _this.FTN1);
                     _this.$store.dispatch('set_FTN2', _this.FTN2);
-                    _this.$store.dispatch('set_ANN1', _this.PNO1);
-                    _this.$store.dispatch('set_ANN1', _this.PNO2);
+//                    设置推荐项目数据
+                    _this.$store.dispatch('set_PNO1', _this.PNO1);
+                    _this.$store.dispatch('set_PNO2', _this.PNO2);
+//                    设置创新技术数据
                     _this.$store.dispatch('set_TNO1', _this.TNO1);
                     _this.$store.dispatch('set_TNO2', _this.TNO2);
+//                    设置中药材数据
                     _this.$store.dispatch('set_tcm', data.tcm);
 
 //                    设置广告的图片链接
-                    for (let i=0;i<_this.advertising.length;i++){
-                        adDoms[i].style.backgroundImage = 'url(http://image.yaosuce.com'+_this.advertising[i].picture+')'
-                    }
+                    advertsing.init(_this.advertising);
+
+
                 })
                 .catch(function (error) {
                     console.log(error);

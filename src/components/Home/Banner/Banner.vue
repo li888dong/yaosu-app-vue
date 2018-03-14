@@ -9,7 +9,7 @@
         </div>
         <div class="banner-img-container" ref="bannerImgContainer">
             <swiper v-if="imgList.length>0" :options="swiperOption">
-                <swiper-slide class="banner-img" :style="{backgroundImage:url}" v-for="url in imgList" :key="url"></swiper-slide>
+                <swiper-slide class="banner-img" :style="{backgroundImage:url}" v-for="(url,index) in imgList" :key="index"></swiper-slide>
             </swiper>
 
         </div>
