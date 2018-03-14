@@ -1,6 +1,10 @@
 const APIs = {
     // 主页列表
     INDEX_LIST: '/app/index/list',
+    // 主页搜索一级
+    HOME_SEARCH_1:'/app/goods/queryGoodsName',
+    // 主页搜索二级
+    HOME_SEARCH_2:'/app/goods/queryGoodsNameAbsolute',
     // 要采购
     PROCUREMENT_LIST:'/app/member/procurementList',
     // 要现货

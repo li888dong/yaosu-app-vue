@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../components/Home/Home.vue'
 import Search from '../components/Search/Search.vue'
+import SearchHistory from '../components/Search/SearchHistory.vue'
+import SearchResult from '../components/Search/SearchResult.vue'
 import Procurement from '../components/Procurement/Procurement.vue'
 import Goods from '../components/Goods/Goods.vue'
 import GoodsDetail from '../components/Goods/GoodsDetail.vue'
@@ -27,7 +29,25 @@ export default new Router({
             component: Search,
             meta:{
                 title:'药素网'
-            }
+            },
+            children:[
+                {
+                    path: '/search_history',
+                    name: 'search_history',
+                    component: SearchHistory,
+                    meta:{
+                        title:'药素网'
+                    }
+                },
+                {
+                    path: '/search_result',
+                    name: 'search_result',
+                    component: SearchResult,
+                    meta:{
+                        title:'药素网'
+                    }
+                },
+            ]
         },
         {
             path: '/procurement',

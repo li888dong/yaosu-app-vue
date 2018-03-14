@@ -5,7 +5,7 @@
         <header>
             <div class="search-container" :class="{'top-bg':scrollTop}">
                 <i class="icon iconfont icon-search "></i>
-                <input type="text" placeholder="搜索产品/企业" class="search-input" @focus="$router.push('search')">
+                <input type="search" placeholder="搜索产品/企业" class="search-input" @focus="$router.push('search_history')">
             </div>
             <Banner></Banner>
         </header>
@@ -98,7 +98,7 @@
             const _this = this;
             window.onscroll = function () {
                 _this.scrollTop = document.documentElement.scrollTop !== 0;
-            }
+            };
             this.$http.get(this.$APIs.INDEX_LIST)
                 .then(function (response) {
                     const data = response.data.data;
@@ -199,7 +199,7 @@
     .top-bg{
         background-color: #03A657;
     }
-    header input[type=text]{
+    header input{
         box-sizing: border-box;
         width: 100%;
         height: 30px;

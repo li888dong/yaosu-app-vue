@@ -2,35 +2,40 @@
     .search-box{
         margin-top: 50px;
     }
-    header .search-container input{
+    header .search-container form{
         width: 80%;
     }
-    .cancle{
+    header .search-container input{
+        width: 100%;
+    }
+    .cancle,
+    .search{
         color: white;
         margin-left: 20px;
     }
-    .history{
-        height: 40px;
-        line-height: 40px;
-        padding:0 20px ;
-    }
-    .icon-shanchu{
-        float: right;
-        font-size: 18px;
-    }
+
 </style>
 <template>
     <div class="search-box">
         <header>
-            <div class="search-container top-bg">
+            <div class="search-container top-bg" @submit.prevent="onSearch">
                 <i class="icon iconfont icon-search "></i>
-                <input type="text" placeholder="搜索产品/企业" v-model="keyword" class="search-input" autofocus>
-                <span class="cancle" @click="cancleSearch">取消</span>
+                <form style="display: inline-block">
+                    <input
+                        type="search"
+                        placeholder="搜索产品/企业"
+                        class="search-input"
+                        autofocus autocomplete="off"
+                        v-model="keyword"
+                    >
+                </form>
+
+                <span class="search" @click="onSearch" v-if="keyword">搜索</span>
+                <span class="cancle" @click="cancleSearch" v-else>取消</span>
             </div>
         </header>
-        <div class="history pannel">
-            <span>历史记录</span><i class="icon iconfont icon-shanchu" @click="clearHistory"></i>
-        </div>
+        <router-view></router-view>
+
     </div>
 </template>
 <script>
@@ -38,7 +43,14 @@
         name:'search',
         data(){
             return{
-                keyword:''
+                keyword:'',
+                resultList:[]
+            }
+        },
+        watch: {
+            '$route' (to, from) {
+                this.keyword = '';
+                this.resultList.length = 0
             }
         },
         methods:{
@@ -46,8 +58,17 @@
                 this.$router.go(-1);
                 this.keyword = ''
             },
-            clearHistory(){
 
+            onSearch(){
+                this.$http.get(this.$APIs.HOME_SEARCH_1+'?search='+this.keyword)
+                    .then(res=>{
+                        console.log(res.data.data.rows);
+                        this.resultList = res.data.data.rows||[]
+                    })
+                    .catch(err=>{
+
+                    });
+                this.$router.push('search_result')
             }
         }
     }

@@ -26,6 +26,9 @@
         border: none;
         outline: none;
     }
+    input[type="search"]::-webkit-search-cancel-button{
+        display: none;
+    }
     .pannel {
         background-color: #fff;
         margin-top: 5px;
