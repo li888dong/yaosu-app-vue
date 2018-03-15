@@ -15,8 +15,8 @@ import './util/Dataformat'
 import APIs from './API'
 
 const instance = axios.create({
-    // https://yxrhome.com/
     baseURL: "http://localhost:3000",
+    // baseURL: "https://yxrhome.com",
     timeout: 15000
 });
 Vue.APIs = Vue.prototype.$APIs = APIs;
