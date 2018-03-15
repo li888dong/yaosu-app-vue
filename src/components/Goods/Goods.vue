@@ -139,9 +139,9 @@
         </div>
         <div class="item-content" v-else>
             <div class="product-item" :key="goodsItem.goodsID" v-for="goodsItem in curGoods" @click="$router.push({path:'goods_detail',query:{goodsId:goodsItem.goodsID}})">
-                <h4 class="item-title">{{goodsItem.chanpmc}}</h4>
-                <div class="item-info">{{goodsItem.chund}}</div>
-                <div class="item-company">{{goodsItem.qiymc}}</div>
+                <h4 class="item-title text-ellipsis">{{goodsItem.chanpmc}}</h4>
+                <div class="item-info text-ellipsis">{{goodsItem.chund}}</div>
+                <div class="item-company text-ellipsis">{{goodsItem.qiymc}}</div>
             </div>
         </div>
     </div>

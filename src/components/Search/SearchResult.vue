@@ -58,6 +58,11 @@
                 return this.$store.getters.resultList
             }
         },
+        watch:{
+            resultList(){
+                this.dataList = this.resultList.map(i=>this.replaceType(i))
+            }
+        },
         mounted(){
             this.dataList = this.resultList.map(i=>this.replaceType(i))
         },

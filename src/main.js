@@ -10,6 +10,8 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 // require styles
 import 'swiper/dist/css/swiper.css'
 import './assets/iconfont/iconfont.css'
+
+import './util/Dataformat'
 import APIs from './API'
 
 const instance = axios.create({

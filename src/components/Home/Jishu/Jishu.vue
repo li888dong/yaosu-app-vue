@@ -16,7 +16,7 @@
         <div class="item-content">
             <div class="product-item" :data-technologyid="item.technologyid" :key="item.technologyid" v-for="item in curData">
                 <div class="item-title">{{item.companyname || ''}}</div>
-                <div class="item-date">{{item.addtime || ''}}</div>
+                <div class="item-date">{{new Date(item.addtime).Format('yyyy-MM-dd')|| ''}}</div>
             </div>
         </div>
 

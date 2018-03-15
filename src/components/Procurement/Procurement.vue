@@ -52,7 +52,7 @@
                 <p><span class="title">联系方式：</span><span class="content">{{item.procurement.contactphone}}</span><span class="ck-btn">查看联系方式</span></p>
                 <p><span class="title">信息有效期至：</span><span class="content">{{item.procurement.messagevalidity}}</span></p>
                 <p><span class="title">备注信息：</span><span class="content">{{item.procurement.otherrequests}}</span></p>
-                <p class="footer"><span>{{item.procurement.addtime}}</span><span class="bj-btn">立即报价</span></p>
+                <p class="footer"><span>{{new Date(item.procurement.addtime).Format('yyyy-MM-dd')}}</span><span class="bj-btn">立即报价</span></p>
             </div>
         </div>
     </div>

@@ -34,7 +34,11 @@
         margin-top: 5px;
         overflow: hidden;
     }
-
+    .text-ellipsis{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
     /*标题logo*/
     .item-container .title {
         display: flex;

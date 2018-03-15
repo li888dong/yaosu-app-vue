@@ -16,7 +16,7 @@
         <div class="item-content">
             <div class="product-item" :data-foreigntradeid="item.projectid" :key="item.projectid" v-for="item in curData">
                 <p><span class="item-title">{{item.companyname}}</span></p>
-                <p><span class="item-info">{{item.addtime}}</span></p>
+                <p><span class="item-info">{{new Date(item.addtime).Format('yyyy-MM-dd')}}</span></p>
             </div>
         </div>
 

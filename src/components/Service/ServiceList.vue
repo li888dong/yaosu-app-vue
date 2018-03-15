@@ -54,7 +54,7 @@
         border-radius: 4px;
         box-shadow: 0 0 5px #888888;
         font-size: 14px;
-        color: #000;
+        color: #666;
     }
 
     .list-item p {
@@ -72,14 +72,14 @@
         justify-content: space-around;
         border-radius: 4px;
         width: 20px;
-        background-color: #019117;
+        background-color: #03A657;
         color: #ffffff;
-        font-size: 14px;
+        font-size: 12px;
         text-align: center;
     }
 
     .list-item .type.supply {
-        background-color: yellowgreen;
+        background-color: #9acd32;
     }
 
     .list-item .content,
@@ -90,7 +90,11 @@
     .list-item .content span {
         color: #666;
     }
-
+    .list-item .footer .hs-code{
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-around;
+    }
     .list-item .footer span {
         margin-left: 20px;
     }
@@ -140,8 +144,7 @@
                                         <p class="hs-code">{{item.companyname}}</p>
                                     </div>
                                     <div class="footer">
-                                        <p class="hs-code">编号 : <span>{{item.projectno}}</span><span
-                                            style="margin-right: 20px;">{{item.addtime}}</span>
+                                        <p class="hs-code">编号 : <span>{{item.projectno}}</span><span>{{new Date(item.addtime).Format('yyyy-MM-dd')}}</span>
                                         </p>
                                     </div>
                                 </div>
@@ -153,8 +156,7 @@
                                         <p class="hs-code">需求描述：<span>{{item.requirementdescription}}</span></p>
                                     </div>
                                     <div class="footer">
-                                        <p class="hs-code">编号 : <span>{{item.foreigntradeno}}</span><span
-                                            style="float: right;margin-right: 20px;">{{item.addtime}}</span>
+                                        <p class="hs-code">编号 : <span>{{item.foreigntradeno}}</span><span>{{new Date(item.addtime).Format('yyyy-MM-dd')}}</span>
                                         </p>
                                     </div>
                                 </div>
@@ -166,8 +168,7 @@
                                         <p class="hs-code">{{item.companyname}}</p>
                                     </div>
                                     <div class="footer">
-                                        <p class="hs-code">编号 : <span>{{item.projectno}}</span><span
-                                            style="float: right;margin-right: 20px;">{{item.addtime}}</span>
+                                        <p class="hs-code">编号 : <span>{{item.projectno}}</span><span>{{new Date(item.addtime).Format('yyyy-MM-dd')}}</span>
                                         </p>
                                     </div>
                                 </div>
@@ -180,8 +181,7 @@
                                         <p class="hs-code"><span>{{item.companyname}}</span></p>
                                     </div>
                                     <div class="footer">
-                                        <p class="hs-code">编号 : <span>{{item.approvalnumberno}}</span><span
-                                            style="float: right;margin-right: 20px;">{{item.addtime}}</span>
+                                        <p class="hs-code">编号 : <span>{{item.approvalnumberno}}</span><span>{{new Date(item.addtime).Format('yyyy-MM-dd')}}</span>
                                         </p>
                                     </div>
                                 </div>
@@ -203,8 +203,7 @@
                                         <p class="hs-code">{{item.companyname}}</p>
                                     </div>
                                     <div class="footer">
-                                        <p class="hs-code">编号 : <span>{{item.projectno}}</span><span
-                                            style="margin-right: 20px;">{{item.addtime}}</span>
+                                        <p class="hs-code">编号 : <span>{{item.projectno}}</span><span>{{new Date(item.addtime).Format('yyyy-MM-dd')}}</span>
                                         </p>
                                     </div>
                                 </div>
@@ -216,8 +215,7 @@
                                         <p class="hs-code">需求描述：<span>{{item.requirementdescription}}</span></p>
                                     </div>
                                     <div class="footer">
-                                        <p class="hs-code">编号 : <span>{{item.foreigntradeno}}</span><span
-                                            style="float: right;margin-right: 20px;">{{item.addtime}}</span>
+                                        <p class="hs-code">编号 : <span>{{item.foreigntradeno}}</span><span>{{new Date(item.addtime).Format('yyyy-MM-dd')}}</span>
                                         </p>
                                     </div>
                                 </div>
@@ -229,8 +227,7 @@
                                         <p class="hs-code">{{item.companyname}}</p>
                                     </div>
                                     <div class="footer">
-                                        <p class="hs-code">编号 : <span>{{item.projectno}}</span><span
-                                            style="float: right;margin-right: 20px;">{{item.addtime}}</span>
+                                        <p class="hs-code">编号 : <span>{{item.projectno}}</span><span>{{new Date(item.addtime).Format('yyyy-MM-dd')}}</span>
                                         </p>
                                     </div>
                                 </div>
@@ -243,8 +240,7 @@
                                         <p class="hs-code"><span>{{item.companyname}}</span></p>
                                     </div>
                                     <div class="footer">
-                                        <p class="hs-code">编号 : <span>{{item.approvalnumberno}}</span><span
-                                            style="float: right;margin-right: 20px;">{{item.addtime}}</span>
+                                        <p class="hs-code">编号 : <span>{{item.approvalnumberno}}</span><span>{{new Date(item.addtime).Format('yyyy-MM-dd')}}</span>
                                         </p>
                                     </div>
                                 </div>

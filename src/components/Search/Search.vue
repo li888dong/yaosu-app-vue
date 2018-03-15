@@ -67,7 +67,7 @@
                 this.$http.get(this.$APIs.HOME_SEARCH_1+'?search='+this.keyword)
                     .then(res=>{
                         console.log(res.data.data.rows);
-                        this.$store.dispatch('set_resultList',res.data.data.rows);
+                        this.$store.commit('set_resultList',res.data.data.rows);
                         this.$router.push('search_result')
 
                     })
