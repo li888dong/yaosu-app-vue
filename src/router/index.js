@@ -4,6 +4,7 @@ import Home from '../components/Home/Home.vue'
 import Search from '../components/Search/Search.vue'
 import SearchHistory from '../components/Search/SearchHistory.vue'
 import SearchResult from '../components/Search/SearchResult.vue'
+import SearchDetailList from '../components/Search/SearchDetailList.vue'
 import Procurement from '../components/Procurement/Procurement.vue'
 import Goods from '../components/Goods/Goods.vue'
 import GoodsDetail from '../components/Goods/GoodsDetail.vue'
@@ -43,6 +44,14 @@ export default new Router({
                     path: '/search_result',
                     name: 'search_result',
                     component: SearchResult,
+                    meta:{
+                        title:'药素网'
+                    }
+                },
+                {
+                    path: '/search_detail_list',
+                    name: 'search_detail_list',
+                    component: SearchDetailList,
                     meta:{
                         title:'药素网'
                     }

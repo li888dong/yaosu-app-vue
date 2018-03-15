@@ -23,9 +23,9 @@
                 <form style="display: inline-block">
                     <input
                         type="search"
-                        placeholder="搜索产品/企业"
                         class="search-input"
-                        autofocus autocomplete="off"
+                        autofocus
+                        ref="searchInput"
                         v-model="keyword"
                     >
                 </form>
@@ -53,6 +53,9 @@
                 this.resultList.length = 0
             }
         },
+        mounted(){
+            this.$refs.searchInput.focus()
+        },
         methods:{
             cancleSearch(){
                 this.$router.go(-1);
@@ -60,15 +63,17 @@
             },
 
             onSearch(){
+                this.$store.dispatch('set_keywords',this.keyword);
                 this.$http.get(this.$APIs.HOME_SEARCH_1+'?search='+this.keyword)
                     .then(res=>{
                         console.log(res.data.data.rows);
-                        this.resultList = res.data.data.rows||[]
+                        this.$store.dispatch('set_resultList',res.data.data.rows);
+                        this.$router.push('search_result')
+
                     })
                     .catch(err=>{
 
                     });
-                this.$router.push('search_result')
             }
         }
     }

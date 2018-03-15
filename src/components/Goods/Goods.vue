@@ -131,17 +131,17 @@
             </div>
         </div>
         <div class="item-content goods-list" v-if="$route.path==='/goods_list'">
-            <div v-for="good in goodsList" @click="$router.push({path:'goods_detail',query:{goodsId:good.goodId}})">
-                <p>{{good.goodName}} <i class="icon iconfont icon-more"></i></p>
-                <p>{{good.purity}}</p>
-                <p><span>{{good.qiymc}}</span></p>
+            <div v-for="goodsItem in goodsList" @click="$router.push({path:'goods_detail',query:{goodsId:goodsItem.goodId}})">
+                <p>{{goodsItem.goodName}} <i class="icon iconfont icon-more"></i></p>
+                <p>纯度:{{goodsItem.purity}}</p>
+                <p><span>{{goodsItem.qiymc}}</span></p>
             </div>
         </div>
         <div class="item-content" v-else>
-            <div class="product-item" :key="good.goodsID" v-for="good in curGoods" @click="$router.push({path:'goods_detail',query:{goodsId:good.goodsID}})">
-                <h4 class="item-title">{{good.chanpmc}}</h4>
-                <div class="item-info">{{good.chund}}</div>
-                <div class="item-company">{{good.qiymc}}</div>
+            <div class="product-item" :key="goodsItem.goodsID" v-for="goodsItem in curGoods" @click="$router.push({path:'goods_detail',query:{goodsId:goodsItem.goodsID}})">
+                <h4 class="item-title">{{goodsItem.chanpmc}}</h4>
+                <div class="item-info">{{goodsItem.chund}}</div>
+                <div class="item-company">{{goodsItem.qiymc}}</div>
             </div>
         </div>
     </div>
