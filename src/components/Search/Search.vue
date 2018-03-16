@@ -49,7 +49,6 @@
         },
         watch: {
             '$route' (to, from) {
-                this.keyword = '';
                 this.resultList.length = 0
             }
         },
@@ -64,15 +63,20 @@
 
             onSearch(){
                 this.$store.dispatch('set_keywords',this.keyword);
-                this.$http.get(this.$APIs.HOME_SEARCH_1+'?search='+this.keyword)
+                this.$http.get(this.$APIs.HOME_SEARCH_1+'?search='+this.keyword+'&page=1&pageSize=15')
                     .then(res=>{
-                        console.log(res.data.data.rows);
-                        this.$store.commit('set_resultList',res.data.data.rows);
-                        this.$router.push('search_result')
+                        if (res.data.status ===200){
+                            console.log(res.data.data.rows);
+                            this.$store.commit('set_resultList',res.data.data.rows);
+                            this.$router.push('search_result')
+                        }else {
+                            alert(res.data.msg)
+                        }
+
 
                     })
                     .catch(err=>{
-
+                        console.log(err)
                     });
             }
         }

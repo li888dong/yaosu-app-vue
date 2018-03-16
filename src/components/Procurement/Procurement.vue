@@ -100,7 +100,9 @@
                 this.$http.get(this.$APIs.PROCUREMENT_LIST + '?page=' + this.page + '&pageSize=' + this.pageSize)
                     .then((res) => {
                         console.log(res);
-                        this.dataList = this.dataList.concat(res.data.data.rows)
+                        this.dataList = this.dataList.concat(res.data.data.rows);
+                        this.page++
+
                     })
                     .catch((err) => {
                         console.log(err)
@@ -108,7 +110,6 @@
             },
             infiniteScroll() {
                 this.fetchData();
-                this.page++
             },
         }
     }

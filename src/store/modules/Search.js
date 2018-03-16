@@ -12,7 +12,10 @@ const mutations = {
         state.keywords.clear()
     },
     set_resultList(state, res) {
-        state.resultList = res
+        state.resultList = state.resultList.concat(res)
+    },
+    clear_resultList(state) {
+        state.resultList.length = 0
     }
 }
 
@@ -23,6 +26,9 @@ const actions = {
     },
     'set_resultList': function ({commit}, res) {
         commit('set_resultList', res||[])
+    },
+    'clear_resultList': function ({commit}, res) {
+        commit('clear_resultList', res||[])
     },
     'clear_keywords': function ({commit}, res) {
         commit('clear_keywords', res)

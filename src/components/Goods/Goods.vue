@@ -158,13 +158,10 @@
     </div>
 </template>
 <script>
-    import VueDataLoading from 'vue-data-loading'
     //    本页数据来源1是首页的接口通过props传递，2是点击按钮时的网络请求
     export default {
         name: 'goods',
-        components: {
-            VueDataLoading
-        },
+
         data() {
             return {
                 curSelected: 'api',
@@ -203,6 +200,8 @@
                         if (res.data.status === 200) {
                             this.$store.dispatch('set_goodsList',res.data.data.rows);
                             this.curSelected = this.element.dataset.type;
+                            this.page++
+
                         } else {
                             alert(res.data.msg)
                         }
@@ -227,7 +226,6 @@
             },
             infiniteScroll() {
                 this.fetchData();
-                this.page++
             },
         }
     }

@@ -33,6 +33,7 @@
 </style>
 <template>
     <div>
+        <VueDataLoading :loading="loading" :completed="false" :listens="['infinite-scroll']" @infinite-scroll="infiniteScroll">
         <ul>
             <li class="result-item" v-for="result in dataList" @click="gotoDetailList(result)">
                 <p class="name">{{result.productName}}</p>
@@ -43,6 +44,7 @@
             </li>
 
         </ul>
+        </VueDataLoading>
     </div>
 </template>
 <script>
@@ -50,12 +52,19 @@
         name:'searchresult',
         data(){
             return{
-                dataList:[]
+                dataList:[],
+                loading: false,
+                completed: false,
+                page: 1,
+                pageSize:10
             }
         },
         computed:{
             resultList(){
                 return this.$store.getters.resultList
+            },
+            keywords(){
+                return Array.from(this.$store.getters.keywords)
             }
         },
         watch:{
@@ -65,6 +74,9 @@
         },
         mounted(){
             this.dataList = this.resultList.map(i=>this.replaceType(i))
+        },
+        beforeDestroy(){
+            this.$store.commit('clear_resultList')
         },
         methods:{
             replaceType(item){
@@ -91,6 +103,20 @@
                     .catch(err=>{
                         console.log(err)
                     });
+            },
+            fetchData(){
+                this.$http.get(this.$APIs.HOME_SEARCH_1+'?search='+this.keywords[0]+'&page='+this.page+'&pageSize='+this.pageSize)
+                    .then(res=>{
+                        this.$store.commit('set_resultList',res.data.data.rows);
+
+                    })
+                    .catch(err=>{
+
+                    });
+            },
+            infiniteScroll(){
+                this.page++;
+                this.fetchData();
             }
         }
     }
