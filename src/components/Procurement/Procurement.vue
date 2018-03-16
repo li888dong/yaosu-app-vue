@@ -1,10 +1,11 @@
 <style scoped>
-    .list-item{
+    .list-item {
         padding: 10px 20px;
         position: relative;
         font-size: 14px;
     }
-    .list-item .status{
+
+    .list-item .status {
         position: absolute;
         right: -44px;
         top: 14px;
@@ -16,17 +17,20 @@
         text-align: center;
         padding: 5px 20px;
     }
-    .list-item .ck-btn{
+
+    .list-item .ck-btn {
         color: #03A657;
         display: inline-block;
         margin-left: 40px;
     }
-    .list-item .footer{
+
+    .list-item .footer {
         border-top: 1px solid #ccc;
         margin-top: 5px;
         padding-top: 8px;
     }
-    .list-item .bj-btn{
+
+    .list-item .bj-btn {
         display: inline-block;
         border: 1px solid #03A657;
         border-radius: 4px;
@@ -44,36 +48,68 @@
             <i class="icon iconfont icon-search right"></i>
         </div>
         <div class="list-container">
-            <div class="list-item pannel" v-for="item in dataList">
-                <div class="status">采购中</div>
-                <h4 class="name">{{item.procurement.goodname}}</h4>
-                <p><span class="title">采购编号：</span><span class="content">{{item.procurement.procurementno}}</span></p>
-                <p><span class="title">采购数量：</span><span class="content">{{item.procurement.quantity}}</span></p>
-                <p><span class="title">联系方式：</span><span class="content">{{item.procurement.contactphone}}</span><span class="ck-btn">查看联系方式</span></p>
-                <p><span class="title">信息有效期至：</span><span class="content">{{item.procurement.messagevalidity}}</span></p>
-                <p><span class="title">备注信息：</span><span class="content">{{item.procurement.otherrequests}}</span></p>
-                <p class="footer"><span>{{new Date(item.procurement.addtime).Format('yyyy-MM-dd')}}</span><span class="bj-btn">立即报价</span></p>
-            </div>
+            <VueDataLoading :loading="loading" :completed="false" :listens="['infinite-scroll']" @infinite-scroll="infiniteScroll">
+                <div class="list-item pannel" v-for="item in dataList">
+                    <div class="status">采购中</div>
+                    <h4 class="name">{{item.procurement.goodname}}</h4>
+                    <p><span class="title">采购编号：</span><span class="content">{{item.procurement.procurementno}}</span></p>
+                    <p><span class="title">采购数量：</span><span class="content">{{item.procurement.quantity}}</span></p>
+                    <p><span class="title">联系方式：</span><span class="content">{{item.procurement.contactphone}}</span><span
+                        class="ck-btn">查看联系方式</span></p>
+                    <p><span class="title">信息有效期至：</span><span class="content">{{item.procurement.messagevalidity}}</span>
+                    </p>
+                    <p><span class="title">备注信息：</span><span class="content">{{item.procurement.otherrequests}}</span></p>
+                    <p class="footer"><span>{{new Date(item.procurement.addtime).Format('yyyy-MM-dd')}}</span><span
+                        class="bj-btn">立即报价</span></p>
+                </div>
+                <div slot="infinite-scroll-loading">加载中...</div>
+            </VueDataLoading>
+            <!--<div class="list-item pannel" v-for="item in dataList">-->
+                <!--<div class="status">采购中</div>-->
+                <!--<h4 class="name">{{item.procurement.goodname}}</h4>-->
+                <!--<p><span class="title">采购编号：</span><span class="content">{{item.procurement.procurementno}}</span></p>-->
+                <!--<p><span class="title">采购数量：</span><span class="content">{{item.procurement.quantity}}</span></p>-->
+                <!--<p><span class="title">联系方式：</span><span class="content">{{item.procurement.contactphone}}</span><span-->
+                    <!--class="ck-btn">查看联系方式</span></p>-->
+                <!--<p><span class="title">信息有效期至：</span><span class="content">{{item.procurement.messagevalidity}}</span>-->
+                <!--</p>-->
+                <!--<p><span class="title">备注信息：</span><span class="content">{{item.procurement.otherrequests}}</span></p>-->
+                <!--<p class="footer"><span>{{new Date(item.procurement.addtime).Format('yyyy-MM-dd')}}</span><span-->
+                    <!--class="bj-btn">立即报价</span></p>-->
+            <!--</div>-->
         </div>
     </div>
 </template>
 <script>
     export default {
-        name:'caigou',
+        name: 'caigou',
         data() {
-            return{
-                dataList:[]
+            return {
+                dataList: [],
+                page: 1,
+                pageSize: 15,
+                loading: false,
+                completed: false,
             }
         },
-        mounted(){
-            this.$http.get(this.$APIs.PROCUREMENT_LIST)
-                .then((res)=>{
-                    console.log(res);
-                    this.dataList = res.data.data.rows
-                })
-                .catch((err)=>{
-                    console.log(err)
-                })
+        mounted() {
+            this.fetchData()
+        },
+        methods: {
+            fetchData() {
+                this.$http.get(this.$APIs.PROCUREMENT_LIST + '?page=' + this.page + '&pageSize=' + this.pageSize)
+                    .then((res) => {
+                        console.log(res);
+                        this.dataList = this.dataList.concat(res.data.data.rows)
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            },
+            infiniteScroll() {
+                this.fetchData();
+                this.page++
+            },
         }
     }
 </script>

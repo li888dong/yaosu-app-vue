@@ -6,7 +6,7 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
-
+import VueDataLoading from 'vue-data-loading'
 // require styles
 import 'swiper/dist/css/swiper.css'
 import './assets/iconfont/iconfont.css'
@@ -21,8 +21,8 @@ const instance = axios.create({
 });
 Vue.APIs = Vue.prototype.$APIs = APIs;
 Vue.http = Vue.prototype.$http = instance;
-Vue.use(VueAwesomeSwiper, /* { default global options } */)
-
+Vue.use(VueAwesomeSwiper, /* { default global options } */);
+Vue.component('VueDataLoading', VueDataLoading)
 Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {
