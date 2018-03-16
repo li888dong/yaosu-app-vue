@@ -3,12 +3,6 @@
         margin: 0;
     }
 
-    .absolute {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-    }
-
     .tabbar-list {
         border-bottom: 5px solid #EFEDEE;
         font-size: 14px;
@@ -86,7 +80,7 @@
     }
 </style>
 <template>
-    <div class="pannel container" :class="{absolute:$route.path==='/goods_list'}">
+    <div class="pannel container">
         <div class="top-bar" v-if="$route.path==='/goods_list'">
             <i class="icon iconfont icon-fanhui" @click="$router.go(-1)"></i>
             <p>现货</p>
@@ -130,29 +124,55 @@
                 </table>
             </div>
         </div>
-        <div class="item-content goods-list" v-if="$route.path==='/goods_list'">
-            <div v-for="goodsItem in goodsList" @click="$router.push({path:'goods_detail',query:{goodsId:goodsItem.goodId}})">
-                <p>{{goodsItem.goodName}} <i class="icon iconfont icon-more"></i></p>
-                <p>纯度:{{goodsItem.purity}}</p>
-                <p><span>{{goodsItem.qiymc}}</span></p>
+        <VueDataLoading :loading="loading" :completed="false" :listens="['infinite-scroll']" @infinite-scroll="infiniteScroll">
+            <div class="item-content goods-list" v-if="$route.path==='/goods_list'">
+                <div v-for="goodsItem in goodsList" @click="$router.push({path:'goods_detail',query:{goodsId:goodsItem.goodId}})">
+                    <p>{{goodsItem.goodName}} <i class="icon iconfont icon-more"></i></p>
+                    <p>纯度:{{goodsItem.purity}}</p>
+                    <p><span>{{goodsItem.qiymc}}</span></p>
+                </div>
             </div>
-        </div>
-        <div class="item-content" v-else>
-            <div class="product-item" :key="goodsItem.goodsID" v-for="goodsItem in curGoods" @click="$router.push({path:'goods_detail',query:{goodsId:goodsItem.goodsID}})">
-                <h4 class="item-title text-ellipsis">{{goodsItem.chanpmc}}</h4>
-                <div class="item-info text-ellipsis">{{goodsItem.chund}}</div>
-                <div class="item-company text-ellipsis">{{goodsItem.qiymc}}</div>
+            <div class="item-content" v-else>
+                <div class="product-item" :key="goodsItem.goodsID" v-for="goodsItem in curGoods" @click="$router.push({path:'goods_detail',query:{goodsId:goodsItem.goodsID}})">
+                    <h4 class="item-title text-ellipsis">{{goodsItem.chanpmc}}</h4>
+                    <div class="item-info text-ellipsis">{{goodsItem.chund}}</div>
+                    <div class="item-company text-ellipsis">{{goodsItem.qiymc}}</div>
+                </div>
             </div>
-        </div>
+            <div slot="infinite-scroll-loading">加载中...</div>
+        </VueDataLoading>
+        <!--<div class="item-content goods-list" v-if="$route.path==='/goods_list'">-->
+            <!--<div v-for="goodsItem in goodsList" @click="$router.push({path:'goods_detail',query:{goodsId:goodsItem.goodId}})">-->
+                <!--<p>{{goodsItem.goodName}} <i class="icon iconfont icon-more"></i></p>-->
+                <!--<p>纯度:{{goodsItem.purity}}</p>-->
+                <!--<p><span>{{goodsItem.qiymc}}</span></p>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="item-content" v-else>-->
+            <!--<div class="product-item" :key="goodsItem.goodsID" v-for="goodsItem in curGoods" @click="$router.push({path:'goods_detail',query:{goodsId:goodsItem.goodsID}})">-->
+                <!--<h4 class="item-title text-ellipsis">{{goodsItem.chanpmc}}</h4>-->
+                <!--<div class="item-info text-ellipsis">{{goodsItem.chund}}</div>-->
+                <!--<div class="item-company text-ellipsis">{{goodsItem.qiymc}}</div>-->
+            <!--</div>-->
+        <!--</div>-->
     </div>
 </template>
 <script>
+    import VueDataLoading from 'vue-data-loading'
     //    本页数据来源1是首页的接口通过props传递，2是点击按钮时的网络请求
     export default {
         name: 'goods',
+        components: {
+            VueDataLoading
+        },
         data() {
             return {
-                curSelected: 'api'
+                curSelected: 'api',
+                element:'',
+                loading: false,
+                completed: false,
+                page: 1,
+                pageSize:10
             }
         },
         computed: {
@@ -166,30 +186,48 @@
                 return this.$store.getters.goodsList
             }
         },
-        mounted() {
-
+        watch: {
+            '$route'(){
+                this.$store.dispatch('clear_goodsList');
+            }
+        },
+        mounted(){
+            this.$store.dispatch('clear_goodsList');
         },
         methods: {
-            changeSelected(e) {
-                if (this.$route.path === '/goods_list') {
-                    this.$http.get(this.$APIs.GOODS_LIST + '?categoryID=' + e.srcElement.dataset.index)
-                        .then((res) => {
-                            if (res.data.status === 200) {
-                                this.$store.dispatch('set_goodsList', res.data.data.rows);
-                                this.curSelected = e.srcElement.dataset.type;
-                            } else {
-                                alert(res.data.msg)
-                            }
-                        })
-                        .catch((err) => {
+            fetchData() {
+                this.loading = true;
+                this.$http.get(this.$APIs.GOODS_LIST + '?categoryID=' + this.element.dataset.index+'&page='+this.page+'&pageSize='+this.pageSize)
+                    .then((res) => {
+                        if (res.data.status === 200) {
+                            this.$store.dispatch('set_goodsList',res.data.data.rows);
+                            this.curSelected = this.element.dataset.type;
+                        } else {
+                            alert(res.data.msg)
+                        }
+                    })
+                    .catch((err) => {
 //                        alert(err.msg)
-                            console.log(err)
-                        });
+                        console.log(err)
+                    });
+                this.loading = false
+
+            },
+            changeSelected(e) {
+                this.$store.dispatch('clear_goodsList');
+                this.page = 1;
+                this.element = e.srcElement;
+                if (this.$route.path === '/goods_list') {
+                    this.fetchData()
                 }else {
-                    this.curSelected = e.srcElement.dataset.type;
+                    this.curSelected = this.element.dataset.type;
                 }
 
-            }
+            },
+            infiniteScroll() {
+                this.fetchData();
+                this.page++
+            },
         }
     }
 </script>

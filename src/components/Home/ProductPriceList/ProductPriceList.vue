@@ -96,6 +96,8 @@
         },
         mounted() {
             this.timerdelay = setTimeout(()=>{
+                this.$zhongyao.append(this.$zhongyao.find('div').eq(0).clone());
+                this.$yuanliao.append(this.$yuanliao.find('div').eq(0).clone());
                 this.changeShow('yuanliao');
             },2000)
         },

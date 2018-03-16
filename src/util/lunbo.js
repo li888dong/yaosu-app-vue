@@ -10,7 +10,6 @@
  * */
 import $ from 'jquery'
 function lunbo(container, content, size, delay, direction, alternation) {
-    container.append(content.eq(0).clone());
     let len = content.length;
     let curELe = 0;
     let animateObj = {};

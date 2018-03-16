@@ -36,7 +36,10 @@ const mutations = {
        state.goods = res
     },
     set_goodsList(state, res) {
-       state.goodsList = res
+       state.goodsList = state.goodsList.concat(res)
+    },
+    clear_goodsList(state) {
+       state.goodsList.length = 0
     },
     set_procurement(state, res) {
        state.procurement = res
@@ -90,6 +93,9 @@ const actions = {
     },
     'set_goodsList': function ({commit}, res) {
         commit('set_goodsList', res)
+    },
+    'clear_goodsList': function ({commit}, res) {
+        commit('clear_goodsList', res)
     },
     'set_procurement': function ({commit}, res) {
         commit('set_procurement', res)
