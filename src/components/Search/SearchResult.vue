@@ -33,7 +33,7 @@
 </style>
 <template>
     <div>
-        <VueDataLoading :loading="loading" :completed="false" :listens="['infinite-scroll']" @infinite-scroll="infiniteScroll">
+        <VueDataLoading :loading="loading" :completed="false" :init-scroll="true" :listens="['infinite-scroll']" @infinite-scroll="infiniteScroll">
         <ul>
             <li class="result-item" v-for="result in dataList" @click="gotoDetailList(result)">
                 <p class="name">{{result.productName}}</p>
@@ -115,8 +115,8 @@
                     });
             },
             infiniteScroll(){
-                this.page++;
                 this.fetchData();
+                this.page++;
             }
         }
     }

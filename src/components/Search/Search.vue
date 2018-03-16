@@ -55,29 +55,32 @@
         mounted(){
             this.$refs.searchInput.focus()
         },
+        beforeDestroy(){
+            this.keyword = ''
+        },
         methods:{
             cancleSearch(){
                 this.$router.go(-1);
-                this.keyword = ''
             },
 
             onSearch(){
                 this.$store.dispatch('set_keywords',this.keyword);
-                this.$http.get(this.$APIs.HOME_SEARCH_1+'?search='+this.keyword+'&page=1&pageSize=15')
-                    .then(res=>{
-                        if (res.data.status ===200){
-                            console.log(res.data.data.rows);
-                            this.$store.commit('set_resultList',res.data.data.rows);
-                            this.$router.push('search_result')
-                        }else {
-                            alert(res.data.msg)
-                        }
+                this.$router.push('search_result')
 
-
-                    })
-                    .catch(err=>{
-                        console.log(err)
-                    });
+//                this.$http.get(this.$APIs.HOME_SEARCH_1+'?search='+this.keyword+'&page=1&pageSize=15')
+//                    .then(res=>{
+//                        if (res.data.status ===200){
+//                            console.log(res.data.data.rows);
+//                            this.$store.commit('set_resultList',res.data.data.rows);
+//                        }else {
+//                            alert(res.data.msg)
+//                        }
+//
+//
+//                    })
+//                    .catch(err=>{
+//                        console.log(err)
+//                    });
             }
         }
     }

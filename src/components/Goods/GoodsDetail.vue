@@ -1,6 +1,7 @@
 <style scoped>
     .goods-detail{
         font-size: 14px;
+        margin-top: 0!important;
         margin-bottom: 40px;
     }
     .fixedTop{
