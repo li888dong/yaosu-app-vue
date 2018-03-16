@@ -193,6 +193,7 @@
         },
         mounted(){
             this.$store.dispatch('clear_goodsList');
+            this.element = document.querySelector('td')
         },
         methods: {
             fetchData() {

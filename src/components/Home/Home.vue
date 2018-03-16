@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="home">
 
         <!--顶部banner搜索框-->
         <header>

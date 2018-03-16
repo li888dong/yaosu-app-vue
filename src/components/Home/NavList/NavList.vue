@@ -50,7 +50,7 @@
         },
         methods: {
             gotoGoods(e) {
-                this.$http.get(this.$APIs.GOODS_LIST+'?categoryID=1&page=1&pageSize=10')
+                this.$http.get(this.$APIs.GOODS_LIST+'?categoryID=1&page=1&pageSize=12')
                     .then((res) => {
                         if (res.data.status === 200){
                             this.$store.dispatch('set_goodsList', res.data.data.rows);

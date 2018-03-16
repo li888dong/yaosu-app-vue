@@ -29,6 +29,12 @@
     input[type="search"]::-webkit-search-cancel-button{
         display: none;
     }
+    #app>div{
+        margin-top: 52px;
+    }
+    .home{
+        margin-top: 0!important;
+    }
     .pannel {
         background-color: #fff;
         margin-top: 5px;
@@ -68,7 +74,7 @@
         list-style: none;
     }
     .ad-logo{
-        background-size: cover;
+        background-size: 100% 41px;
         background-repeat: no-repeat;
         height: 41px;
         margin-top: 5px;
@@ -81,7 +87,9 @@
         background-color: #03A657;
         color: #ffffff;
         text-align: center;
-        position: relative;
+        position: fixed;
+        top: 0;
+        z-index: 14;
     }
 
     .top-bar .icon-fanhui {
