@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="item-content">
-            <div class="product-item" :data-foreigntradeid="item.foreigntradeid" :key="item.foreigntradeid" v-for="item in curData">
+            <div class="product-item" :data-foreigntradeid="item.foreigntradeid" :key="item.foreigntradeid" v-for="item in curData" @click="gotoService(item.foreigntradeid)">
                 <p><span class="item-title">{{item.companyname}}</span></p>
                 <p><span class="item-info">HS号：{{item.hs}}</span></p>
             </div>
@@ -44,6 +44,17 @@
         methods:{
             changeCur(cur){
                 this.curSelected = cur
+            },
+            gotoService(id){
+                this.$http.post(this.$APIs.FOREIGNTRADE_DETAIL,{
+                    foreigntradeid:id
+                })
+                    .then(res=>{
+                        this.$router.push({path:'service_detail',query:{itemData:res.data.data,catorageType:'外贸'}})
+                    })
+                    .catch(err=>{
+                        alert(err)
+                    })
             }
         }
     }

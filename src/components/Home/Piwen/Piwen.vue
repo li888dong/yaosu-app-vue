@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="item-content">
-            <div class="product-item" :data-technologyid="item.approvalnumberid" :key="item.approvalnumberid" v-for="item in curData">
+            <div class="product-item" :data-approvalnumberid="item.approvalnumberid" :key="item.approvalnumberid" v-for="item in curData" @click="gotoService(item.approvalnumberid)">
                 <div class="item-title">{{item.companyname || ''}}</div>
                 <div class="item-date">{{new Date(item.addtime).Format('yyyy-MM-dd')|| ''}}</div>
             </div>
@@ -47,6 +47,17 @@
         methods:{
             changeCur(cur){
                 this.curSelected = cur
+            },
+            gotoService(id){
+                this.$http.post(this.$APIs.APPROVAL_NUMBER_DETAIL,{
+                    approvalnumberid:id
+                })
+                    .then(res=>{
+                        this.$router.push({path:'service_detail',query:{itemData:res.data.data,catorageType:'技术'}})
+                    })
+                    .catch(err=>{
+                        alert(err)
+                    })
             }
         }
     }

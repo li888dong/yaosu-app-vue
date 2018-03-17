@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="item-content">
-            <div class="product-item" :data-procurementid="item.procurementid" :key="item.procurementid" v-for="item in procurement">
+            <div class="product-item" :data-procurementid="item.procurementid" :key="item.procurementid" v-for="item in procurement" @click="$router.push({path:'procurement',query:{type:'采购'}})">
                 <div class="item-title">{{item.goodname}}</div>
                 <div class="item-company">{{item.companyname||'个人用户'}}</div>
                 <div class="item-info">{{item.messagevalidity}}</div>
