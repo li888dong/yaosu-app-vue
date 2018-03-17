@@ -1,15 +1,18 @@
 <style scoped>
-    .search-box{
+    .search-box {
         margin-top: 50px;
     }
-    header .search-container form{
+
+    header .search-container form {
         width: 80%;
     }
-    header .search-container input{
+
+    header .search-container input {
         width: 100%;
     }
+
     .cancle,
-    .search{
+    .search {
         color: white;
         margin-left: 20px;
     }
@@ -39,47 +42,52 @@
     </div>
 </template>
 <script>
+    import qs from 'qs'
+
     export default {
-        name:'search',
-        data(){
-            return{
-                keyword:'',
-                resultList:[]
+        name: 'search',
+        data() {
+            return {
+                keyword: '',
+                resultList: []
             }
         },
         watch: {
-            '$route' (to, from) {
+            '$route'(to, from) {
                 this.resultList.length = 0
             }
         },
-        mounted(){
+        mounted() {
             this.$refs.searchInput.focus()
         },
-        beforeDestroy(){
+        beforeDestroy() {
             this.keyword = ''
         },
-        methods:{
-            cancleSearch(){
+        methods: {
+            cancleSearch() {
                 this.$router.go(-1);
             },
 
-            onSearch(){
-                this.$store.dispatch('set_keywords',this.keyword);
+            onSearch() {
+                this.$store.dispatch('set_keywords', this.keyword);
                 this.$router.push('search_result');
-
-                this.$http.get(this.$APIs.HOME_SEARCH_1+'?search='+this.keyword+'&page=1&pageSize=20')
-                    .then(res=>{
-                        if (res.data.status ===200){
+                this.$http.post(this.$APIs.HOME_SEARCH_1, {
+                    search: this.keyword,
+                    page: 1,
+                    pageSize: 22
+                })
+                    .then(res => {
+                        if (res.data.status === 200) {
                             console.log(res.data.data.rows);
                             this.$store.commit('clear_resultList');
-                            this.$store.commit('set_resultList',res.data.data.rows);
-                        }else {
+                            this.$store.commit('set_resultList', res.data.data.rows);
+                        } else {
                             alert(res.data.msg)
                         }
 
 
                     })
-                    .catch(err=>{
+                    .catch(err => {
                         console.log(err)
                     });
             }

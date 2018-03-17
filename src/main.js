@@ -13,8 +13,16 @@ import './assets/iconfont/iconfont.css'
 
 import './util/Dataformat'
 import APIs from './API'
+import qs from 'qs'
 
 const instance = axios.create({
+    // `transformRequest` 允许在向服务器发送前，修改请求数据
+    // 只能用在 'PUT', 'POST' 和 'PATCH' 这几个请求方法
+    // 后面数组中的函数必须返回一个字符串，或 ArrayBuffer，或 Stream
+    transformRequest: [function (data) {
+        // 对 data 进行任意转换处理
+        return qs.stringify(data);
+    }],
     baseURL: "http://localhost:3000",
     // baseURL: "https://yxrhome.com",
     timeout: 15000
@@ -29,7 +37,7 @@ router.beforeEach((to, from, next) => {
     if (to.meta.title) {
         document.title = to.meta.title
     }
-   next()
+    next()
 });
 /* eslint-disable no-new */
 new Vue({
