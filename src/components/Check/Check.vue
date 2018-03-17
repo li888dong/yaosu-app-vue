@@ -1,5 +1,5 @@
 <style scoped>
-    .dete-list{
+    .data-list{
         background-color: #fff;
         padding: 10px;
         border-bottom: 1px solid #eee;
@@ -25,8 +25,8 @@
         box-shadow: 0 0 1px #999;
         z-index: 13;
     }
-    .history{
-        margin-top: 40px;
+    .item-list{
+        margin-top: 30px;
     }
 </style>
 <template>
@@ -37,8 +37,8 @@
             <p>检测</p>
         </div>
         <div>
-            <div class="search-container" @submit.prevent="onSearch">
-                <i class="icon iconfont icon-search "></i>
+            <div class="search-container">
+                <i class="icon iconfont icon-search"></i>
                 <form style="display: inline-block">
                     <input
                         type="search"
@@ -51,11 +51,12 @@
                 </form>
             </div>
         </div>
-        <div class="history">
-            最近
-        </div>
-        <ul>
-            <li class="dete-list" v-for="data in dataList" :key="data.testingproductid" data-testid="data.testingproductid">
+        <ul class="item-list">
+
+            <li class="data-list" v-if="keyword" v-for="data in filterList" :key="data.testingproductid" data-testid="data.testingproductid">
+                {{data.testingproduct}}
+            </li>
+            <li class="data-list" v-if="keyword===''" v-for="data in dataList" :key="data.testingproductid" data-testid="data.testingproductid">
                 {{data.testingproduct}}
             </li>
         </ul>
@@ -67,6 +68,7 @@
         data(){
             return{
                 dataList:[],
+                filterList:[],
                 keyword:''
             }
         },
@@ -84,6 +86,20 @@
                 .catch(err=>{
                     console.log(err)
                 })
+        },
+        watch:{
+            'keyword'(){
+                this.filterList = this.dataList.filter(i=>{
+                    return this.keyword === i.testingproduct
+                })
+            }
+        },
+        methods:{
+            onSearch(){
+                this.filterList = this.dataList.filter(i=>{
+                    this.keyword = i.testingproduct
+                })
+            }
         }
     }
 </script>
