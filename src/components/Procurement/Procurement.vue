@@ -48,7 +48,7 @@
             <i class="icon iconfont icon-search right"></i>
         </div>
         <div class="list-container">
-            <VueDataLoading :loading="loading" :completed="false" :listens="['infinite-scroll']" @infinite-scroll="infiniteScroll">
+            <VueDataLoading :loading="loading" :completed="completed" :listens="['infinite-scroll']" :init-scroll="true" @infinite-scroll="infiniteScroll">
                 <div class="list-item pannel" v-for="item in dataList">
                     <div class="status">采购中</div>
                     <h4 class="name">{{item.procurement.goodname}}</h4>
@@ -93,15 +93,22 @@
             }
         },
         mounted() {
-            this.fetchData()
+
         },
         methods: {
             fetchData() {
                 this.$http.get(this.$APIs.PROCUREMENT_LIST + '?page=' + this.page + '&pageSize=' + this.pageSize)
                     .then((res) => {
-                        console.log(res);
-                        this.dataList = this.dataList.concat(res.data.data.rows);
-                        this.page++
+                        if (res.data.status===200){
+
+                            console.log(res);
+                            this.dataList = this.dataList.concat(res.data.data.rows);
+                            this.page++
+                        } else if(res.data.status===300&&res.data.msg ==='无数据'){
+                            this.completed = true
+                        }else {
+                            alert(this.data.msg)
+                        }
 
                     })
                     .catch((err) => {

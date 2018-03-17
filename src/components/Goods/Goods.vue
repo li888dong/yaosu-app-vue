@@ -124,23 +124,24 @@
                 </table>
             </div>
         </div>
-        <VueDataLoading :loading="loading" :completed="false" :listens="['infinite-scroll']" @infinite-scroll="infiniteScroll">
-            <div class="item-content goods-list" v-if="$route.path==='/goods_list'">
+        <VueDataLoading v-if="$route.path==='/goods_list'" :loading="loading" :completed="completed" :listens="['infinite-scroll']" :init-scroll="true" @infinite-scroll="infiniteScroll">
+            <div class="item-content goods-list">
                 <div v-for="goodsItem in goodsList" @click="$router.push({path:'goods_detail',query:{goodsId:goodsItem.goodId}})">
                     <p>{{goodsItem.goodName}} <i class="icon iconfont icon-more"></i></p>
                     <p>纯度:{{goodsItem.purity}}</p>
                     <p><span>{{goodsItem.qiymc}}</span></p>
                 </div>
             </div>
-            <div class="item-content" v-else>
-                <div class="product-item" :key="goodsItem.goodsID" v-for="goodsItem in curGoods" @click="$router.push({path:'goods_detail',query:{goodsId:goodsItem.goodsID}})">
-                    <h4 class="item-title text-ellipsis">{{goodsItem.chanpmc}}</h4>
-                    <div class="item-info text-ellipsis">{{goodsItem.chund}}</div>
-                    <div class="item-company text-ellipsis">{{goodsItem.qiymc}}</div>
-                </div>
-            </div>
+
             <div slot="infinite-scroll-loading">加载中...</div>
         </VueDataLoading>
+        <div class="item-content" v-else>
+            <div class="product-item" :key="goodsItem.goodsID" v-for="goodsItem in curGoods" @click="$router.push({path:'goods_detail',query:{goodsId:goodsItem.goodsID}})">
+                <h4 class="item-title text-ellipsis">{{goodsItem.chanpmc}}</h4>
+                <div class="item-info text-ellipsis">{{goodsItem.chund}}</div>
+                <div class="item-company text-ellipsis">{{goodsItem.qiymc}}</div>
+            </div>
+        </div>
         <!--<div class="item-content goods-list" v-if="$route.path==='/goods_list'">-->
             <!--<div v-for="goodsItem in goodsList" @click="$router.push({path:'goods_detail',query:{goodsId:goodsItem.goodId}})">-->
                 <!--<p>{{goodsItem.goodName}} <i class="icon iconfont icon-more"></i></p>-->
@@ -169,7 +170,7 @@
                 loading: false,
                 completed: false,
                 page: 1,
-                pageSize:10
+                pageSize:14
             }
         },
         computed: {
@@ -200,9 +201,11 @@
                         if (res.data.status === 200) {
                             this.$store.dispatch('set_goodsList',res.data.data.rows);
                             this.curSelected = this.element.dataset.type;
-                            this.page++
-
-                        } else {
+                            this.page++;
+                            this.loading = false;
+                        }else if(res.data.status===300){
+                            this.completed = true
+                        }else {
                             alert(res.data.msg)
                         }
                     })
@@ -210,7 +213,6 @@
 //                        alert(err.msg)
                         console.log(err)
                     });
-                this.loading = false
 
             },
             changeSelected(e) {

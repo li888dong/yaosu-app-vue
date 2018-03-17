@@ -133,6 +133,7 @@
 
                 <transition name="slide-fade1">
                     <div class="animate-item" v-if="curSelected==='supply'">
+                        <VueDataLoading :loading="loading" :completed="completed" :listens="['infinite-scroll']" @infinite-scroll="infiniteScroll">
                         <ul class="list-container" v-if="supplyDataList.length>0">
                             <li class="list-item" v-for="item in supplyDataList"
                                 @click="$router.push({path:'service_detail',query:{itemData:item,catorageType:type}})">
@@ -188,10 +189,13 @@
                             </li>
                         </ul>
                         <h3 v-else>暂无数据</h3>
+
+                        </VueDataLoading>
                     </div>
                 </transition>
                 <transition name="slide-fade2">
                     <div class="animate-item" v-if="curSelected==='demand'">
+                        <VueDataLoading :loading="loading" :completed="completed" :listens="['infinite-scroll']" @infinite-scroll="infiniteScroll">
                         <ul class="list-container" v-if="demandDataList.length>0">
                             <li class="list-item" v-for="item in demandDataList"
                                 @click="$router.push({path:'service_detail',query:{itemData:item,catorageType:type}})">
@@ -247,6 +251,7 @@
                             </li>
                         </ul>
                         <h3 v-else>暂无数据</h3>
+                        </VueDataLoading>
                     </div>
                 </transition>
             </div>
@@ -267,7 +272,11 @@
                 resData: [],
                 supplyDataList:[],
                 demandDataList:[],
-                dataList: []
+                dataList: [],
+                loading: false,
+                completed: false,
+                page: 1,
+                pageSize:20
             }
         },
         methods: {
@@ -285,14 +294,40 @@
                     case '批文':
                         return this.$APIs.APPROVAL_NUMBER_LIST;
                 }
+            },
+            fetchData(){
+                this.$http.get(this.reqUrl+'?page='+this.page+'&pageSize='+this.pageSize)
+                    .then((res) => {
+                        if (res.data.status===200){
+                            this.page++;
+                            this.resData = this.resData.concat(res.data.data.rows);
+                            this.supplyDataList = this.resData.filter((item) => {
+                                return item.type === 'B'
+                            });
+                            this.demandDataList = this.resData.filter((item) => {
+                                return item.type === 'A'
+                            });
+                            this.changeCatorageType('demand')
+                        }
+                        if(res.data.status===300&&res.data.msg ==='无数据！'){
+                            this.completed = true
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+            infiniteScroll(){
+                this.fetchData()
             }
+
         },
         mounted() {
             this.demand = this.$route.query.demand;
             this.type = this.$route.query.type;
             this.supply = this.$route.query.supply;
             this.reqUrl = this.getReqUrl(this.type);
-            this.$http.get(this.reqUrl)
+            this.$http.get(this.reqUrl+'?page=1&pageSize=20')
                 .then((res) => {
                     console.log('+++', res);
                     this.resData = res.data.data.rows;
@@ -302,11 +337,13 @@
                     this.demandDataList = this.resData.filter((item) => {
                         return item.type === 'A'
                     });
+                    this.page++;
                     this.changeCatorageType('demand')
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
-        }
+        },
+
     }
 </script>
