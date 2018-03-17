@@ -33,7 +33,7 @@
 </style>
 <template>
     <div>
-        <VueDataLoading :loading="loading" :completed="false" :init-scroll="true" :listens="['infinite-scroll']" @infinite-scroll="infiniteScroll">
+        <VueDataLoading :loading="loading" :completed="completed" :init-scroll="true" :listens="['infinite-scroll']" @infinite-scroll="infiniteScroll">
         <ul>
             <li class="result-item" v-for="result in dataList" @click="gotoDetailList(result)">
                 <p class="name">{{result.productName}}</p>
@@ -55,8 +55,8 @@
                 dataList:[],
                 loading: false,
                 completed: false,
-                page: 1,
-                pageSize:10
+                page: 2,
+                pageSize:20
             }
         },
         computed:{
@@ -96,7 +96,7 @@
             gotoDetailList(result){
                 this.$http.get(this.$APIs.HOME_SEARCH_2+'?search='+result.productName)
                     .then(res=>{
-                        console.log(res.data)
+                        console.log(res.data);
                         this.$router.push('search_detail_list')
 
                     })
@@ -105,18 +105,25 @@
                     });
             },
             fetchData(){
+                this.loading = true;
                 this.$http.get(this.$APIs.HOME_SEARCH_1+'?search='+this.keywords[0]+'&page='+this.page+'&pageSize='+this.pageSize)
                     .then(res=>{
-                        this.$store.commit('set_resultList',res.data.data.rows);
+                        if (res.data.status===200){
+                            this.loading = false;
+                            this.page++;
+                            this.$store.commit('set_resultList',res.data.data.rows);
+                        }else if (res.data.status===300){
+                            this.completed = true;
+                            this.loading = false;
+                        }
 
                     })
                     .catch(err=>{
-
+                        console.log(err)
                     });
             },
             infiniteScroll(){
                 this.fetchData();
-                this.page++;
             }
         }
     }

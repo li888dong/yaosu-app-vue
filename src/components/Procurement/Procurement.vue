@@ -104,7 +104,7 @@
                             console.log(res);
                             this.dataList = this.dataList.concat(res.data.data.rows);
                             this.page++
-                        } else if(res.data.status===300&&res.data.msg ==='无数据'){
+                        } else if(res.data.status===300){
                             this.completed = true
                         }else {
                             alert(this.data.msg)

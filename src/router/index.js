@@ -9,6 +9,7 @@ import Procurement from '../components/Procurement/Procurement.vue'
 import Goods from '../components/Goods/Goods.vue'
 import GoodsDetail from '../components/Goods/GoodsDetail.vue'
 import Finance from '../components/Finance/Finance.vue'
+import Check from '../components/Check/Check.vue'
 import ServiceList from '../components/Service/ServiceList.vue'
 import ServiceDetail from '../components/Service/ServiceDetail.vue'
 
@@ -88,6 +89,14 @@ export default new Router({
             component: Finance,
             meta:{
                 title:'要金融'
+            }
+        },
+        {
+            path: '/check',
+            name: 'check',
+            component: Check,
+            meta:{
+                title:'要检测'
             }
         },
         {

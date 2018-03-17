@@ -21,7 +21,8 @@
             <div class="nav-item-img nav-img04"></div>
             <div class="nav-title">要外贸</div>
         </div>
-        <div class="nav-item" data-name="jiance">
+        <div class="nav-item" data-name="jiance"
+             @click="$router.push({path:'check',query:{type:'检测',demand:'检测',supply:'要检测'}})">
             <div class="nav-item-img nav-img05"></div>
             <div class="nav-title">要检测</div>
         </div>

@@ -309,7 +309,7 @@
                             });
                             this.changeCatorageType('demand')
                         }
-                        if(res.data.status===300&&res.data.msg ==='无数据！'){
+                        if(res.data.status===300){
                             this.completed = true
                         }
                     })

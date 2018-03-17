@@ -19,6 +19,8 @@ const APIs = {
     TECHNOLOGY_LIST: '/app/technology/list',
     // 要批文
     APPROVAL_NUMBER_LIST: '/app/approvalNumber/list',
+    // 要检测
+    DETECTION_LIST: '/app/detection/listProduct',
 
 };
 export default APIs
