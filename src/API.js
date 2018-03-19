@@ -41,5 +41,13 @@ const APIs = {
     MSG_CODE:'/app/code',
     // 注册并登陆
     REGISTER_AND_LOGIN:'/app/registerAndLogin',
+    // 购物车新增
+    CART_ADD:'/app/cart/add',
+    // 购物车列表
+    CART_LIST:'/app/cart/list',
+    // 购物车删除
+    CART_DELETE:'/app/cart/delete',
+    // 修改购物车数量
+    CART_UPDATE:'/app/cart/update/goodsNum',
 };
 export default APIs

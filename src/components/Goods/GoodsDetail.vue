@@ -1,18 +1,21 @@
 <style scoped>
-    .goods-detail{
+    .goods-detail {
         font-size: 14px;
-        margin-top: 0!important;
+        margin-top: 0 !important;
         margin-bottom: 40px;
     }
-    .fixedTop{
+
+    .fixedTop {
         position: fixed;
         top: 0;
         z-index: 13;
     }
-    .goods-summary{
+
+    .goods-summary {
         position: relative;
     }
-    .goods-summary .circle-back{
+
+    .goods-summary .circle-back {
         position: absolute;
         top: 10px;
         left: 10px;
@@ -22,11 +25,12 @@
         text-align: center;
         line-height: 24px;
         background-color: #999;
-        border-radius: 50% ;
+        border-radius: 50%;
         color: #ffffff;
-        font-weight:bolder;
+        font-weight: bolder;
     }
-    .banner-img{
+
+    .banner-img {
         height: 150px;
         width: 100%;
         background-repeat: no-repeat;
@@ -34,57 +38,67 @@
         display: inline-block;
         vertical-align: top;
     }
-    .divide{
+
+    .divide {
         text-align: center;
         height: 30px;
         line-height: 30px;
     }
-    .goods-price{
+
+    .goods-price {
         height: 80px;
-        padding:10px 20px;
+        padding: 10px 20px;
         box-sizing: border-box;
     }
-    .goods-selecetor{
+
+    .goods-selecetor {
         height: 40px;
         line-height: 40px;
-        padding:0 20px;
+        padding: 0 20px;
         box-sizing: border-box;
         color: #000;
 
     }
-    .goods-selecetor span{
+
+    .goods-selecetor span {
         width: 85%;
         margin-left: 10px;
         display: inline-block;
     }
-    .goods-selecetor .icon-more{
+
+    .goods-selecetor .icon-more {
         transform: rotate(0);
         font-size: 18px;
         color: #ccc;
     }
-    .goods-info{
+
+    .goods-info {
         padding: 20px;
         color: #000;
         line-height: 28px;
     }
-    .goods-info p>span{
+
+    .goods-info p > span {
         color: #999999;
     }
-    .footer .btn-group{
+
+    .footer .btn-group {
         position: fixed;
         bottom: 0;
         left: 0;
         right: 0;
         z-index: 13;
     }
-    .footer .btn-group button{
+
+    .footer .btn-group button {
         width: 50%;
         height: 40px;
         line-height: 40px;
         border: none;
         color: #ffffff;
     }
-    .model{
+
+    .model {
         position: absolute;
         top: 0;
         bottom: 0;
@@ -94,7 +108,8 @@
         background-color: #000;
         opacity: .3;
     }
-    .specification .content{
+
+    .specification .content {
         position: fixed;
         bottom: 0;
         left: 0;
@@ -102,37 +117,44 @@
         z-index: 12;
         background-color: #fff;
         height: 300px;
-        padding: 15px  20px;
+        padding: 15px 20px;
 
     }
-    .specification .selected{
+
+    .specification .selected {
         position: relative;
     }
-    .specification .selected>div{
+
+    .specification .selected > div {
         display: inline-block;
         vertical-align: top;
     }
-    .specification .logo{
+
+    .specification .logo {
         width: 60px;
         height: 60px;
         margin-left: 20px;
         background: url("../../assets/logo_01.png") no-repeat;
         background-size: contain;
     }
-    .specification .selected-info{
+
+    .specification .selected-info {
         margin-left: 40px;
         font-size: 14px;
         line-height: 22px;
     }
-    .specification .close-btn{
+
+    .specification .close-btn {
         position: absolute;
         top: 0;
         right: 0;
     }
-    .specification .close-btn i{
+
+    .specification .close-btn i {
         font-size: 28px;
     }
-    .specifications-btn{
+
+    .specifications-btn {
         border-radius: 4px;
         border: none;
         padding: 10px 8px;
@@ -141,23 +163,26 @@
         margin-right: 10px;
     }
 
-    .specifications-btn.current{
+    .specifications-btn.current {
         background-color: #03A657;
         color: white;
     }
-    .specification .amount-btn{
+
+    .specification .amount-btn {
         font-size: 16px;
-        margin:0 10px;
+        margin: 0 10px;
         padding: 5px 14px;
         background-color: #eee;
     }
-    .specification .amount-btn.current{
+
+    .specification .amount-btn.current {
         background-color: #ccc;
     }
-    .confirm-btn{
+
+    .confirm-btn {
         position: absolute;
         bottom: 0;
-        width: 100%!important;
+        width: 100% !important;
         border: none;
         height: 40px;
         background-color: #03A657;
@@ -178,7 +203,8 @@
             <i class="icon iconfont icon-fanhui circle-back" @click="$router.go(-1)"></i>
             <div class="goods-img">
                 <swiper v-if="imgList.length>0" :options="swiperOption">
-                    <swiper-slide class="banner-img" :style="{backgroundImage:url}" v-for="url in imgList" :key="url"></swiper-slide>
+                    <swiper-slide class="banner-img" :style="{backgroundImage:url}" v-for="url in imgList"
+                                  :key="url"></swiper-slide>
                     <div class="swiper-pagination" slot="pagination"></div>
                 </swiper>
                 <div class="banner-img" v-else>
@@ -196,7 +222,8 @@
             <!--商品规格选择框-->
             <div class="goods-selecetor pannel" @click="showSelector">
                 <i class="icon iconfont icon-xuanze"></i>
-                <span v-if="confirmSelectGoods">{{amount}}{{specification.current.jildw}},{{specification.current.guig}}</span>
+                <span
+                    v-if="confirmSelectGoods">{{amount}}{{specification.current.jildw}},{{specification.current.guig}}</span>
                 <span v-else style="margin-left: 10px;">请选择规格数量</span>
 
                 <i class="icon iconfont icon-more"></i>
@@ -230,8 +257,9 @@
         <!--底部按钮-->
         <div class="footer">
             <div class="btn-group">
-                <button style="background-color: #03A657;" v-if="!selectorShow">联系卖家</button><button style="background-color: darkorange;" v-if="!selectorShow">加入购物车</button>
-                <button class="confirm-btn" v-if="selectorShow" @click="confirmSelect">确认</button>
+                <button style="background-color: #03A657;" v-if="!selectorShow">联系卖家</button><!--
+                --><button style="background-color: darkorange;" v-if="!selectorShow" @click="$router.push('shopping_cart')">加入购物车</button><!--
+                --><button class="confirm-btn" v-if="selectorShow" @click="confirmSelect">确认</button>
             </div>
         </div>
         <!--底部按钮结束-->
@@ -252,10 +280,13 @@
                     class="specifications-btn"
                     :class="{current:specification.index===index}"
                     v-for="(item,index) in specification.list"
-                    @click="changeSpecification(index)">{{item.guig}}</button>
+                    @click="changeSpecification(index)">{{item.guig}}
+                </button>
                 <hr color="#ccc">
                 <div style="margin-top: 20px;">
-                    <span style="font-size: 16px;">购买数量</span> <span style="float: right"><button class="amount-btn current" @click="decreaseAmount">-</button><span>{{amount}}</span><button class="amount-btn" @click="increaseAmount">+</button></span>
+                    <span style="font-size: 16px;">购买数量</span> <span style="float: right"><button
+                    class="amount-btn current" @click="decreaseAmount">-</button><span>{{amount}}</span><button
+                    class="amount-btn" @click="increaseAmount">+</button></span>
                 </div>
 
             </div>
@@ -274,22 +305,22 @@
             return {
 //                商品数据
                 goodsData: [],
-                specification:{
-                    list:[],
-                    index:0,
-                    current:{}
+                specification: {
+                    list: [],
+                    index: 0,
+                    current: {}
                 },
 //                是否已选择商品规格
-                confirmSelectGoods:false,
+                confirmSelectGoods: false,
 //                选择商品数量
-                amount:1,
+                amount: 1,
 //                页面初始化滚动条位置
-                scrollTop:0,
+                scrollTop: 0,
 //                产品选择框
-                selectorShow:false,
+                selectorShow: false,
 //                轮播图配置
                 swiperOption: {
-                    speed:1000,
+                    speed: 1000,
                     spaceBetween: 0,
                     loop: true,
                     centeredSlides: true,
@@ -332,21 +363,21 @@
             }
 
         },
-        methods:{
-            changeSpecification(index){
+        methods: {
+            changeSpecification(index) {
                 this.specification.index = index;
                 this.specification.current = this.specification.list[index]
             },
-            showSelector(){
+            showSelector() {
                 this.selectorShow = true;
             },
-            increaseAmount(){
-                this.amount=Math.min(this.specification.current.kucsl,this.amount+1)
+            increaseAmount() {
+                this.amount = Math.min(this.specification.current.kucsl, this.amount + 1)
             },
-            decreaseAmount(){
-                this.amount = Math.max(this.amount-1,1)
+            decreaseAmount() {
+                this.amount = Math.max(this.amount - 1, 1)
             },
-            confirmSelect(){
+            confirmSelect() {
                 this.confirmSelectGoods = true;
                 this.selectorShow = false
             }

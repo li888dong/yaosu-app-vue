@@ -1,0 +1,29 @@
+<style>
+
+</style>
+<template>
+    <div>
+        购物车
+    </div>
+</template>
+<script>
+    export default {
+        name:'shoppingcart',
+        mounted(){
+           this.getCartList()
+        },
+        methods:{
+            getCartList(){
+                this.$http.post(this.$APIs.CART_LIST,{
+                    userid:"f0ae84fc-60a2-48e5-a2f2-75bf26d2ac2a"
+                })
+                    .then(res=>{
+                        console.log(res)
+                    })
+                    .catch(err=>{
+                        alert(err)
+                    })
+            }
+        }
+    }
+</script>
