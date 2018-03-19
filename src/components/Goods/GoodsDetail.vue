@@ -52,6 +52,11 @@
         color: #000;
 
     }
+    .goods-selecetor span{
+        width: 85%;
+        margin-left: 10px;
+        display: inline-block;
+    }
     .goods-selecetor .icon-more{
         transform: rotate(0);
         font-size: 18px;
@@ -161,12 +166,15 @@
 </style>
 <template>
     <div class="goods-detail">
+        <!--标题栏-->
         <div class="top-bar fixedTop" v-if="scrollTop">
             <i class="icon iconfont icon-fanhui" @click="$router.go(-1)"></i>
             <p>详情</p>
             <i class="icon iconfont icon-search right"></i>
         </div>
+        <!--标题栏结束-->
         <div class="goods-summary">
+            <!--商品大图-->
             <i class="icon iconfont icon-fanhui circle-back" @click="$router.go(-1)"></i>
             <div class="goods-img">
                 <swiper v-if="imgList.length>0" :options="swiperOption">
@@ -177,15 +185,27 @@
 
                 </div>
             </div>
+            <!--商品大图结束-->
+            <!--商品名称、单价、公司-->
             <div class="goods-price pannel">
                 <h4>{{goodsData.chanpmc}}</h4>
                 <p style="color: #f00">￥{{specification.current.danj}}</p>
+                <p>{{goodsData.pinp}}</p>
             </div>
+            <!--商品名称、单价、公司结束-->
+            <!--商品规格选择框-->
             <div class="goods-selecetor pannel" @click="showSelector">
-                <i class="icon iconfont icon-xuanze"></i><span style="margin-left: 10px;">请选择规格数量</span><i class="icon iconfont icon-more"></i>
+                <i class="icon iconfont icon-xuanze"></i>
+                <span v-if="confirmSelectGoods">{{amount}}{{specification.current.jildw}},{{specification.current.guig}}</span>
+                <span v-else style="margin-left: 10px;">请选择规格数量</span>
+
+                <i class="icon iconfont icon-more"></i>
             </div>
+            <!--商品规格选择框结束-->
+
         </div>
         <div class="divide"> ———— <i class="icon iconfont icon-zan"> </i> 商品信息 ———— </div>
+        <!--商品详细信息-->
         <div class="goods-info pannel">
             <p>商品编号：<span>{{goodsData.huoh}}</span></p>
             <p>产品分类：<span>{{goodsData.categoryname}}</span></p>
@@ -205,20 +225,24 @@
             <p>备货期：<span>{{   }}</span></p>
             <p>更新时间：<span>{{goodsData.updatetime}}</span></p>
         </div>
+        <!--商品详细信息结束-->
         <div class="divide"> ———— <i class="icon iconfont icon-zan"> </i> 图文详情 ———— </div>
+        <!--底部按钮-->
         <div class="footer">
             <div class="btn-group">
                 <button style="background-color: #03A657;" v-if="!selectorShow">联系卖家</button><button style="background-color: darkorange;" v-if="!selectorShow">加入购物车</button>
-                <button class="confirm-btn" v-if="selectorShow" @click="selectorShow = false">确认</button>
+                <button class="confirm-btn" v-if="selectorShow" @click="confirmSelect">确认</button>
             </div>
         </div>
+        <!--底部按钮结束-->
+        <!--商品规格选择列表-->
         <div class="specification" v-if="selectorShow">
             <div class="content">
                 <div class="selected">
                     <div class="logo"></div>
                     <div class="selected-info">
                         <p style="color: #df5000;font-size: 16px;">单价：<span>{{specification.current.danj}}</span></p>
-                        <p>库存：<span>{{specification.current.kucsl}}</span>{{specification.current.danw}}</p>
+                        <p>库存：<span>{{specification.current.kucsl}}</span>{{specification.current.kucdw}}</p>
                         <p>已选：<span>{{specification.current.guig}}</span></p>
                     </div>
                     <div class="close-btn"><i class="icon iconfont icon-guanbi" @click="selectorShow = false"></i></div>
@@ -236,6 +260,8 @@
 
             </div>
         </div>
+        <!--商品规格选择列表结束-->
+        <!--模态框-->
         <div class="model" v-if="selectorShow" @click="selectorShow = false">
 
         </div>
@@ -246,16 +272,22 @@
         name: 'goodsdetail',
         data() {
             return {
+//                商品数据
                 goodsData: [],
                 specification:{
                     list:[],
                     index:0,
                     current:{}
                 },
+//                是否已选择商品规格
+                confirmSelectGoods:false,
+//                选择商品数量
                 amount:1,
-                specificationsIndex:0,
+//                页面初始化滚动条位置
                 scrollTop:0,
+//                产品选择框
                 selectorShow:false,
+//                轮播图配置
                 swiperOption: {
                     speed:1000,
                     spaceBetween: 0,
@@ -284,7 +316,7 @@
                         console.log('***', res.data.data.GoodsApi);
                         this.goodsData = res.data.data.GoodsApi;
                         this.specification.list = res.data.data.GoodsApi.tbGoodsSpecifications;
-                        this.specification.current = this.specification.list[0]
+                        this.specification.current = this.specification.list[0];
                         console.log(this.specification.list)
                     } else {
                         alert(res.data.data.msg)
@@ -309,10 +341,14 @@
                 this.selectorShow = true;
             },
             increaseAmount(){
-                this.amount++
+                this.amount=Math.min(this.specification.current.kucsl,this.amount+1)
             },
             decreaseAmount(){
                 this.amount = Math.max(this.amount-1,1)
+            },
+            confirmSelect(){
+                this.confirmSelectGoods = true;
+                this.selectorShow = false
             }
         }
     }
