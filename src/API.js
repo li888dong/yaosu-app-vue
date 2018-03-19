@@ -31,6 +31,15 @@ const APIs = {
     DETECTION_LIST: '/app/detection/listProduct',
     // 要检测详情
     DETECTION_DETAIL: '/app/detection/detailsOrder',
-
+    // 注册
+    REGISTER:'/app/register',
+    // 密码登陆
+    LOGIN:'/app/login',
+    // 短信登陆
+    MSG_LOGIN:'/app/passwordLessForLogin',
+    // 请求短信验证码
+    MSG_CODE:'/app/code',
+    // 注册并登陆
+    REGISTER_AND_LOGIN:'/app/registerAndLogin',
 };
 export default APIs

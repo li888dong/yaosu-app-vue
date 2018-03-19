@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../components/Home/Home.vue'
+import Login from '../components/Login/Login.vue'
 import Search from '../components/Search/Search.vue'
 import SearchHistory from '../components/Search/SearchHistory.vue'
 import SearchResult from '../components/Search/SearchResult.vue'
@@ -23,6 +24,14 @@ export default new Router({
             component: Home,
             meta:{
                 title:'药素网'
+            }
+        },
+        {
+            path: '/login',
+            name: 'Login',
+            component: Login,
+            meta:{
+                title:'登陆药素网'
             }
         },
         {

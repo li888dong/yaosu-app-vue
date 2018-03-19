@@ -4,6 +4,7 @@
         <!--顶部banner搜索框-->
         <header>
             <div class="search-container" :class="{'top-bg':scrollTop}">
+                <i class="icon iconfont icon-touxiang2" @click="$router.push('login')"></i>
                 <i class="icon iconfont icon-search "></i>
                 <input type="search" placeholder="搜索产品/企业" class="search-input" @focus="$router.push('search_history')">
             </div>
@@ -194,7 +195,7 @@
         left: 0;
         right: 0;
         z-index: 11;
-        padding:10px 5% ;
+        padding:10px 5% 10px 15%;
     }
     .top-bg{
         background-color: #03A657;
@@ -214,8 +215,15 @@
     header i.icon-search{
         position: absolute;
         top: 16px;
-        left: 30px;
+        left: 18%;
         color: #03A657;
+    }
+    header i.icon-touxiang2{
+        position: absolute;
+        top: 16px;
+        left: 7%;
+        font-size: 20px;
+        color: #fff;
     }
 
 </style>
