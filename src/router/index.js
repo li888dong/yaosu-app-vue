@@ -39,6 +39,7 @@ export default new Router({
         {
             path: '/person',
             name: 'person',
+            access:'login',
             component: Person,
             meta:{
                 title:'个人中心'
@@ -47,6 +48,7 @@ export default new Router({
         {
             path: '/shopping_cart',
             name: 'shopping_cart',
+            access:'login',
             component: ShoppingCart,
             meta:{
                 title:'购物车'

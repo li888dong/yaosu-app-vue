@@ -45,7 +45,7 @@
 <template>
     <div class="person-container">
         <div class="header-container">
-            <i class="icon iconfont icon-fanhui" @click="$router.go(-1)"></i>
+            <i class="icon iconfont icon-fanhui" @click="$router.push('home')"></i>
             <p class="head"><i class="icon iconfont icon-touxiang2"></i></p>
             <p>{{uname}}</p>
         </div>

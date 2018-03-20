@@ -224,7 +224,7 @@
                         this.nic = res.data.data.tbCus.nic;
                         localStorage.setItem('uid', this.uid);
                         localStorage.setItem('nic', this.nic);
-                        this.$router.push('home');
+                        this.$router.push('person');
                         console.log(res)
                     })
                     .catch(err => {
@@ -250,7 +250,7 @@
                         this.nic = res.data.data.tbCus.nic;
                         localStorage.setItem('uid', this.uid);
                         localStorage.setItem('nic', this.nic);
-                        this.$router.push('home');
+                        this.$router.push('person');
                     })
                     .catch(err => {
                         alert(err)
@@ -272,7 +272,7 @@
                         this.nic = res.data.data.tbCus.nic;
                         localStorage.setItem('uid', this.uid);
                         localStorage.setItem('nic', this.nic);
-                        this.$router.push('home');
+                        this.$router.push('person');
                     })
                     .catch(err => {
                         alert(err)
