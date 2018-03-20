@@ -115,19 +115,19 @@
                 }
             },
             gotoGoods(e) {
-                this.$http.get(this.$APIs.GOODS_LIST+'?categoryID=1')
-                    .then((res) => {
-                        if (res.data.status === 200){
-                            this.$store.dispatch('set_goodsList', res.data.data.rows);
-                            this.curSelected = e.srcElement.dataset.type;
-                        }else {
-                            alert(res.data.msg)
-                        }
-                    })
-                    .catch((err) => {
-//                        alert(err.msg)
-                        console.log(err)
-                    });
+//                this.$http.get(this.$APIs.GOODS_LIST+'?categoryID=1')
+//                    .then((res) => {
+//                        if (res.data.status === 200){
+//                            this.$store.dispatch('set_goodsList', res.data.data.rows);
+//                            this.curSelected = e.srcElement.dataset.type;
+//                        }else {
+//                            alert(res.data.msg)
+//                        }
+//                    })
+//                    .catch((err) => {
+////                        alert(err.msg)
+//                        console.log(err)
+//                    });
                 this.$router.push({path: 'goods_list', query: {type: '现货', demand: '要产品', supply: '要渠道'}})
             }
         },

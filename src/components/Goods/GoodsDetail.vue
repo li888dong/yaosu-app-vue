@@ -258,7 +258,7 @@
         <div class="footer">
             <div class="btn-group">
                 <button style="background-color: #03A657;" v-if="!selectorShow">联系卖家</button><!--
-                --><button style="background-color: darkorange;" v-if="!selectorShow" @click="$router.push('shopping_cart')">加入购物车</button><!--
+                --><button style="background-color: darkorange;" v-if="!selectorShow">加入购物车</button><!--
                 --><button class="confirm-btn" v-if="selectorShow" @click="confirmSelect">确认</button>
             </div>
         </div>

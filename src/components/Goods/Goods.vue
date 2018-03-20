@@ -124,6 +124,7 @@
                 </table>
             </div>
         </div>
+        <!--要现货列表-->
         <VueDataLoading v-if="$route.path==='/goods_list'" :loading="loading" :completed="completed" :listens="['infinite-scroll']" :init-scroll="true" @infinite-scroll="infiniteScroll">
             <div class="item-content goods-list">
                 <div v-for="goodsItem in goodsList" @click="$router.push({path:'goods_detail',query:{goodsId:goodsItem.goodId}})">
@@ -132,9 +133,8 @@
                     <p><span>{{goodsItem.qiymc}}</span></p>
                 </div>
             </div>
-
-            <div slot="infinite-scroll-loading">加载中...</div>
         </VueDataLoading>
+        <!--首页要现货-->
         <div class="item-content" v-else>
             <div class="product-item" :key="goodsItem.goodsID" v-for="goodsItem in curGoods" @click="$router.push({path:'goods_detail',query:{goodsId:goodsItem.goodsID}})">
                 <h4 class="item-title text-ellipsis">{{goodsItem.chanpmc}}</h4>
@@ -142,20 +142,6 @@
                 <div class="item-company text-ellipsis">{{goodsItem.qiymc}}</div>
             </div>
         </div>
-        <!--<div class="item-content goods-list" v-if="$route.path==='/goods_list'">-->
-            <!--<div v-for="goodsItem in goodsList" @click="$router.push({path:'goods_detail',query:{goodsId:goodsItem.goodId}})">-->
-                <!--<p>{{goodsItem.goodName}} <i class="icon iconfont icon-more"></i></p>-->
-                <!--<p>纯度:{{goodsItem.purity}}</p>-->
-                <!--<p><span>{{goodsItem.qiymc}}</span></p>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="item-content" v-else>-->
-            <!--<div class="product-item" :key="goodsItem.goodsID" v-for="goodsItem in curGoods" @click="$router.push({path:'goods_detail',query:{goodsId:goodsItem.goodsID}})">-->
-                <!--<h4 class="item-title text-ellipsis">{{goodsItem.chanpmc}}</h4>-->
-                <!--<div class="item-info text-ellipsis">{{goodsItem.chund}}</div>-->
-                <!--<div class="item-company text-ellipsis">{{goodsItem.qiymc}}</div>-->
-            <!--</div>-->
-        <!--</div>-->
     </div>
 </template>
 <script>
@@ -204,7 +190,10 @@
                             this.page++;
                             this.loading = false;
                         }else if(res.data.status===300){
-                            this.completed = true
+                            this.completed = true;
+                            if (res.data.data===null){
+                                alert(res.data.msg)
+                            }
                         }else {
                             alert(res.data.msg)
                         }

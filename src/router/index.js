@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../components/Home/Home.vue'
 import Login from '../components/Login/Login.vue'
+import Person from '../components/Person/Person.vue'
 import ShoppingCart from '../components/ShoppingCart/ShoppingCart.vue'
 import Search from '../components/Search/Search.vue'
 import SearchHistory from '../components/Search/SearchHistory.vue'
@@ -20,7 +21,7 @@ Vue.use(Router)
 export default new Router({
     routes: [
         {
-            path: '/',
+            path: '/home',
             name: 'Home',
             component: Home,
             meta:{
@@ -33,6 +34,14 @@ export default new Router({
             component: Login,
             meta:{
                 title:'登陆药素网'
+            }
+        },
+        {
+            path: '/person',
+            name: 'person',
+            component: Person,
+            meta:{
+                title:'个人中心'
             }
         },
         {
@@ -132,6 +141,10 @@ export default new Router({
             meta:{
                 title:'药素网'
             }
+        },
+        {
+            path: '*',
+            redirect: '/home'
         }
     ]
 })

@@ -82,3 +82,7 @@ span.login{
     color: #fff;
     font-size: 14px;
 }
+.rotate_180{
+    display: inline-block;
+    transform: rotate(180deg);
+}
