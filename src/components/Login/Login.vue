@@ -137,7 +137,8 @@
         <div v-if="curPage==='login'" class="login-btn-group">
             <p class="register-btn" @click="curPage='register'"><span>新用户注册 <i
                 class="icon iconfont icon-fanhui rotate_180"></i></span></p>
-            <p class="login-btn" @click="login"><span>直接登陆 <i class="icon iconfont icon-fanhui rotate_180"></i></span></p>
+            <p class="login-btn" @click="login"><span>直接登陆 <i class="icon iconfont icon-fanhui rotate_180"></i></span>
+            </p>
         </div>
         <p v-else class="submit-btn" @click="registerAndLogin"><span>注册并登陆 <i
             class="icon iconfont icon-fanhui rotate_180"></i></span></p>
@@ -148,6 +149,8 @@
         name: 'login',
         data() {
             return {
+                uid: '',
+                nic: '',
                 curPage: 'login',
                 loginType: 'password',
                 gettingCode: false,
@@ -156,7 +159,7 @@
                 phone: '',
                 password: '',
                 smsCode: '',
-                agree:true
+                agree: true
             }
         },
         computed: {
@@ -199,8 +202,8 @@
                 }
                 return true
             },
-            login(){
-                if (this.loginType === 'msg'){
+            login() {
+                if (this.loginType === 'msg') {
                     this.smsLogin();
                     return
                 }
@@ -217,13 +220,18 @@
                     password: this.password
                 })
                     .then(res => {
+                        this.uid = res.data.data.tbCus.userid;
+                        this.nic = res.data.data.tbCus.nic;
+                        localStorage.setItem('uid', this.uid);
+                        localStorage.setItem('nic', this.nic);
+                        this.$router.push('home');
                         console.log(res)
                     })
                     .catch(err => {
                         alert(err)
                     })
             },
-            smsLogin(){
+            smsLogin() {
                 if (!/^1[3|4|5|8][0-9]\d{4,8}$/.test(this.phone)) {
                     alert('手机号码格式错误');
                     return false
@@ -237,14 +245,19 @@
                     smsCode: this.smsCode
                 })
                     .then(res => {
-                        console.log(res)
+                        console.log(res);
+                        this.uid = res.data.data.tbCus.userid;
+                        this.nic = res.data.data.tbCus.nic;
+                        localStorage.setItem('uid', this.uid);
+                        localStorage.setItem('nic', this.nic);
+                        this.$router.push('home');
                     })
                     .catch(err => {
                         alert(err)
                     })
             },
             registerAndLogin() {
-                if (!this.validate()){
+                if (!this.validate()) {
                     return false
                 }
 
@@ -254,7 +267,12 @@
                     password: this.password
                 })
                     .then(res => {
-                        console.log(res)
+                        console.log(res);
+                        this.uid = res.data.data.tbCus.userid;
+                        this.nic = res.data.data.tbCus.nic;
+                        localStorage.setItem('uid', this.uid);
+                        localStorage.setItem('nic', this.nic);
+                        this.$router.push('home');
                     })
                     .catch(err => {
                         alert(err)

@@ -98,7 +98,7 @@
                 this.$http.post(this.$APIs.CART_UPDATE,{
                     goodsNum:this.goodsAmount,
                     id:this.curEditId,
-                    userid:"f0ae84fc-60a2-48e5-a2f2-75bf26d2ac2a"
+                    userid:localStorage.getItem('uid')
                 })
                     .then(res=>{
                         console.log(res);
@@ -111,7 +111,7 @@
             deleteGoods(){
                 this.$http.post(this.$APIs.CART_DELETE,{
                     id:this.curEditId,
-                    userid:"f0ae84fc-60a2-48e5-a2f2-75bf26d2ac2a"
+                    userid:localStorage.getItem('uid')
                 })
                     .then(res=>{
                         console.log(res);

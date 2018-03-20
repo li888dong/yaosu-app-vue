@@ -75,3 +75,10 @@ header i.icon-touxiang2{
     font-size: 20px;
     color: #fff;
 }
+span.login{
+    position: absolute;
+    top: 16px;
+    left: 7%;
+    color: #fff;
+    font-size: 14px;
+}

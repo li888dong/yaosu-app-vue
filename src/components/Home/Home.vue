@@ -4,7 +4,8 @@
         <!--顶部banner搜索框-->
         <header>
             <div class="search-container" :class="{'top-bg':scrollTop}">
-                <i class="icon iconfont icon-touxiang2" @click="$router.push('login')"></i>
+                <i class="icon iconfont icon-touxiang2" v-if="isLogin"></i>
+                <span class="login" @click="$router.push('login')" v-else>登陆</span>
                 <i class="icon iconfont icon-search "></i>
                 <input type="search" placeholder="搜索产品/企业" class="search-input" @focus="$router.push('search_history')">
             </div>
@@ -91,6 +92,11 @@
             Xiangmu,
             Jishu,
             Piwen
+        },
+        computed:{
+            isLogin(){
+                return !!localStorage.getItem('uid')
+            }
         },
         beforeMount(){
 
