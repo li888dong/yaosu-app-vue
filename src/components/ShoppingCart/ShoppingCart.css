@@ -1,0 +1,129 @@
+.cartList{
+    margin-top: 5px;
+}
+.rotate_180{
+    display: inline-block;
+    transform: rotate(180deg);
+}
+.goods-company{
+    height: 24px;
+    padding: 10px;
+    background-color: #fff;
+}
+.goods-info{
+    height: 120px;
+    padding: 5px 10px;
+    margin-top: 1px;
+    background-color: #fff;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+
+}
+.goods-img{
+    width: 120px;
+    height: 120px;
+    background-size: 100% 120px;
+    background-repeat:no-repeat;
+}
+.goods-desription{
+    font-size: 14px;
+}
+.goods-name{
+    color: #000000;
+}
+.goods-specification{
+    margin-top: 40px;
+    font-size: 14px;
+}
+.goods-price{
+    margin-top: 10px;
+    color: #f97433;
+}
+.goods-amount{
+    margin-top: 66px;
+    color: #000000;
+    text-align: right;
+    margin-right: 10px;
+
+}
+.edit-button{
+    margin-right: 10px;
+}
+.icon-zan{
+    margin-right: 5px;
+}
+.goods-amout-selector{
+    width: 195px;
+}
+.goods-amout-selector >div{
+    display: inline-block;
+    vertical-align: top;
+}
+.goods-amout-selector .amount-selector{
+    margin-top: 20px;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    height: 30px;
+    border: 1px solid #999;
+    width: 120px;
+    border-radius: 4px;
+}
+.goods-amout-selector .amount-selector input{
+    width: 50px;
+    text-align: center;
+    outline: none;
+    border: none;
+}
+.goods-amout-selector .decrease-btn,
+.goods-amout-selector .increase-btn{
+    padding: 5px;
+    width: 20px;
+    text-align: center;
+}
+
+.goods-amout-selector .decrease-btn{
+    border-right: solid 1px #999;
+}.goods-amout-selector .increase-btn{
+    border-left: solid 1px #999;
+}
+.btn-group>button{
+    width: 30px;
+    height: 120px;
+    color: #ffffff;
+}
+.delete-btn{
+    background-color: #df5000;
+}
+.complete-btn{
+    background-color: #03A657;
+}
+.footer{
+    height: 30px;
+    padding: 5px 10px;
+    position: fixed;
+    z-index: 14;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #ccc;
+}
+.footer>.goods-price{
+    line-height: 30px;
+    margin-left: 100px;
+}
+.select-all{
+
+}
+.go-pay{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    width: 100px;
+    background-color: #03A657;
+    color: #fff;
+    text-align: center;
+    line-height: 40px;
+}
