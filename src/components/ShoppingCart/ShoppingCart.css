@@ -7,7 +7,9 @@
 .icon-selected::before{
     color: #03A657;
 }
-
+.icon-gouxuan{
+    font-size: 20px;
+}
 .goods-company{
     height: 24px;
     padding: 10px;

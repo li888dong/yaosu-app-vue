@@ -4,7 +4,7 @@
 <template>
     <div class="cart-container">
         <div class="top-bar">
-            <i class="icon iconfont icon-fanhui" @click="$router.go(-1)"></i>
+            <i class="icon iconfont icon-fanhui" @click="$router.push('home')"></i>
             <p>购物车({{cartList.length}})</p>
         </div>
         <div class="cartList" v-for="cart in cartList">
