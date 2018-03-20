@@ -136,12 +136,12 @@
         </form>
         <div v-if="curPage==='login'" class="login-btn-group">
             <p class="register-btn" @click="curPage='register'"><span>新用户注册 <i
-                class="icon iconfont icon-fanhui rotate_180"></i></span></p>
-            <p class="login-btn" @click="login"><span>直接登陆 <i class="icon iconfont icon-fanhui rotate_180"></i></span>
+                class="icon iconfont icon-more"></i></span></p>
+            <p class="login-btn" @click="login"><span>直接登陆 <i class="icon iconfont icon-more"></i></span>
             </p>
         </div>
         <p v-else class="submit-btn" @click="registerAndLogin"><span>注册并登陆 <i
-            class="icon iconfont icon-fanhui rotate_180"></i></span></p>
+            class="icon iconfont icon-more"></i></span></p>
     </div>
 </template>
 <script>

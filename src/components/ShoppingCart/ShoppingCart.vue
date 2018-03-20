@@ -12,7 +12,7 @@
                 <i class="icon iconfont icon-gouxuan"></i>
                 <i class="icon iconfont icon-dianpu"></i>
                 {{cart.company}}
-                <i class="icon iconfont icon-fanhui rotate_180"></i>
+                <i class="icon iconfont icon-more"></i>
             </div>
             <div class="goods-info" v-for="goods in cart.shoppingCarts" :key="goods.id">
                 <div class="check-box"><i class="icon iconfont icon-gouxuan"></i></div>

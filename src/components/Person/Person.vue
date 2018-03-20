@@ -27,7 +27,7 @@
         line-height: 40px;
         font-size: 14px;
     }
-    .item-list .icon-fanhui{
+    .item-list .icon-more{
         float: right;
         margin-right: 15px;
     }
@@ -50,7 +50,7 @@
             <p>{{uname}}</p>
         </div>
         <div class="item-list">
-            <div class="cart" @click="$router.push('shopping_cart')">购物车<i class="icon iconfont icon-fanhui rotate_180"></i></div>
+            <div class="cart" @click="$router.push('shopping_cart')">购物车<i class="icon iconfont icon-more"></i></div>
         </div>
         <div>
             <button class="logout" @click="logout">退出登陆</button>
