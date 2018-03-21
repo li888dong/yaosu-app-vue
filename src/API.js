@@ -51,9 +51,11 @@ const APIs = {
     CART_UPDATE:'/app/cart/update/goodsNum',
     // 报价列表
     OFFER_LIST:'/app/member/offerList',
-    // 报价列表
+    // 报价详情
     OFFER_DETAIL:'/app/member/offerDetails',
-    // 报价列表
-    OFFER_ADD:'/app/member/offerSave'
+    // 报价添加
+    OFFER_ADD:'/app/member/offerSave',
+    // 报价更改
+    OFFER_OPERATION:'/app/member/offerOperation'
 };
 export default APIs

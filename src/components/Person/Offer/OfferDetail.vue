@@ -21,14 +21,32 @@
     .status0{
         color: #03A657!important;
     }
+    .statusbg0{
+        background-color: #03A657!important;
+    }
     .status1{
         color: #cc0000!important;
+    }
+    .statusbg1{
+        background-color: #cc0000!important;
     }
     .status2{
         color: #666666!important;
     }
     .status3{
         color: #f97433!important;
+    }
+    .footer{
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+    .footer button{
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        color: white;
     }
 </style>
 <template>
@@ -64,6 +82,10 @@
                 <p><span class="title">信息有效期至：</span><span class="content">{{procurementData.messagevalidity}}</span></p>
                 <p><span class="title">备注信息：</span><span class="content">{{procurementData.otherrequests}}</span></p>
             </div>
+        </div>
+        <div class="footer">
+            <button class="statusbg0" v-if="offerData.status=='0'" @click="operationOffer(3)">撤销报价</button>
+            <button class="statusbg1" v-if="offerData.status=='3'" @click="operationOffer(1)">删除报价</button>
         </div>
     </div>
 </template>
@@ -101,7 +123,22 @@
                     .catch(err => {
                         alert(err)
                     })
+            },
+            operationOffer(status){
+                console.log(status,this.offerData.offerid)
+                this.$http.post(this.$APIs.OFFER_OPERATION,{
+                    userId:localStorage.getItem('uid'),
+                    status:status,
+                    offerId:this.offerData.offerid
+                })
+                    .then(res=>{
+                        this.$router.go(-1)
+                    })
+                    .catch(err=>{
+                        alert(err)
+                    })
             }
+
         }
     }
 </script>

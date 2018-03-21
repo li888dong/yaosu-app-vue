@@ -117,11 +117,18 @@
                         unit:this.unit
                     })
                         .then(res=>{
-                            console.log(res)
+                            if (res.data.status===200){
+
+                                this.$router.push('offer')
+                            }else {
+                                alert(res.data.msg)
+                            }
                         })
                         .catch(err=>{
                             alert(err)
                         })
+                }else {
+                    alert('请填写完整信息')
                 }
 
             }

@@ -21,7 +21,7 @@
 <template>
     <div class="offer-container">
         <div class="top-bar">
-            <i class="icon iconfont icon-fanhui" @click="$router.go(-1)"></i>
+            <i class="icon iconfont icon-fanhui" @click="$router.push('person')"></i>
             <p>我的报价</p>
         </div>
         <div class="list-container">

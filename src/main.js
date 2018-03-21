@@ -10,7 +10,7 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 // 滚动刷新
 import VueDataLoading from 'vue-data-loading'
 // 日期选择
-import { DatePicker,Dialog,Radio,RadioGroup } from 'element-ui';
+import { DatePicker,Dialog,Radio,RadioGroup,Message } from 'element-ui';
 // require styles
 import 'swiper/dist/css/swiper.css'
 import './assets/iconfont/iconfont.css'
@@ -39,6 +39,7 @@ Vue.use(DatePicker);
 Vue.use(Dialog);
 Vue.use(Radio);
 Vue.use(RadioGroup);
+Vue.use(Message);
 Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {

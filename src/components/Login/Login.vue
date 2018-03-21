@@ -11,7 +11,7 @@
         padding: 0 20px;
     }
 
-    .login-container form {
+    .login-container .form-container {
         margin-top: 40px;
     }
 
@@ -115,7 +115,7 @@
             <h2 v-if="curPage==='login'" class="title">欢迎登陆</h2>
         </div>
 
-        <form>
+        <div class="form-container">
             <label>
                 <span>手机号</span><br>
                 <input type="tel" class="login-input" ref="tel" v-model="phone">
@@ -133,7 +133,7 @@
             <label v-if="curPage==='register'">
                 <input type="checkbox" autofocus v-model="agree">我已阅读并同意《药素网注册协议》
             </label>
-        </form>
+        </div>
         <div v-if="curPage==='login'" class="login-btn-group">
             <p class="register-btn" @click="curPage='register'"><span>新用户注册 <i
                 class="icon iconfont icon-more"></i></span></p>
@@ -220,8 +220,8 @@
                     password: this.password
                 })
                     .then(res => {
-                        this.uid = res.data.data.tbCus.userid;
-                        this.nic = res.data.data.tbCus.nic;
+                        this.uid = res.data.data.mall_cus.userid;
+                        this.nic = res.data.data.mall_cus.nic;
                         localStorage.setItem('uid', this.uid);
                         localStorage.setItem('nic', this.nic);
                         this.$router.push('person');
@@ -246,8 +246,8 @@
                 })
                     .then(res => {
                         console.log(res);
-                        this.uid = res.data.data.tbCus.userid;
-                        this.nic = res.data.data.tbCus.nic;
+                        this.uid = res.data.data.mall_cus.userid;
+                        this.nic = res.data.data.mall_cus.nic;
                         localStorage.setItem('uid', this.uid);
                         localStorage.setItem('nic', this.nic);
                         this.$router.push('person');
@@ -268,8 +268,8 @@
                 })
                     .then(res => {
                         console.log(res);
-                        this.uid = res.data.data.tbCus.userid;
-                        this.nic = res.data.data.tbCus.nic;
+                        this.uid = res.data.data.mall_cus.userid;
+                        this.nic = res.data.data.mall_cus.nic;
                         localStorage.setItem('uid', this.uid);
                         localStorage.setItem('nic', this.nic);
                         this.$router.push('person');
