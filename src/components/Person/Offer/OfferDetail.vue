@@ -121,7 +121,7 @@
                         this.procurementData = res.data.data.procurement;
                     })
                     .catch(err => {
-                        alert(err)
+                        this.$message.error({message:'网络错误'});
                     })
             },
             operationOffer(status){
@@ -135,7 +135,7 @@
                         this.$router.go(-1)
                     })
                     .catch(err=>{
-                        alert(err)
+                        this.$message.error({message:'网络错误'});
                     })
             }
 

@@ -192,15 +192,15 @@
                         }else if(res.data.status===300){
                             this.completed = true;
                             if (res.data.data===null){
-                                alert(res.data.msg)
+                                this.$message.error({message:res.data.msg});
                             }
                         }else {
-                            alert(res.data.msg)
+                            this.$message.error({message:res.data.msg});
                         }
                     })
                     .catch((err) => {
 //                        alert(err.msg)
-                        console.log(err)
+                        this.$message.error({message:'网络错误'});
                     });
 
             },

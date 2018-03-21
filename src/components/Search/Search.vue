@@ -82,7 +82,7 @@
                             this.$store.commit('clear_resultList');
                             this.$store.commit('set_resultList', res.data.data.rows);
                         } else {
-                            alert(res.data.msg)
+                            this.$message.error({message:res.data.msg});
                         }
 
 

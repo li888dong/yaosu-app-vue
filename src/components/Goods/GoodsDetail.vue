@@ -350,11 +350,11 @@
                         this.specification.current = this.specification.list[0];
                         console.log(this.specification.list)
                     } else {
-                        alert(res.data.data.msg)
+                        this.$message.error({message:res.data.data.msg});
                     }
                 })
                 .catch(err => {
-                    console.log(err)
+                    this.$message.error({message:'网络错误'});
                 });
             let _this = this;
             document.documentElement.scrollTop = 0;
@@ -390,12 +390,10 @@
                 })
                     .then(res=>{
                         console.log(res);
-                        alert(res.data.msg);
-
+                        this.$message.error({message:res.data.msg});
                     })
                     .catch(err=>{
-                        alert(err.data.msg);
-
+                        this.$message.error({message:err.data.msg});
                     })
             }
         }

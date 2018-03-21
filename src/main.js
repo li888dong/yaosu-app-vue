@@ -39,7 +39,7 @@ Vue.use(DatePicker);
 Vue.use(Dialog);
 Vue.use(Radio);
 Vue.use(RadioGroup);
-Vue.use(Message);
+Vue.prototype.$message = Message;
 Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {

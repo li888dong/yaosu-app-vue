@@ -74,12 +74,12 @@
                         } else if(res.data.status===300){
                             this.completed = true
                         }else {
-                            alert(this.data.msg)
+                            this.$message.error({message:this.data.msg});
                         }
 
                     })
                     .catch(err=>{
-                        alert(err)
+                        this.$message.error({message:'网络错误'});
                     })
             },
             infiniteScroll() {

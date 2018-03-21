@@ -79,12 +79,12 @@
                         this.dataList = res.data.data;
                         console.log(res.data)
                     }else {
-                        alert(res.data.msg)
+                        this.$message.error({message:res.data.msg});
                     }
 
                 })
                 .catch(err=>{
-                    console.log(err)
+                    this.$message.error({message:'网络错误'});
                 })
         },
         watch:{

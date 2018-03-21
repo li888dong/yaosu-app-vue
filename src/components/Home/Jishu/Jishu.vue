@@ -56,7 +56,7 @@
                         this.$router.push({path:'service_detail',query:{itemData:res.data.data,catorageType:'技术'}})
                     })
                     .catch(err=>{
-                        alert(err)
+                        this.$message.error({message:'网络错误'});
                     })
             }
         }

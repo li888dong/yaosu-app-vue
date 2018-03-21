@@ -32,12 +32,12 @@
                             this.$store.dispatch('set_goodsList', res.data.data.rows);
                             this.curSelected = e.srcElement.dataset.type;
                         }else {
-                            alert(res.data.msg)
+                            this.$message.error({message:res.data.msg});
                         }
                     })
                     .catch((err) => {
 //                        alert(err.msg)
-                        console.log(err)
+                        this.$message.error({message:'网络错误'});
                     });
                 this.$router.push({path: 'goods_list', query: {type: '现货', demand: '要产品', supply: '要渠道'}})
             }

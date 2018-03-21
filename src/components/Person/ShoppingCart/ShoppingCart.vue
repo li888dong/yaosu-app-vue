@@ -81,7 +81,7 @@
                         this.cartList = res.data.data
                     })
                     .catch(err => {
-                        alert(err)
+                        this.$message.error({message:'网络错误'});
                     })
             },
             editGoods(goods) {
@@ -106,7 +106,7 @@
                         this.getCartList();
                     })
                     .catch(err => {
-                        alert(err)
+                        this.$message.error({message:'网络错误'});
                     })
             },
             deleteGoods() {
@@ -119,7 +119,7 @@
                         this.getCartList()
                     })
                     .catch(err => {
-                        alert(err)
+                        this.$message.error({message:'网络错误'});
                     })
             },
             selectGoods(goods) {

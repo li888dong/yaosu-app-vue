@@ -121,14 +121,14 @@
 
                                 this.$router.push('offer')
                             }else {
-                                alert(res.data.msg)
+                                this.$message.error({message:res.data.msg});
                             }
                         })
                         .catch(err=>{
-                            alert(err)
+                            this.$message.error({message:'网络错误'});
                         })
                 }else {
-                    alert('请填写完整信息')
+                    this.$message.error({message:'请填写完整信息'});
                 }
 
             }

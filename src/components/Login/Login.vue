@@ -185,19 +185,19 @@
         methods: {
             validate() {
                 if (!/^1[3|4|5|8][0-9]\d{4,8}$/.test(this.phone)) {
-                    alert('手机号码格式错误');
+                    this.$message.error({message:'手机号码格式错误'});
                     return false
                 }
                 if (!/^[A-Za-z0-9]{6,14}$/.test(this.password)) {
-                    alert('密码6-14位字母加数字');
+                    this.$message.error({message:'密码6-14位字母加数字'});
                     return false
                 }
                 if (!/^[0-9]{6}$/.test(this.smsCode)) {
-                    alert('验证码 6数字');
+                    this.$message.error({message:'验证码 6数字'});
                     return false
                 }
                 if (!this.agree) {
-                    alert('请同意协议');
+                    this.$message.error({message:'请同意协议'});
                     return false
                 }
                 return true
@@ -208,11 +208,11 @@
                     return
                 }
                 if (!/^1[3|4|5|8][0-9]\d{4,8}$/.test(this.phone)) {
-                    alert('手机号码格式错误');
+                    this.$message.error({message:'手机号码格式错误'});
                     return false
                 }
                 if (!/^[A-Za-z0-9]{6,14}$/.test(this.password)) {
-                    alert('密码6-14位字母加数字');
+                    this.$message.error({message:'密码6-14位字母加数字'});
                     return false
                 }
                 this.$http.post(this.$APIs.LOGIN, {
@@ -228,16 +228,16 @@
                         console.log(res)
                     })
                     .catch(err => {
-                        alert(err)
+                        this.$message.error({message:'网络错误'});
                     })
             },
             smsLogin() {
                 if (!/^1[3|4|5|8][0-9]\d{4,8}$/.test(this.phone)) {
-                    alert('手机号码格式错误');
+                    this.$message.error({message:'手机号码格式错误'});
                     return false
                 }
                 if (!/^[0-9]{6}$/.test(this.smsCode)) {
-                    alert('验证码 6数字');
+                    this.$message.error({message:'验证码 6数字'});
                     return false
                 }
                 this.$http.post(this.$APIs.MSG_LOGIN, {
@@ -253,7 +253,7 @@
                         this.$router.push('person');
                     })
                     .catch(err => {
-                        alert(err)
+                        this.$message.error({message:'网络错误'});
                     })
             },
             registerAndLogin() {
@@ -275,13 +275,13 @@
                         this.$router.push('person');
                     })
                     .catch(err => {
-                        alert(err)
+                        this.$message.error({message:'网络错误'});
                     })
             },
             getSmsCode() {
                 clearInterval(this.timer);
                 if (!/^1[3|4|5|8][0-9]\d{4,8}$/.test(this.phone)) {
-                    alert('手机号码格式错误');
+                    this.$message.error({message:'手机号码格式错误'});
                     return false
                 }
                 this.gettingCode = true;
@@ -297,7 +297,7 @@
                         console.log(res)
                     })
                     .catch(err => {
-                        alert(err)
+                        this.$message.error({message:'网络错误'});
                     })
             }
         }
