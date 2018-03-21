@@ -49,5 +49,9 @@ const APIs = {
     CART_DELETE:'/app/cart/delete',
     // 修改购物车数量
     CART_UPDATE:'/app/cart/update/goodsNum',
+    // 报价列表
+    OFFER_LIST:'/app/member/offerList',
+    // 报价列表
+    OFFER_DETAIL:'/app/member/offerDetails'
 };
 export default APIs

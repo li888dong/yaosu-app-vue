@@ -1,0 +1,59 @@
+.person-container{
+    margin: 0!important;
+}
+.header-container{
+    height: 180px;
+    overflow: hidden;
+    background-color: #03A657;
+    color: #ffffff;
+    text-align: center;
+}
+.header-container .icon-fanhui{
+    position: absolute;
+    left: 10px;
+    top: 20px;
+}
+.head{
+    margin-top: 40px;
+}
+.icon-touxiang2{
+    font-size: 80px;
+}
+.item-list>div{
+    background-color: #fff;
+    height: 40px;
+    margin-top: 5px;
+    line-height: 40px;
+    font-size: 14px;
+}
+.item-list .icon-more{
+    float: right;
+    margin-right: 15px;
+}
+.item-list .list-icon{
+    padding: 5px;
+    border-radius: 50%;
+    margin:0 10px 0 15px;
+}
+.item-list .list-icon.gouwuche{
+    background-color: #007aff;
+}
+.item-list .list-icon.dingdan{
+    background-color: #f97433;
+}
+.item-list .list-icon.baojia{
+    background-color: #c00;
+}
+.item-list .list-icon .iconfont::before{
+    color: white;
+}
+.logout{
+    width: 200px;
+    background-color: #df5000;
+    color: #ffffff;
+    margin-left: 50%;
+    transform: translate(-50%);
+    padding: 5px 10px;
+    margin-top: 15px;
+    border-radius: 4px;
+}

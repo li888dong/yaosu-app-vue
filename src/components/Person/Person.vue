@@ -1,46 +1,5 @@
 <style scoped>
-    .person-container{
-        margin: 0!important;
-    }
-    .header-container{
-        height: 180px;
-        overflow: hidden;
-        background-color: #03A657;
-        color: #ffffff;
-        text-align: center;
-    }
-    .header-container .icon-fanhui{
-        position: absolute;
-        left: 10px;
-        top: 20px;
-    }
-    .head{
-        margin-top: 40px;
-    }
-    .icon-touxiang2{
-        font-size: 80px;
-    }
-    .item-list>div{
-        background-color: #fff;
-        height: 40px;
-        margin-top: 5px;
-        line-height: 40px;
-        font-size: 14px;
-    }
-    .item-list .icon-more{
-        float: right;
-        margin-right: 15px;
-    }
-    .logout{
-        width: 200px;
-        background-color: #df5000;
-        color: #ffffff;
-        margin-left: 50%;
-        transform: translate(-50%);
-        padding: 5px 10px;
-        margin-top: 15px;
-        border-radius: 4px;
-    }
+  @import "Person.css";
 </style>
 <template>
     <div class="person-container">
@@ -50,7 +9,9 @@
             <p>{{uname}}</p>
         </div>
         <div class="item-list">
-            <div class="cart" @click="$router.push('shopping_cart')">购物车<i class="icon iconfont icon-more"></i></div>
+            <div class="cart" @click="$router.push('shopping_cart')"><span class="list-icon gouwuche"><i class="icon iconfont icon-gouwuche"></i> </span>购物车 <i class="icon iconfont icon-more"></i></div>
+            <div class="cart" @click="$router.push('order')"><span class="list-icon dingdan"><i class="icon iconfont icon-shenhe"></i> </span>我的订单 <i class="icon iconfont icon-more"></i></div>
+            <div class="cart" @click="$router.push('offer')"><span class="list-icon baojia"><i class="icon iconfont icon-baojiadan"></i> </span>我的报价 <i class="icon iconfont icon-more"></i></div>
         </div>
         <div>
             <button class="logout" @click="logout">退出登陆</button>

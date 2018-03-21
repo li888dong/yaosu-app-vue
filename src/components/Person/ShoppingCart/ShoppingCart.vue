@@ -10,13 +10,14 @@
         <div class="cartList" v-for="cart in cartList">
             <div class="goods-company">
                 <!--<i class="icon iconfont icon-gouxuan" :class="{'icon-selected':false}"-->
-                   <!--@click="selectCompany(cart.shoppingCarts)"></i>-->
+                <!--@click="selectCompany(cart.shoppingCarts)"></i>-->
                 <i class="icon iconfont icon-dianpu"></i>
                 {{cart.company}}
                 <i class="icon iconfont icon-more"></i>
             </div>
             <div class="goods-info" v-for="goods in cart.shoppingCarts" :key="goods.id">
-                <div class="check-box"><i class="icon iconfont icon-gouxuan" :class="{'icon-selected':selectedList.has(goods)}"
+                <div class="check-box"><i class="icon iconfont icon-gouxuan"
+                                          :class="{'icon-selected':selectedList.has(goods)}"
                                           @click="selectGoods(goods)"></i></div>
                 <div class="goods-img" :style="{backgroundImage:'url(http://image.yaosuce.com'+goods.url+')'}"></div>
                 <!--商品编辑器-->
@@ -48,7 +49,7 @@
         <!--底部购买按钮-->
         <div class="footer">
             <span class="select-all" @click="selectAll"><i class="icon iconfont icon-gouxuan"
-                                                                    :class="{'icon-selected':isSelectAll}"></i>反选</span>
+                                                           :class="{'icon-selected':isSelectAll}"></i>全选</span>
             <span class="goods-price">合计￥{{totalPrice}}<span></span></span>
             <span class="go-pay">去支付</span>
         </div>
@@ -64,7 +65,7 @@
                 goodsAmount: '',
                 selectedList: new Set(),
                 totalPrice: 0,
-                isSelectAll:false
+                isSelectAll: false
             }
         },
         mounted() {
@@ -101,7 +102,8 @@
                 })
                     .then(res => {
                         console.log(res);
-                        this.getCartList()
+                        this.curEditId = '';
+                        this.getCartList();
                     })
                     .catch(err => {
                         alert(err)
@@ -133,11 +135,11 @@
             selectAll() {
                 let temArr = [];
 
-                if (this.isSelectAll){
+                if (this.isSelectAll) {
                     this.selectedList.clear()
-                }else {
-                    this.cartList.map(i=>{
-                        i.shoppingCarts.map(j=>{
+                } else {
+                    this.cartList.map(i => {
+                        i.shoppingCarts.map(j => {
                             this.selectedList.add(j);
                         })
                     });

@@ -3,7 +3,10 @@ import Router from 'vue-router'
 import Home from '../components/Home/Home.vue'
 import Login from '../components/Login/Login.vue'
 import Person from '../components/Person/Person.vue'
-import ShoppingCart from '../components/ShoppingCart/ShoppingCart.vue'
+import ShoppingCart from '../components/Person/ShoppingCart/ShoppingCart.vue'
+import Order from '../components/Person/Order/Order.vue'
+import Offer from '../components/Person/Offer/Offer.vue'
+import OfferDetail from '../components/Person/Offer/OfferDetail.vue'
 import Search from '../components/Search/Search.vue'
 import SearchHistory from '../components/Search/SearchHistory.vue'
 import SearchResult from '../components/Search/SearchResult.vue'
@@ -52,6 +55,33 @@ export default new Router({
             component: ShoppingCart,
             meta:{
                 title:'购物车'
+            }
+        },
+        {
+            path: '/order',
+            name: 'order',
+            access:'login',
+            component: Order,
+            meta:{
+                title:'订单'
+            }
+        },
+        {
+            path: '/offer',
+            name: 'offer',
+            access:'login',
+            component: Offer,
+            meta:{
+                title:'报价'
+            }
+        },
+        {
+            path: '/offer_detail',
+            name: 'offer_detail',
+            access:'login',
+            component: OfferDetail,
+            meta:{
+                title:'报价'
             }
         },
         {
