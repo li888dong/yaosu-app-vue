@@ -52,6 +52,8 @@ const APIs = {
     // 报价列表
     OFFER_LIST:'/app/member/offerList',
     // 报价列表
-    OFFER_DETAIL:'/app/member/offerDetails'
+    OFFER_DETAIL:'/app/member/offerDetails',
+    // 报价列表
+    OFFER_ADD:'/app/member/offerSave'
 };
 export default APIs

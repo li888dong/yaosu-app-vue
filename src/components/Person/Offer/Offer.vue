@@ -59,9 +59,6 @@
                 completed: false,
             }
         },
-        mounted(){
-            this.fetchData()
-        },
         methods:{
             fetchData(){
                 this.$http.post(this.$APIs.OFFER_LIST,{
@@ -71,10 +68,8 @@
                 })
                     .then(res=>{
                         if (res.data.status===200){
-
                             this.dataList = this.dataList.concat(res.data.data.rows);
                             console.log(this.dataList);
-
                             this.page++
                         } else if(res.data.status===300){
                             this.completed = true

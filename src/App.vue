@@ -101,6 +101,7 @@
         position: absolute;
         top: 0;
         right: 10px;
+        font-size: 12px;
     }
 
     .catorage-selector {

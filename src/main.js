@@ -5,8 +5,12 @@ import App from './App'
 import router from './router'
 import store from './store'
 import axios from 'axios'
+// 轮播图
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+// 滚动刷新
 import VueDataLoading from 'vue-data-loading'
+// 日期选择
+import { DatePicker,Dialog,Radio,RadioGroup } from 'element-ui';
 // require styles
 import 'swiper/dist/css/swiper.css'
 import './assets/iconfont/iconfont.css'
@@ -30,7 +34,11 @@ const instance = axios.create({
 Vue.APIs = Vue.prototype.$APIs = APIs;
 Vue.http = Vue.prototype.$http = instance;
 Vue.use(VueAwesomeSwiper, /* { default global options } */);
-Vue.component('VueDataLoading', VueDataLoading)
+Vue.component('VueDataLoading', VueDataLoading);
+Vue.use(DatePicker);
+Vue.use(Dialog);
+Vue.use(Radio);
+Vue.use(RadioGroup);
 Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {

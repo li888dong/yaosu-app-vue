@@ -11,7 +11,7 @@
         </div>
         <div class="list-container">
             <VueDataLoading :loading="loading" :completed="completed" :listens="['infinite-scroll']" :init-scroll="true" @infinite-scroll="infiniteScroll">
-                <div class="list-item pannel" v-for="item in dataList">
+                <div class="list-item pannel" v-for="item in dataList" @click="$router.push({path:'offer_add',query:{procurementid:item.procurement.procurementid}})">
                     <div class="status">采购中</div>
                     <h4 class="name">{{item.procurement.goodname}}</h4>
                     <p><span class="title">采购编号：</span><span class="content">{{item.procurement.procurementno}}</span></p>

@@ -7,6 +7,7 @@ import ShoppingCart from '../components/Person/ShoppingCart/ShoppingCart.vue'
 import Order from '../components/Person/Order/Order.vue'
 import Offer from '../components/Person/Offer/Offer.vue'
 import OfferDetail from '../components/Person/Offer/OfferDetail.vue'
+import OfferAdd from '../components/Person/Offer/OfferAdd.vue'
 import Search from '../components/Search/Search.vue'
 import SearchHistory from '../components/Search/SearchHistory.vue'
 import SearchResult from '../components/Search/SearchResult.vue'
@@ -80,6 +81,15 @@ export default new Router({
             name: 'offer_detail',
             access:'login',
             component: OfferDetail,
+            meta:{
+                title:'报价'
+            }
+        },
+        {
+            path: '/offer_add',
+            name: 'offer_add',
+            access:'login',
+            component: OfferAdd,
             meta:{
                 title:'报价'
             }
