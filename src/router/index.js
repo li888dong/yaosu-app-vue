@@ -4,6 +4,7 @@ import Home from '../components/Home/Home.vue'
 import Login from '../components/Login/Login.vue'
 import Person from '../components/Person/Person.vue'
 import ShoppingCart from '../components/Person/ShoppingCart/ShoppingCart.vue'
+import Shop from '../components/Shop/Shop.vue'
 import Order from '../components/Person/Order/Order.vue'
 import Offer from '../components/Person/Offer/Offer.vue'
 import OfferDetail from '../components/Person/Offer/OfferDetail.vue'
@@ -11,7 +12,9 @@ import OfferAdd from '../components/Person/Offer/OfferAdd.vue'
 import Search from '../components/Search/Search.vue'
 import SearchHistory from '../components/Search/SearchHistory.vue'
 import SearchResult from '../components/Search/SearchResult.vue'
-import SearchDetailList from '../components/Search/SearchDetailList.vue'
+import SearchZhongyaoDetailList from '../components/Search/SearchZhongyaoDetail.vue'
+import SearchYuanliaoDetailList from '../components/Search/SearchYuanliaoDetail.vue'
+import SearchXianhuoDetailList from '../components/Search/SearchXianhuoDetailList.vue'
 import Procurement from '../components/Procurement/Procurement.vue'
 import Goods from '../components/Goods/Goods.vue'
 import GoodsDetail from '../components/Goods/GoodsDetail.vue'
@@ -56,6 +59,15 @@ export default new Router({
             component: ShoppingCart,
             meta:{
                 title:'购物车'
+            }
+        },
+        {
+            path: '/shop',
+            name: 'shop',
+            access:'login',
+            component: Shop,
+            meta:{
+                title:'店铺'
             }
         },
         {
@@ -118,15 +130,32 @@ export default new Router({
                         title:'药素网'
                     }
                 },
-                {
-                    path: '/search_detail_list',
-                    name: 'search_detail_list',
-                    component: SearchDetailList,
-                    meta:{
-                        title:'药素网'
-                    }
-                },
+
             ]
+        },
+        {
+            path: '/search_xianhuo_detail_list',
+            name: 'search_xianhuo_detail_list',
+            component: SearchXianhuoDetailList,
+            meta:{
+                title:'药素网'
+            }
+        },
+        {
+            path: '/search_zhongyao_detail_list',
+            name: 'search_zhongyao_detail_list',
+            component: SearchZhongyaoDetailList,
+            meta:{
+                title:'药素网'
+            }
+        },
+        {
+            path: '/search_yuanliao_detail_list',
+            name: 'search_yuanliao_detail_list',
+            component: SearchYuanliaoDetailList,
+            meta:{
+                title:'药素网'
+            }
         },
         {
             path: '/procurement',

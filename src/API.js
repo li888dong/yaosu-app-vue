@@ -5,6 +5,10 @@ const APIs = {
     HOME_SEARCH_1:'/app/goods/queryGoodsName',
     // 主页搜索二级
     HOME_SEARCH_2:'/app/goods/queryGoodsNameAbsolute',
+    // 中药材精确查询
+    QUERY_TCM:'/app/map/queryTcm',
+    // 原料药制剂
+    QUERY_API:'/app/goods/queryApi',
     // 要采购
     PROCUREMENT_LIST:'/app/member/procurementList',
     // 要现货

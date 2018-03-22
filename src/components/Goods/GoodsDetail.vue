@@ -305,6 +305,7 @@
             return {
 //                商品数据
                 goodsData: [],
+//                当前选择的商品规格
                 specification: {
                     list: [],
                     index: 0,
@@ -332,6 +333,7 @@
             }
         },
         computed: {
+//            顶部大图的地址
             imgList() {
                 if (this.goodsData.pictures && this.goodsData.pictures.length > 0) {
                     return this.goodsData.pictures.map(i => "url('http://image.yaosuce.com" + i.url + "')")
@@ -341,6 +343,7 @@
             }
         },
         mounted() {
+//            获取商品详情
             this.$http.get(this.$APIs.GOODS_DETAIL + '?goodsid=' + this.$route.query.goodsId)
                 .then(res => {
                     if (res.data.status === 200) {
@@ -364,10 +367,12 @@
 
         },
         methods: {
+//            选择规格
             changeSpecification(index) {
                 this.specification.index = index;
                 this.specification.current = this.specification.list[index]
             },
+//            显示规格选择页
             showSelector() {
                 this.selectorShow = true;
             },
@@ -377,10 +382,12 @@
             decreaseAmount() {
                 this.amount = Math.max(this.amount - 1, 1)
             },
+//            确认选择
             confirmSelect() {
                 this.confirmSelectGoods = true;
                 this.selectorShow = false
             },
+//            添加至购物车
             addCart(){
                 this.$http.post(this.$APIs.CART_ADD,{
                     goodsNum:this.amount,

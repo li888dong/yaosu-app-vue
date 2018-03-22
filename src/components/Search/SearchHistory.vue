@@ -59,7 +59,11 @@
             },
             onSearch(keyword){
                 this.$store.dispatch('set_keywords',this.keyword);
-                this.$http.get(this.$APIs.HOME_SEARCH_1+'?search='+keyword)
+                this.$http.post(this.$APIs.HOME_SEARCH_1,{
+                    search:keyword,
+                    page:1,
+                    pageSize:15
+                })
                     .then(res=>{
                         console.log(res.data.data.rows);
                         this.$store.dispatch('set_resultList',res.data.data.rows);
@@ -67,7 +71,7 @@
 
                     })
                     .catch(err=>{
-
+                        this.$message.error('网络错误')
                     });
             }
         }

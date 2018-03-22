@@ -44,7 +44,7 @@
                 <li class="result-item" v-for="result in dataList" @click="gotoDetailList(result)">
                     <p class="name">{{result.productName}}</p>
                     <p class="tags">
-                        <span class="productType">{{result.productType}}</span>
+                        <span class="dosageForm" :class="{productType:result.productTypeDes=='现货'}">{{result.productTypeDes}}</span>
                         <span class="dosageForm">{{result.dosageForm}}</span>
                     </p>
                 </li>
@@ -60,7 +60,7 @@
                 dataList: [],
                 loading: false,
                 completed: false,
-                page: 2,
+                page: 1,
                 pageSize: 22
             }
         },
@@ -87,27 +87,31 @@
             replaceType(item) {
                 switch (item.productType) {
                     case 'A':
-                        return Object.assign({}, item, {productType: '制剂'});
+                        return Object.assign({}, item, {productTypeDes: '制剂'});
                     case 'B':
-                        return Object.assign({}, item, {productType: '原料药'});
+                        return Object.assign({}, item, {productTypeDes: '原料药'});
                     case 'C':
-                        return Object.assign({}, item, {productType: '中药材'});
+                        return Object.assign({}, item, {productTypeDes: '中药材'});
                     case 'D':
-                        return Object.assign({}, item, {productType: '现货'});
+                        return Object.assign({}, item, {productTypeDes: '现货'});
                     default:
                         return item
                 }
             },
             gotoDetailList(result) {
-                this.$http.get(this.$APIs.HOME_SEARCH_2 + '?search=' + result.productName)
-                    .then(res => {
-                        console.log(res.data);
-                        this.$router.push('search_detail_list')
-
-                    })
-                    .catch(err => {
-                        console.log(err)
-                    });
+                switch (result.productType) {
+                    case 'A':
+                        this.$router.push({path:'search_yuanliao_detail_list',query:{productName:result.productName}});
+                        break;
+                    case 'B':
+                        this.$router.push({path:'search_yuanliao_detail_list',query:{productName:result.productName}});
+                        break;
+                    case 'C':
+                        this.$router.push({path:'search_zhongyao_detail_list',query:{tcmId:result.id}});
+                        break;
+                    case 'D':
+                        this.$router.push({path:'search_xianhuo_detail_list',query:{productName:result.productName}});
+                }
             },
             fetchData() {
                 this.loading = true;

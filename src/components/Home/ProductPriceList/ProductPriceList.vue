@@ -10,6 +10,7 @@
         </div>
         <div class="product-price" @click="gotoGoods">
             <h4 class="price-title">参考价格</h4>
+            <!--原料药轮播-->
             <div class="product-info" v-show="show === 'yuanliao'">
                 <div class="slide-container yuanliao" ref="yuanliao" v-if="zhongyaoData.length>0">
 
@@ -27,6 +28,7 @@
                     </div>
                 </div>
             </div>
+            <!--中药轮播-->
             <div class="product-info" v-show="show === 'zhongyao'" v-if="zhongyaoData.length>0">
                 <div class="slide-container zhongyao" ref="zhongyao">
                     <div v-for="zhongyao in zhongyaoData" :key="zhongyao.productName">
@@ -57,9 +59,13 @@
         name: 'productpricelist',
         data() {
             return {
+//                中药计时器
                 timerzy:0,
+//                原料药计时器
                 timeryl:0,
+//                延迟插入节点计时器
                 timerdelay:0,
+//                当前显示的中药或者原料药
                 show: 'yuanliao',
                 swiperOption: {
                     direction: 'vertical',
@@ -74,9 +80,11 @@
             }
         },
         computed: {
+//            原料药数据
             yuanliaos(){
                 return this.$store.getters.api
             },
+//            原料药数据，转为两个一组
             yuanliaoData() {
                 const temp = [];
                 for (let i = 0; i < this.yuanliaos.length; i += 2) {
@@ -84,17 +92,21 @@
                 }
                 return temp
             },
+//            中药材数据
             zhongyaoData() {
                 return this.$store.getters.tcm
             },
+//            中药列表的dom节点
             $zhongyao(){
                 return $(this.$refs.zhongyao)
             },
+//            原料药的dom节点
             $yuanliao(){
                 return $(this.$refs.yuanliao)
             }
         },
         mounted() {
+//            加载两秒后插入节点，开始轮播
             this.timerdelay = setTimeout(()=>{
                 this.$zhongyao.append(this.$zhongyao.find('div').eq(0).clone());
                 this.$yuanliao.append(this.$yuanliao.find('div').eq(0).clone());
@@ -102,6 +114,7 @@
             },2000)
         },
         methods:{
+//            切换显示的原料药和中药材
             changeShow(type){
                 this.show = type;
                 if (type === 'zhongyao'){
