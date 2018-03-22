@@ -45,12 +45,12 @@
     <div>
         <div class="top-bar">
             <i class="icon iconfont icon-fanhui" @click="$router.go(-1)"></i>
-            <p>发布报价</p>
+            <p>发布{{type}}</p>
             <span class="right" @click="publish">发布</span>
         </div>
         <div class="offer-add-container pannel">
             <p class="form-item"><span class="required">* </span>商品名称：<input type="text" placeholder="请输入商品名称" v-model="goodsName"></p>
-            <p class="form-item"><span class="required">* </span>单价：<input type="number" placeholder="请输入单价" v-model="price"></p>
+            <p class="form-item" v-if="type==='报价'"><span class="required">* </span>单价：<input type="number" placeholder="请输入单价" v-model="price"></p>
             <p class="form-item"><span class="required">* </span>数量：<span class="unit" @click="dialogTableVisible = true">{{unit}} <i class="icon iconfont icon-more rotate_90"></i></span><input type="number" placeholder="请输入数量" v-model="amount"></p>
             <p class="form-item"><span class="required">* </span>联系方式：<input type="tel" placeholder="请输入联系方式" v-model="contact"></p>
             <p class="form-item"><span class="required">* </span>报价有效期至：
@@ -100,33 +100,60 @@
         computed:{
             procurementid(){
                 return this.$route.query.procurementid
+            },
+            type(){
+                return this.$route.query.publishType
             }
         },
         methods:{
             publish(){
                 if (this.goodsName&&this.price&&this.amount&&this.unit&&this.contact&&this.messagevalidity){
-                    this.$http.post(this.$APIs.OFFER_ADD,{
-                        userId:localStorage.getItem('uid'),
-                        procurementid:this.procurementid,
-                        goodname:this.goodsName,
-                        price:this.price,
-                        quantity:this.amount,
-                        messagevalidity:this.messagevalidity,
-                        contactphone:this.contact,
-                        note:this.note,
-                        unit:this.unit
-                    })
-                        .then(res=>{
-                            if (res.data.status===200){
+                    if (this.type === '报价'){
+                        this.$http.post(this.$APIs.OFFER_ADD,{
+                            userId:localStorage.getItem('uid'),
+                            procurementid:this.procurementid,
+                            goodname:this.goodsName,
+                            price:this.price,
+                            quantity:this.amount,
+                            messagevalidity:this.messagevalidity,
+                            contactphone:this.contact,
+                            note:this.note,
+                            unit:this.unit
+                        })
+                            .then(res=>{
+                                if (res.data.status===200){
 
-                                this.$router.push('offer')
-                            }else {
-                                this.$message.error({message:res.data.msg});
-                            }
+                                    this.$router.push('offer')
+                                }else {
+                                    this.$message.error({message:res.data.msg});
+                                }
+                            })
+                            .catch(err=>{
+                                this.$message.error({message:'网络错误'});
+                            })
+                    }else {
+                        this.$http.post(this.$APIs.PROCUREMENT_PUBLISH,{
+                            userId:localStorage.getItem('uid'),
+                            goodname:this.goodsName,
+                            quantity:this.amount,
+                            messagevalidity:this.messagevalidity,
+                            contactphone:this.contact,
+                            otherrequests:this.note,
+                            unit:this.unit
                         })
-                        .catch(err=>{
-                            this.$message.error({message:'网络错误'});
-                        })
+                            .then(res=>{
+                                if (res.data.status===200){
+
+                                    this.$router.go(-1)
+                                }else {
+                                    this.$message.error({message:res.data.msg});
+                                }
+                            })
+                            .catch(err=>{
+                                this.$message.error({message:'网络错误'});
+                            })
+                    }
+
                 }else {
                     this.$message.error({message:'请填写完整信息'});
                 }

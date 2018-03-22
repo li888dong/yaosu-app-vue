@@ -15,6 +15,7 @@ import SearchResult from '../components/Search/SearchResult.vue'
 import SearchZhongyaoDetailList from '../components/Search/SearchZhongyaoDetail.vue'
 import SearchYuanliaoDetailList from '../components/Search/SearchYuanliaoDetail.vue'
 import SearchXianhuoDetailList from '../components/Search/SearchXianhuoDetailList.vue'
+import Supplier from '../components/Search/Supplier.vue'
 import Procurement from '../components/Procurement/Procurement.vue'
 import Goods from '../components/Goods/Goods.vue'
 import GoodsDetail from '../components/Goods/GoodsDetail.vue'
@@ -103,7 +104,7 @@ export default new Router({
             access:'login',
             component: OfferAdd,
             meta:{
-                title:'报价'
+                title:'药素网'
             }
         },
         {
@@ -153,6 +154,14 @@ export default new Router({
             path: '/search_yuanliao_detail_list',
             name: 'search_yuanliao_detail_list',
             component: SearchYuanliaoDetailList,
+            meta:{
+                title:'药素网'
+            }
+        },
+        {
+            path: '/supplier',
+            name: 'supplier',
+            component: Supplier,
             meta:{
                 title:'药素网'
             }

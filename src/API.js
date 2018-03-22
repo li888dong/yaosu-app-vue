@@ -9,6 +9,8 @@ const APIs = {
     QUERY_TCM:'/app/map/queryTcm',
     // 原料药制剂
     QUERY_API:'/app/goods/queryApi',
+    // 发布采购
+    PROCUREMENT_PUBLISH:'/app/member/procurementPublish',
     // 要采购
     PROCUREMENT_LIST:'/app/member/procurementList',
     // 要现货

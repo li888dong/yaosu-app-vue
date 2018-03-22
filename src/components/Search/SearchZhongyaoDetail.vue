@@ -15,6 +15,20 @@
         font-size: 16px;
         margin: 10px 0;
     }
+    .footer{
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+    .footer button{
+        width: 50%;
+        height: 40px;
+        background-color: #03A657;
+        border-left: 1px solid #fff;
+        line-height: 40px;
+        text-align: center;
+        color: white;
+    }
 </style>
 <template>
     <div class="zhongyao-detail-container">
@@ -55,6 +69,9 @@
             <p>{{tcmData.lcyy}}</p>
             <p class="title">品种特点</p>
             <p>{{tcmData.pztd}}</p>
+        </div>
+        <div class="footer">
+            <button @click="$router.push({path:'supplier',query:{productName:tcmData.ycmc}})">查看供应商</button><button @click="$router.push({path:'offer_add',query:{publishType:'采购'}})">发布采购</button>
         </div>
     </div>
 </template>
