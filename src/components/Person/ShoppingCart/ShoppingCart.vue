@@ -60,11 +60,17 @@
         name: 'shoppingcart',
         data() {
             return {
+//                购物车列表
                 cartList: [],
+//                当前编辑的购物车id
                 curEditId: '',
+//                编辑的商品数量
                 goodsAmount: '',
+//                已选择的商品
                 selectedList: new Set(),
+//                总价
                 totalPrice: 0,
+//                是否全选
                 isSelectAll: false
             }
         },
@@ -72,13 +78,18 @@
             this.getCartList()
         },
         methods: {
+//            获取购物车列表
             getCartList() {
                 this.$http.post(this.$APIs.CART_LIST, {
-                    userid: "f0ae84fc-60a2-48e5-a2f2-75bf26d2ac2a"
+                    userid: localStorage.getItem('uid')
                 })
                     .then(res => {
                         console.log(res);
-                        this.cartList = res.data.data
+                        if (res.data.statu ===200){
+                            this.cartList = res.data.data
+                        }else {
+                            this.$message.error({message:res.data.msg});
+                        }
                     })
                     .catch(err => {
                         this.$message.error({message:'网络错误'});
@@ -94,6 +105,7 @@
             increaseAmount() {
                 this.goodsAmount++
             },
+//            提交更改数量
             changeGoodsAmount() {
                 this.$http.post(this.$APIs.CART_UPDATE, {
                     goodsNum: this.goodsAmount,
@@ -122,6 +134,7 @@
                         this.$message.error({message:'网络错误'});
                     })
             },
+//            选择商品
             selectGoods(goods) {
                 let temArr = [];
                 if (this.selectedList.has(goods)) {
@@ -130,8 +143,10 @@
                     this.selectedList.add(goods)
                 }
                 temArr = Array.from(this.selectedList);
+//                价格求和
                 this.totalPrice = temArr.reduce((accumulator, currentValue) => accumulator + currentValue.totalPrice, 0)
             },
+//            选择全部
             selectAll() {
                 let temArr = [];
 
@@ -144,7 +159,9 @@
                         })
                     });
                 }
+//                Set转Array
                 temArr = Array.from(this.selectedList);
+//                价格求和
                 this.totalPrice = temArr.reduce((accumulator, currentValue) => accumulator + currentValue.totalPrice, 0);
                 this.isSelectAll = !this.isSelectAll;
             }
