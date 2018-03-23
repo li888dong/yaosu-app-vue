@@ -178,4 +178,9 @@
         color: #05a96d;
         border-bottom: 1px solid #05a96d;
     }
+    .rotate_90{
+        display: inline-block;
+        vertical-align: middle;
+        transform: rotate(90deg);
+    }
 </style>

@@ -9,9 +9,18 @@
             <p>{{uname}}</p>
         </div>
         <div class="item-list">
-            <div class="cart" @click="$router.push('shopping_cart')"><span class="list-icon gouwuche"><i class="icon iconfont icon-gouwuche"></i> </span>购物车 <i class="icon iconfont icon-more"></i></div>
-            <div class="cart" @click="$router.push('order')"><span class="list-icon dingdan"><i class="icon iconfont icon-shenhe"></i> </span>我的订单 <i class="icon iconfont icon-more"></i></div>
-            <div class="cart" @click="$router.push('offer')"><span class="list-icon baojia"><i class="icon iconfont icon-baojiadan"></i> </span>我的报价 <i class="icon iconfont icon-more"></i></div>
+            <div class="cart" @click="$router.push('own_goods')">
+                <span class="list-icon xin"><i class="icon iconfont icon-xin"></i> </span><p>我的产品 </p>
+            </div>
+            <div class="cart" @click="$router.push('shopping_cart')">
+                <span class="list-icon gouwuche"><i class="icon iconfont icon-gouwuche"></i> </span><p>购物车 </p>
+            </div>
+            <div class="cart" @click="$router.push('order')">
+                <span class="list-icon dingdan"><i class="icon iconfont icon-shenhe"></i> </span><p>我的订单</p>
+            </div>
+            <div class="cart" @click="$router.push('offer')">
+                <span class="list-icon baojia"><i class="icon iconfont icon-baojiadan"></i> </span><p>我的报价</p>
+            </div>
         </div>
         <div>
             <button class="logout" @click="logout">退出登陆</button>

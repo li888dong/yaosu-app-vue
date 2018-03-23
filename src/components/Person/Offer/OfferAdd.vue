@@ -27,11 +27,7 @@
         border-left: 1px solid #eee;
         padding-left: 10px;
     }
-    .rotate_90{
-        display: inline-block;
-        vertical-align: middle;
-        transform: rotate(90deg);
-    }
+
     .unit-item{
         height: 40px;
     }

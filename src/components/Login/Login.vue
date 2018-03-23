@@ -220,14 +220,19 @@
                     password: this.password
                 })
                     .then(res => {
+                        console.log(res)
+                        if(res.data.status===200){
+
 //                        this.uid = res.data.data.mall_cus.userid;
 //                        this.nic = res.data.data.mall_cus.nic;
-                        this.uid = res.data.data.tbCus.userid;
-                        this.nic = res.data.data.tbCus.nic;
-                        localStorage.setItem('uid', this.uid);
-                        localStorage.setItem('nic', this.nic);
-                        this.$router.push('person');
-                        console.log(res)
+                            this.uid = res.data.data.tbCus.userid;
+                            this.nic = res.data.data.tbCus.nic;
+                            localStorage.setItem('uid', this.uid);
+                            localStorage.setItem('nic', this.nic);
+                            this.$router.push('person');
+                        }else {
+                            this.$message.error({message:res.data.msg});
+                        }
                     })
                     .catch(err => {
                         this.$message.error({message:'网络错误'});
@@ -247,14 +252,19 @@
                     smsCode: this.smsCode
                 })
                     .then(res => {
-                        console.log(res);
+                        console.log(res)
+                        if(res.data.status===200){
+
 //                        this.uid = res.data.data.mall_cus.userid;
 //                        this.nic = res.data.data.mall_cus.nic;
-                        this.uid = res.data.data.tbCus.userid;
-                        this.nic = res.data.data.tbCus.nic;
-                        localStorage.setItem('uid', this.uid);
-                        localStorage.setItem('nic', this.nic);
-                        this.$router.push('person');
+                            this.uid = res.data.data.tbCus.userid;
+                            this.nic = res.data.data.tbCus.nic;
+                            localStorage.setItem('uid', this.uid);
+                            localStorage.setItem('nic', this.nic);
+                            this.$router.push('person');
+                        }else {
+                            this.$message.error({message:res.data.msg});
+                        }
                     })
                     .catch(err => {
                         this.$message.error({message:'网络错误'});
@@ -271,14 +281,19 @@
                     password: this.password
                 })
                     .then(res => {
-                        console.log(res);
+                        console.log(res)
+                        if(res.data.status===200){
+
 //                        this.uid = res.data.data.mall_cus.userid;
 //                        this.nic = res.data.data.mall_cus.nic;
-                        this.uid = res.data.data.tbCus.userid;
-                        this.nic = res.data.data.tbCus.nic;
-                        localStorage.setItem('uid', this.uid);
-                        localStorage.setItem('nic', this.nic);
-                        this.$router.push('person');
+                            this.uid = res.data.data.tbCus.userid;
+                            this.nic = res.data.data.tbCus.nic;
+                            localStorage.setItem('uid', this.uid);
+                            localStorage.setItem('nic', this.nic);
+                            this.$router.push('person');
+                        }else {
+                            this.$message.error({message:res.data.msg});
+                        }
                     })
                     .catch(err => {
                         this.$message.error({message:'网络错误'});

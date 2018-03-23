@@ -9,6 +9,8 @@ import Order from '../components/Person/Order/Order.vue'
 import Offer from '../components/Person/Offer/Offer.vue'
 import OfferDetail from '../components/Person/Offer/OfferDetail.vue'
 import OfferAdd from '../components/Person/Offer/OfferAdd.vue'
+import OwnGoods from '../components/Person/OwnGoods/OwnGoods.vue'
+import PublishGoods from '../components/Goods/PublishGoods.vue'
 import Search from '../components/Search/Search.vue'
 import SearchHistory from '../components/Search/SearchHistory.vue'
 import SearchResult from '../components/Search/SearchResult.vue'
@@ -103,6 +105,24 @@ export default new Router({
             name: 'offer_add',
             access:'login',
             component: OfferAdd,
+            meta:{
+                title:'药素网'
+            }
+        },
+        {
+            path: '/own_goods',
+            name: 'own_goods',
+            access:'login',
+            component: OwnGoods,
+            meta:{
+                title:'药素网'
+            }
+        },
+        {
+            path: '/publish_goods',
+            name: 'publish_goods',
+            access:'login',
+            component: PublishGoods,
             meta:{
                 title:'药素网'
             }

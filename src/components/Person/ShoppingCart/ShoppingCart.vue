@@ -85,8 +85,9 @@
                 })
                     .then(res => {
                         console.log(res);
-                        if (res.data.statu ===200){
-                            this.cartList = res.data.data
+                        if (res.data.status ===200){
+                            this.cartList = res.data.data;
+                            console.log(res)
                         }else {
                             this.$message.error({message:res.data.msg});
                         }
