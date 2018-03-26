@@ -11,8 +11,7 @@ const APIs = {
     QUERY_API:'/app/goods/queryApi',
     // 商品图片上传接口
     GOODS_PICTURE_ADD:'/app/goods/picture/add',
-    // 商品发布接口
-    GOODS_ADD:'/app/goods/add',
+
     // 发布采购
     PROCUREMENT_PUBLISH:'/app/member/procurementPublish',
     // 要采购
@@ -21,6 +20,10 @@ const APIs = {
     GOODS_LIST:'/app/goods/list',
     // 商品详情
     GOODS_DETAIL:'/app/goods/details',
+    // 商品发布接口
+    GOODS_ADD:'/app/goods/add',
+    // 商品修改接口
+    GOODS_UPDATE:'/app/goods/update',
     // 要项目
     PROJECT_LIST: '/app/project/list',
     // 要项目详情

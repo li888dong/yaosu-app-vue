@@ -13,7 +13,9 @@ const state = {
     PNO2:[],
     TNO1:[],
     TNO2:[],
-    tcm:[]
+    tcm:[],
+    // 商品实体
+    goodsApi_json: {}
 }
 
 const mutations = {
@@ -71,6 +73,9 @@ const mutations = {
     set_tcm(state, res) {
        state.tcm = res
     },
+    set_goodsApi_json(state, res) {
+       state.goodsApi_json = Object.assign({},state.goodsApi_json,res)
+    },
 
 }
 
@@ -126,6 +131,9 @@ const actions = {
     },
     'set_tcm': function ({commit}, res) {
         commit('set_tcm', res)
+    },
+    'set_goodsApi_json': function ({commit}, res) {
+        commit('set_goodsApi_json', res)
     }
 }
 
@@ -174,6 +182,9 @@ const getters = {
     },
     tcm: state => {
         return state.tcm
+    },
+    goodsApi_json: state => {
+        return state.goodsApi_json
     },
 }
 export default {

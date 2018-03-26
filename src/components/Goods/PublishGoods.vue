@@ -67,7 +67,10 @@
         width: 300px;
         height: 60px;
     }
-
+    #preview-container>img{
+        width: 60px;
+        height: 45px;
+    }
     .circle-border {
         border: 1px solid #03A657;
         color: #03A657;
@@ -123,7 +126,8 @@
         <div class="top-bar">
             <i class="icon iconfont icon-fanhui" @click="$router.go(-1)"></i>
             <p>我的商品</p>
-            <span class="right" @click="publishGoods">发布</span>
+            <span class="right" @click="editGoods" v-if="from === 'edit_goods'">保存</span>
+            <span class="right" @click="publishGoods" v-else>发布</span>
         </div>
         <div class="publish-goods-container pannel">
             <p class="form-item"><span class="required">* </span>产品分类：<span class="catorage"
@@ -134,7 +138,9 @@
             <label class="img-selector" for="img">
                 <i class="icon iconfont icon-plus-add"></i>
             </label>
-            <div id="preview-container"></div>
+            <div id="preview-container">
+                <img v-for="img in imgList" :src="'http://image.yaosuce.com'+img.url">
+            </div>
             <p>
             <p class="form-item"><span class="required">* </span>产品中文名称：<input type="text"
                                                                                v-model="goodsApi_json.chanpmc">
@@ -211,8 +217,8 @@
         <el-dialog :visible.sync="dialogTableVisible1" class="dialog2" width="80%" :show-close="false">
             <p>
 
-                <input type="text" placeholder="请输入规格" v-model="guig">
-                <select name="unit1" id="unit1" v-model="unit1">
+                <input type="text" placeholder="请输入规格" v-model="guigsl">
+                <select name="unit1" id="unit1" v-model="danw">
                     <option value="吨">吨</option>
                     <option value="千克">千克</option>
                     <option value="克">克</option>
@@ -221,7 +227,7 @@
                     <option value="毫升">毫升</option>
                     <option value="其他">其他</option>
                 </select>/
-                <select name="unit2" id="unit2" v-model="unit2">
+                <select name="unit2" id="unit2" v-model="jildw">
                     <option value="桶">桶</option>
                     <option value="盒">盒</option>
                     <option value="瓶">瓶</option>
@@ -249,9 +255,9 @@
                 dialogTableVisible: false,
                 dialogTableVisible1: false,
 //                规格 吨/桶
-                guig: '',
-                unit1:'吨',
-                unit2:'桶',
+                guigsl: '',
+                danw:'吨',
+                jildw:'桶',
 //                单价
                 danj: '',
 //                库存数量
@@ -260,6 +266,8 @@
                 tbGoodsSpecifications: [],
 //                上传的图片路径
                 savePath: '',
+//                规格id
+                specificationsids:'',
 //                产品实体
                 goodsApi_json: {
                     categoryname: '原料药',
@@ -297,13 +305,17 @@
                     xingzms: '',
 //                商品描述
                     adduserid: ''
-                }
+                },
+                imgList:[]
 
             }
         },
         computed: {
             adduserid() {
                 return localStorage.getItem('uid')
+            },
+            from(){
+                return this.$route.query.from
             }
         },
         methods: {
@@ -315,7 +327,7 @@
                     tip: "请上传格式为png, gif或者jpg的图片",
                     fileId: "img",
                     containerId: "preview-container",
-                    imgStyle: "width:60px;height:auto;border-radius:0;"
+                    imgStyle: "width:60px;height:45px;border-radius:0;"
                 };
                 let previewer = new ImgPrevirewer(config);
                 previewer.preview();
@@ -339,22 +351,26 @@
                 }
                 //                图片上传ajax结束
             },
-
+//            产品编辑
+            editGoods(){
+                this.$http.post(this.$APIs.GOODS_UPDATE, {
+                    goodsApi_json: JSON.stringify(this.goodsApi_json),
+                    savePath: this.savePath,
+                    specificationsids:this.specificationsids
+                })
+                    .then(res => {
+                        console.log(res);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+            },
 //            产品发布
             publishGoods() {
                 this.goodsApi_json.adduserid = this.adduserid;
-                let tem = [];
-                this.tbGoodsSpecifications.map(i=>{
-                    tem.push({
-                        danj:i.danj,
-                        kucsl:i.kucsl,
-                        guig:i.guig
-                    })
-                });
-                this.goodsApi_json.tbGoodsSpecifications = tem;
-//                this.goodsApi_json.tbGoodsSpecifications.danj = this.tbGoodsSpecifications.danj;
-//                this.goodsApi_json.tbGoodsSpecifications.kucsl = this.tbGoodsSpecifications.kucsl;
-//                this.goodsApi_json.tbGoodsSpecifications.guig = this.tbGoodsSpecifications.guig;
+//                this.goodsApi_json.adduserid = 'a6631c56-00ff-4be5-b18a-2122cc22e702';
+
+                this.goodsApi_json.tbGoodsSpecifications = this.tbGoodsSpecifications;
                 this.goodsApi_json.categoryname = this.goodsApi_json.categoryname.split('-')[0];
                 this.$http.post(this.$APIs.GOODS_ADD, {
                     goodsApi_json: JSON.stringify(this.goodsApi_json),
@@ -362,11 +378,9 @@
                 })
                     .then(res => {
                         console.log(res);
-                        tem.length = 0;
                     })
                     .catch(err => {
                         console.log(err);
-                        tem.length = 0;
                     })
             },
 //选择产品类别
@@ -379,14 +393,32 @@
                 this.tbGoodsSpecifications.push({
                     danj:this.danj,
                     kucsl:this.kucsl,
-                    guig:this.guig+this.unit1+'/'+this.unit2,
-                    unit1:this.unit1,
-                    unit2:this.unit2
+                    guig:this.guigsl+this.danw+'/'+this.jildw,
+                    guigsl:this.guigsl,
+                    danw:this.danw,
+                    jildw:this.jildw
                 })
             },
 //            删除一天所填规格
             deleteTbGoodsSpecifications(index){
                 this.tbGoodsSpecifications.splice(index,1)
+            },
+//            当页面为编辑时展现的数据
+            mergeData(){
+                this.goodsApi_json = Object.assign({},this.goodsApi_json,this.$store.getters.goodsApi_json)
+            }
+        },
+        mounted(){
+            this.imgList = this.$route.query.imgList;
+            this.imgList.map(i=>{
+                this.savePath+=i.url+','
+            });
+//            this.savePath = this.$route.query.imgList.join(',');
+            console.dir(this.savePath);
+//            console.dir(this.$route.query.imgList)
+            if (this.from === 'edit_goods'){
+                this.mergeData();
+                this.tbGoodsSpecifications = this.goodsApi_json.tbGoodsSpecifications
             }
         }
     }

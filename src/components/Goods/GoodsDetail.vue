@@ -215,7 +215,7 @@
             <!--商品名称、单价、公司-->
             <div class="goods-price pannel">
                 <h4>{{goodsData.chanpmc}}</h4>
-                <p style="color: #f00">￥{{specification.current.danj}}</p>
+                <p style="color: #f00">￥{{specification.current ? specification.current.danj : ''}}</p>
                 <p>{{goodsData.pinp}}</p>
             </div>
             <!--商品名称、单价、公司结束-->
@@ -257,9 +257,16 @@
         <!--底部按钮-->
         <div class="footer">
             <div class="btn-group">
-                <button style="background-color: #03A657;" v-if="!selectorShow">联系卖家</button><!--
-                --><button style="background-color: darkorange;" v-if="!selectorShow" @click="addCart">加入购物车</button><!--
-                --><button class="confirm-btn" v-if="selectorShow" @click="confirmSelect">确认</button>
+                <button v-if="from === 'own_goods'" style="background-color: #03A657;width: 100%"
+                        @click="$router.push({path:'publish_goods',query:{from:'edit_goods',imgList:goodsData.pictures}})">编辑
+                </button>
+                <button style="background-color: #03A657;" v-if="!selectorShow&&from !== 'own_goods'">联系卖家</button><!--
+                -->
+                <button style="background-color: darkorange;" v-if="!selectorShow&&from !== 'own_goods'"
+                        @click="addCart">加入购物车
+                </button><!--
+                -->
+                <button class="confirm-btn" v-if="selectorShow&&from !== 'own_goods'" @click="confirmSelect">确认</button>
             </div>
         </div>
         <!--底部按钮结束-->
@@ -269,9 +276,12 @@
                 <div class="selected">
                     <div class="logo"></div>
                     <div class="selected-info">
-                        <p style="color: #df5000;font-size: 16px;">单价：<span>{{specification.current.danj}}</span></p>
-                        <p>库存：<span>{{specification.current.kucsl}}</span>{{specification.current.kucdw}}</p>
-                        <p>已选：<span>{{specification.current.guig}}</span></p>
+                        <p style="color: #df5000;font-size: 16px;">
+                            单价：<span>{{specification.current ? specification.current.danj : ''}}</span></p>
+                        <p>
+                            库存：<span>{{specification.current ? specification.current.kucsl : ''}}</span>{{specification.current ? specification.current.kucdw : ''}}
+                        </p>
+                        <p>已选：<span>{{specification.current ? specification.current.guig : ''}}</span></p>
                     </div>
                     <div class="close-btn"><i class="icon iconfont icon-guanbi" @click="selectorShow = false"></i></div>
                 </div>
@@ -340,25 +350,15 @@
                 } else {
                     return ''
                 }
+            },
+            from() {
+                return this.$route.query.from
             }
         },
         mounted() {
-//            获取商品详情
-            this.$http.get(this.$APIs.GOODS_DETAIL + '?goodsid=' + this.$route.query.goodsId)
-                .then(res => {
-                    if (res.data.status === 200) {
-                        console.log('***', res.data.data.GoodsApi);
-                        this.goodsData = res.data.data.GoodsApi;
-                        this.specification.list = res.data.data.GoodsApi.tbGoodsSpecifications;
-                        this.specification.current = this.specification.list[0];
-                        console.log(this.specification.list)
-                    } else {
-                        this.$message.error({message:res.data.data.msg});
-                    }
-                })
-                .catch(err => {
-                    this.$message.error({message:'网络错误'});
-                });
+//            请求数据
+            this.fetchData();
+//            页面滚动在顶部
             let _this = this;
             document.documentElement.scrollTop = 0;
             window.onscroll = function () {
@@ -367,6 +367,24 @@
 
         },
         methods: {
+//            获取商品详情
+            fetchData() {
+                this.$http.get(this.$APIs.GOODS_DETAIL + '?goodsid=' + this.$route.query.goodsId)
+                    .then(res => {
+                        if (res.data.status === 200) {
+                            console.log('***', res.data.data.GoodsApi);
+                            this.goodsData = res.data.data.GoodsApi;
+                            this.specification.list = res.data.data.GoodsApi.tbGoodsSpecifications;
+                            this.specification.current = this.specification.list[0];
+                            this.$store.commit('set_goodsApi_json',this.goodsData)
+                        } else {
+                            this.$message.error({message: res.data.data.msg});
+                        }
+                    })
+                    .catch(err => {
+                        this.$message.error({message: '网络错误'});
+                    });
+            },
 //            选择规格
             changeSpecification(index) {
                 this.specification.index = index;
@@ -388,19 +406,19 @@
                 this.selectorShow = false
             },
 //            添加至购物车
-            addCart(){
-                this.$http.post(this.$APIs.CART_ADD,{
-                    goodsNum:this.amount,
-                    goodsid:this.goodsData.goodsid,
-                    userid:localStorage.getItem('uid'),
-                    specificationsid:this.specification.current.specificationsid
+            addCart() {
+                this.$http.post(this.$APIs.CART_ADD, {
+                    goodsNum: this.amount,
+                    goodsid: this.goodsData.goodsid,
+                    userid: localStorage.getItem('uid'),
+                    specificationsid: this.specification.current.specificationsid
                 })
-                    .then(res=>{
+                    .then(res => {
                         console.log(res);
-                        this.$message.error({message:res.data.msg});
+                        this.$message.error({message: res.data.msg});
                     })
-                    .catch(err=>{
-                        this.$message.error({message:err.data.msg});
+                    .catch(err => {
+                        this.$message.error({message: err.data.msg});
                     })
             }
         }
