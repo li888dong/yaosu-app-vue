@@ -10,7 +10,7 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 // 滚动刷新
 import VueDataLoading from 'vue-data-loading'
 // 日期选择
-import { DatePicker,Dialog,Radio,RadioGroup,Message } from 'element-ui';
+import { DatePicker,Dialog,Radio,RadioGroup,Message,Select } from 'element-ui';
 // require styles
 import 'swiper/dist/css/swiper.css'
 import './assets/iconfont/iconfont.css'
@@ -31,6 +31,16 @@ const instance = axios.create({
     // baseURL: "https://yxrhome.com",
     timeout: 15000
 });
+// 添加请求拦截器
+instance.interceptors.request.use(function (config) {
+    // 在发送请求之前做些什么
+    console.log('请求发送之前')
+    return config;
+}, function (error) {
+    // 对请求错误做些什么
+    return Promise.reject(error);
+});
+
 Vue.APIs = Vue.prototype.$APIs = APIs;
 Vue.http = Vue.prototype.$http = instance;
 Vue.use(VueAwesomeSwiper, /* { default global options } */);
@@ -39,6 +49,7 @@ Vue.use(DatePicker);
 Vue.use(Dialog);
 Vue.use(Radio);
 Vue.use(RadioGroup);
+Vue.use(Select);
 Vue.prototype.$message = Message;
 Vue.config.productionTip = false
 

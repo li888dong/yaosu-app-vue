@@ -29,6 +29,18 @@
     input[type="search"]::-webkit-search-cancel-button{
         display: none;
     }
+    input,
+    select,
+    option{
+        border: none;
+        outline: none;
+    }
+    textarea{
+        outline: none;
+        border: 1px solid #eee;
+        border-radius: 4px;
+        vertical-align: top;
+    }
     #app>div{
         margin-top: 52px;
     }
