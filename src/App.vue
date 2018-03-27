@@ -51,6 +51,7 @@
         background-color: #fff;
         margin-top: 5px;
         overflow: hidden;
+        position: relative;
     }
     .footer{
         position: fixed;

@@ -1,10 +1,58 @@
 <style scoped>
-    .noaddress-container{
+    .top-bar{
+        border-bottom: 5px solid #eeeeee;
+    }
+    .noaddress-container,
+    .address-container
+    {
         padding: 10px;
         height: 50px;
         line-height: 50px;
         text-align: center;
         font-size: 14px;
+    }
+    .address-container>span{
+        position: absolute;
+    }
+    .address-container>.icon-dingwei{
+        position: absolute;
+        left: 10px;
+        top: 10px;
+    }
+    .address-container>.shouhr{
+        color: #000;
+        left: 60px;
+        top: -10px;
+    }
+    .address-container>.phone{
+        color: #000;
+        left: 160px;
+        top: -10px;
+    }
+    .address-container>.dizhi{
+        left: 60px;
+        top: 10px;
+        font-size: 12px;
+    }
+    .address-container>.isMor{
+        right: 40px;
+        top: 5px;
+        font-size: 12px;
+        border: 1px solid #03A657;
+        border-radius: 4px;
+        height: 20px;
+        width: 36px;
+        line-height: 20px;
+        color: #03A657;
+    }
+    .address-container>.more{
+        position: absolute;
+        right: 10px;
+    }
+    .address-container>.type{
+        color: #03A657;
+        right: 60px;
+        bottom: -10px;
     }
     .cartList{
         margin-top: 5px;
@@ -105,15 +153,27 @@
             <p>确认订单</p>
         </div>
         <!--收货地址-->
-        <div v-if="receiveAddress.addressid" class="">
-            收货地址
+        <div v-if="receiveAddress.addressid" class="address-container pannel">
+            <i class="icon iconfont icon-dingwei"></i>
+            <span class="shouhr">{{receiveAddress.shouhr}}</span>
+            <span class="phone">{{receiveAddress.phone}}</span>
+            <span class="dizhi">{{receiveAddress.dizhi}}</span>
+            <span class="isMor">{{receiveAddress.isMor==0?'':'默认'}}</span>
+            <span class="type">收货地址</span>
+            <i class="icon iconfont icon-more more"></i>
         </div>
         <div v-else>
             <p @click="gotoReceiveAddress" class="noaddress-container pannel">还没有任何收货地址，立即添加 <i class="icon iconfont icon-more"></i></p>
         </div>
         <!--发票地址-->
-        <div v-if="invoiceAddress.addressid" class="">
-            发票地址
+        <div v-if="invoiceAddress.addressid" class="address-container pannel">
+            <i class="icon iconfont icon-dingwei"></i>
+            <span class="shouhr">{{invoiceAddress.shouhr}}</span>
+            <span class="phone">{{invoiceAddress.phone}}</span>
+            <span class="dizhi">{{invoiceAddress.dizhi}}</span>
+            <span class="isMor">{{invoiceAddress.isMor==0?'':'默认'}}</span>
+            <span class="type">收票地址</span>
+            <i class="icon iconfont icon-more more"></i>
         </div>
         <div v-else>
             <p @click="gotoInvoiceAddress" class="noaddress-container pannel">还没有任何发票邮寄地址，立即添加 <i class="icon iconfont icon-more"></i></p>
