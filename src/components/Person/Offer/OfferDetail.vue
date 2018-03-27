@@ -36,18 +36,7 @@
     .status3{
         color: #f97433!important;
     }
-    .footer{
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-    }
-    .footer button{
-        width: 100%;
-        height: 40px;
-        line-height: 40px;
-        text-align: center;
-        color: white;
-    }
+
 </style>
 <template>
     <div class="offer-detail-container">

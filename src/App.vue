@@ -52,6 +52,18 @@
         margin-top: 5px;
         overflow: hidden;
     }
+    .footer{
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+    .footer button{
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        color: white;
+    }
     .text-ellipsis{
         white-space: nowrap;
         overflow: hidden;

@@ -15,11 +15,7 @@
         font-size: 16px;
         margin: 10px 0;
     }
-    .footer{
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-    }
+
     .footer button{
         width: 50%;
         height: 40px;

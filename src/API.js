@@ -16,6 +16,8 @@ const APIs = {
     PROCUREMENT_PUBLISH:'/app/member/procurementPublish',
     // 要采购
     PROCUREMENT_LIST:'/app/member/procurementList',
+
+
     // 要现货
     GOODS_LIST:'/app/goods/list',
     // 商品详情
@@ -24,26 +26,38 @@ const APIs = {
     GOODS_ADD:'/app/goods/add',
     // 商品修改接口
     GOODS_UPDATE:'/app/goods/update',
+
+
     // 要项目
     PROJECT_LIST: '/app/project/list',
     // 要项目详情
     PROJECT_DETAIL: '/app/project/details',
+
+
     // 要外贸
     FOREIGNTRADE_LIST: '/app/foreigntrade/list',
     // 外贸详情
     FOREIGNTRADE_DETAIL:'/app/foreigntrade/details',
+
+
     // 要技术
     TECHNOLOGY_LIST: '/app/technology/list',
     // 技术详情
     TECHNOLOGY_DETAIL:'/app/technology/details',
+
+
     // 要批文
     APPROVAL_NUMBER_LIST: '/app/approvalNumber/list',
     // 要批文详情
     APPROVAL_NUMBER_DETAIL: '/app/approvalNumber/details',
+
+
     // 要检测
     DETECTION_LIST: '/app/detection/listProduct',
     // 要检测详情
     DETECTION_DETAIL: '/app/detection/detailsOrder',
+
+
     // 注册
     REGISTER:'/app/register',
     // 密码登陆
@@ -54,6 +68,8 @@ const APIs = {
     MSG_CODE:'/app/code',
     // 注册并登陆
     REGISTER_AND_LOGIN:'/app/registerAndLogin',
+
+
     // 购物车新增
     CART_ADD:'/app/cart/add',
     // 购物车列表
@@ -62,6 +78,16 @@ const APIs = {
     CART_DELETE:'/app/cart/delete',
     // 修改购物车数量
     CART_UPDATE:'/app/cart/update/goodsNum',
+
+
+    // 生成订单
+    GO_BOOKING:'/app/order/go-booking',
+
+
+    // 新增地址
+    CREATE_ADDRESS:'/member/createAddress',
+
+
     // 报价列表
     OFFER_LIST:'/app/member/offerList',
     // 报价详情

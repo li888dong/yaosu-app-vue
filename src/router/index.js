@@ -6,6 +6,8 @@ import Person from '../components/Person/Person.vue'
 import ShoppingCart from '../components/Person/ShoppingCart/ShoppingCart.vue'
 import Shop from '../components/Shop/Shop.vue'
 import Order from '../components/Person/Order/Order.vue'
+import ReceiveAddress from '../components/Person/Order/ReceiveAddress.vue'
+import InvoiceAddress from '../components/Person/Order/InvoiceAddress.vue'
 import Offer from '../components/Person/Offer/Offer.vue'
 import OfferDetail from '../components/Person/Offer/OfferDetail.vue'
 import OfferAdd from '../components/Person/Offer/OfferAdd.vue'
@@ -80,6 +82,24 @@ export default new Router({
             component: Order,
             meta:{
                 title:'订单'
+            }
+        },
+        {
+            path: '/receiveAddress',
+            name: 'receiveAddress',
+            access:'login',
+            component: ReceiveAddress,
+            meta:{
+                title:'地址'
+            }
+        },
+        {
+            path: '/invoiceAddress',
+            name: 'invoiceAddress',
+            access:'login',
+            component: InvoiceAddress,
+            meta:{
+                title:'地址'
             }
         },
         {

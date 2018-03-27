@@ -1,5 +1,9 @@
 <style scoped>
     @import "ShoppingCart.css";
+    .dialog-footer button{
+        background-color: #fff;
+        color: #03A657;
+    }
 </style>
 <template>
     <div class="cart-container">
@@ -51,8 +55,17 @@
             <span class="select-all" @click="selectAll"><i class="icon iconfont icon-gouxuan"
                                                            :class="{'icon-selected':isSelectAll}"></i>全选</span>
             <span class="goods-price">合计￥{{totalPrice}}<span></span></span>
-            <span class="go-pay">去支付</span>
+            <span class="go-pay" @click="confirmDialog=true">去支付</span>
         </div>
+
+        <!--确认生成订单的弹窗-->
+        <el-dialog title="确认订单" :visible.sync="confirmDialog" width="80%">
+            合计：{{selectedList.size}}件商品，共{{totalPrice}}元
+            <span slot="footer" class="dialog-footer">
+                <button @click="confirmDialog = false" class="cancel-btn">取 消</button><button
+                @click="gotoOrder" class="confirm-btn">确 定</button>
+            </span>
+        </el-dialog>
     </div>
 </template>
 <script>
@@ -68,10 +81,14 @@
                 goodsAmount: '',
 //                已选择的商品
                 selectedList: new Set(),
+//                已选择的商品id
+                ids:'',
 //                总价
                 totalPrice: 0,
 //                是否全选
-                isSelectAll: false
+                isSelectAll: false,
+//                显示确认框
+                confirmDialog:false
             }
         },
         mounted() {
@@ -165,6 +182,16 @@
 //                价格求和
                 this.totalPrice = temArr.reduce((accumulator, currentValue) => accumulator + currentValue.totalPrice, 0);
                 this.isSelectAll = !this.isSelectAll;
+            },
+            gotoOrder(){
+                let temArr;
+//                Set转Array
+                temArr = Array.from(this.selectedList);
+                temArr.map(i=>{
+                    this.ids+=i.id+','
+                });
+
+                this.$router.push({path:'order',query:{ids:this.ids}})
             }
 
         }

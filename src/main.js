@@ -11,6 +11,7 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 import VueDataLoading from 'vue-data-loading'
 // 日期选择
 import { DatePicker,Dialog,Radio,RadioGroup,Message,Select } from 'element-ui';
+import vuePicker from './util/vue-picker'
 // require styles
 import 'swiper/dist/css/swiper.css'
 import './assets/iconfont/iconfont.css'
@@ -50,6 +51,7 @@ Vue.use(Dialog);
 Vue.use(Radio);
 Vue.use(RadioGroup);
 Vue.use(Select);
+Vue.use(vuePicker);
 Vue.prototype.$message = Message;
 Vue.config.productionTip = false
 
