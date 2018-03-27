@@ -1,4 +1,4 @@
-<style>
+<style scoped>
     @import "../../Procurement/Procurement.css";
     .status0{
         background-color: #666666!important;

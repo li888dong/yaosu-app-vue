@@ -409,16 +409,20 @@
             }
         },
         mounted(){
-            this.imgList = this.$route.query.imgList;
-            this.imgList.map(i=>{
-                this.savePath+=i.url+','
-            });
-//            this.savePath = this.$route.query.imgList.join(',');
-            console.dir(this.savePath);
-//            console.dir(this.$route.query.imgList)
+
             if (this.from === 'edit_goods'){
+                this.imgList = this.$route.query.imgList;
+                this.imgList.map(i=>{
+                    this.savePath+=i.url+','
+                });
+
                 this.mergeData();
-                this.tbGoodsSpecifications = this.goodsApi_json.tbGoodsSpecifications
+                this.tbGoodsSpecifications = this.goodsApi_json.tbGoodsSpecifications;
+                console.log('+++',this.tbGoodsSpecifications)
+                this.tbGoodsSpecifications.map(i=>{
+                    this.specificationsids+=i.specificationsid+','
+                })
+//
             }
         }
     }

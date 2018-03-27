@@ -250,7 +250,7 @@
             <p>有关物质：<span>{{goodsData.yougwz}}</span></p>
             <p>性状描述：<span>{{goodsData.xingzms}}</span></p>
             <p>备货期：<span>{{   }}</span></p>
-            <p>更新时间：<span>{{goodsData.updatetime}}</span></p>
+            <p>更新时间：<span>{{new Date(goodsData.updatetime).Format('yyyy-MM-dd')}}</span></p>
         </div>
         <!--商品详细信息结束-->
         <div class="divide"> ———— <i class="icon iconfont icon-zan"> </i> 图文详情 ———— </div>
