@@ -101,7 +101,7 @@
         </div>
         <div class="footer">
             <span class="total-price">合计：<span class="fc-red">{{totalPrice}}</span></span>
-            <button class="confirm-btn">提交订单</button>
+            <button class="confirm-btn" @click="createOrder">提交订单</button>
         </div>
     </div>
 </template>
@@ -119,9 +119,11 @@
 //                购物车信息
                 carts: [],
 //                发票地址信息
-                invoiceAddress: [],
+                invoiceAddress: {},
 //                收货地址信息
-                receiveAddress: []
+                receiveAddress: {},
+//                发票信息
+                vatSpecialInvoice:{}
             }
         },
         mounted() {
@@ -147,6 +149,7 @@
                         this.carts = res.data.data.carts;
                         this.invoiceAddress = res.data.data.invoiceAddress;
                         this.receiveAddress = res.data.data.receiveAddress;
+                        this.vatSpecialInvoice = res.data.data.vatSpecialInvoice;
                     })
                     .catch(err => {
                         this.$message.error('网络错误')
@@ -160,6 +163,32 @@
                     .then(res=>{
                         console.log('发票信息',res);
                         this.invoiceData = res.data.data
+                    })
+                    .catch(err=>{
+                        this.$message.error('网络错误')
+                    })
+            },
+            createOrder(){
+                this.$http.post(this.$APIs.CREATE_ORDER,{
+                    userid:localStorage.getItem('uid'),
+                    ids:this.ids,
+                    consignee:this.receiveAddress.shouhr,
+                    consigneephone:this.receiveAddress.phone,
+                    deliveryaddress:this.receiveAddress.dizhi,
+                    invoicetype:this.invoicetype,
+                    companyname:this.vatSpecialInvoice.companyname,
+                    tfn:this.vatSpecialInvoice.tfn,
+                    address:this.vatSpecialInvoice.address,
+                    tel:this.vatSpecialInvoice.tel,
+                    bank:this.vatSpecialInvoice.bank,
+                    cardno:this.vatSpecialInvoice.cardno,
+                    invoicereman:this.invoiceAddress.shouhr,
+                    invoicephone:this.invoiceAddress.phone,
+                    invoiceaddress:this.invoiceAddress.dizhi,
+                    deliveryMethod:0,
+                })
+                    .then(res=>{
+                        console.log(res)
                     })
                     .catch(err=>{
                         this.$message.error('网络错误')

@@ -81,6 +81,7 @@ const APIs = {
 
 
     // 生成订单
+    CREATE_ORDER:'/app/order/createOrder',
     GO_BOOKING:'/app/order/go-booking',
 
 
