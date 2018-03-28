@@ -32,32 +32,32 @@
             <p class="form-item">
                 <span class="title">地址类型：</span>
                 <label>
-                    <input type="radio" name="type" value="1" v-model="addressType">收货地址
+                    <input type="radio" name="type" value="0" v-model="addressData.addressType" disabled>收货地址
                 </label>
                 <label>
-                    <input type="radio" name="type" value="2" v-model="addressType" disabled>收票地址
+                    <input type="radio" name="type" value="1" v-model="addressData.addressType">收票地址
                 </label>
             </p>
             <p class="form-item">
                 <span class="title">收货人：</span>
-                <input type="text" v-model="consignee">
+                <input type="text" v-model="addressData.shouhr">
             </p>
             <p class="form-item">
                 <span class="title">收货人电话：</span>
-                <input type="text" v-model="consigneephone">
+                <input type="text" v-model="addressData.phone">
             </p>
             <p class="form-item" @click='citypicker'>
                 <span class="title">所在地区：</span>
-                <span>{{area}}</span>
+                <span>{{addressData.province+'-'+addressData.city+'-'+addressData.district}}</span>
                 <i class="icon iconfont icon-more" style="float: right"></i>
             </p>
             <p class="form-item">
                 <span class="title">详细地址：</span>
-                <input type="text" v-model="detailaddress">
+                <input type="text" v-model="addressData.dizhi">
             </p>
             <p class="form-item mor">
                 <label>
-                    <input type="checkbox" :value="1" v-model="isMor">
+                    <input type="checkbox" :value="0" v-model="addressData.isMor">
                     默认地址
                 </label>
             </p>
@@ -73,60 +73,96 @@
         name:'address',
         data(){
             return{
-//                地址类型
-                addressType:'2',
-//                收货人
-                consignee:'',
-//                收货人联系电话
-                consigneephone:'',
-//                收货地址
-                deliveryaddress:'',
-//                所在区域
-                area:'',
-//                省
-                province:'',
-//                市
-                city:'',
-//                区
-                district:'',
-//                详细地址
-                detailaddress:'',
-//                是否默认地址
-                isMor:0
+                addressData:{
+
+                    //                地址类型
+                    addressType:'1',
+                    //                收货人
+                    shouhr:'',
+                    //                收货人联系电话
+                    phone:'',
+                    //                所在区域
+                    area:'',
+                    //                省
+                    province:'',
+                    //                市
+                    city:'',
+                    //                区
+                    district:'',
+                    //                详细地址
+                    dizhi:'',
+                    //                是否默认地址
+                    isMor:0
+                }
+
             }
+        },
+        computed:{
+            currentAddressData(){
+                return this.$route.query.addressData||{}
+            }
+        },
+        mounted(){
+            this.addressData = Object.assign({},this.addressData,this.currentAddressData)
+            console.log(this.currentAddressData)
         },
         methods:{
             citypicker(){
                 this.$citypicker({
-                    value:this.city,
-                    change:(e)=>{
 
-                    }
                 }).then((e)=>{
-                    this.province = e[0];
-                    this.city = e[1]||'';
-                    this.district = e[2]||'';
-                    this.area=e.join('-');
+                    this.addressData.province = e[0];
+                    this.addressData.city = e[1]||'';
+                    this.addressData.district = e[2]||'';
+                    this.addressData.area=e.join('-');
                     console.log('11',e)
 
                 }).catch(()=>{
 
                 })
             },
+            updateAddress(){
+                this.$http.post(this.$APIs.CREATE_ADDRESS,{
+                    updateuserid:localStorage.getItem('uid'),
+                    type:1,
+                    addressid:this.addressData.addressid,
+                    shouhr:this.addressData.shouhr,
+                    phone:this.addressData.phone,
+                    quh:'',
+                    tel:this.addressData.phone,
+                    youb:'',
+                    dizhi:this.addressData.dizhi,
+                    isMor:this.addressData.isMor,
+                    province:this.addressData.province,
+                    city:this.addressData.city,
+                    district:this.addressData.district
+                })
+                    .then(res=>{
+                        console.log('更新地址',res);
+                        this.$router.go(-1)
+                    })
+                    .catch(err=>{
+                        this.$message.error('网络错误')
+                    })
+            },
             submitAddress(){
+                if (this.addressData.addressid){
+                    this.updateAddress();
+                    return
+                }
                 this.$http.post(this.$APIs.CREATE_ADDRESS,{
                     adduserid:localStorage.getItem('uid'),
                     type:1,
-                    shouhr:this.consignee,
-                    phone:this.consigneephone,
+                    shouhr:this.addressData.shouhr,
+                    phone:this.addressData.phone,
                     quh:'',
-                    tel:this.consigneephone,
-                    you:'',
-                    dizhi:this.area+this.detailaddress,
-                    isMor:this.isMor,
-                    province:this.province,
-                    city:this.city,
-                    district:this.district
+                    tel:this.addressData.phone,
+                    youb:'',
+                    dizhi:this.addressData.dizhi,
+                    isMor:this.addressData.isMor,
+                    province:this.addressData.province,
+                    city:this.addressData.city,
+                    district:this.addressData.district
                 })
                     .then(res=>{
                         console.log(res);

@@ -259,14 +259,11 @@
             <div class="btn-group">
                 <button v-if="from === 'own_goods'" style="background-color: #03A657;width: 100%"
                         @click="$router.push({path:'publish_goods',query:{from:'edit_goods',imgList:goodsData.pictures}})">编辑
-                </button>
-                <button style="background-color: #03A657;" v-if="!selectorShow&&from !== 'own_goods'">联系卖家</button><!--
-                -->
-                <button style="background-color: darkorange;" v-if="!selectorShow&&from !== 'own_goods'"
+                </button><button style="background-color: #03A657;" v-if="!selectorShow&&from !== 'own_goods'">联系卖家</button><!--
+                --><button style="background-color: darkorange;" v-if="!selectorShow&&from !== 'own_goods'"
                         @click="addCart">加入购物车
                 </button><!--
-                -->
-                <button class="confirm-btn" v-if="selectorShow&&from !== 'own_goods'" @click="confirmSelect">确认</button>
+                --><button class="confirm-btn" v-if="selectorShow&&from !== 'own_goods'" @click="confirmSelect">确认</button>
             </div>
         </div>
         <!--底部按钮结束-->

@@ -86,6 +86,8 @@ const APIs = {
 
     // 新增地址
     CREATE_ADDRESS:'/member/createAddress',
+    // 地址列表
+    ADDRESS_LIST:'/member/address',
 
 
     // 报价列表

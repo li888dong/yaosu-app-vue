@@ -125,7 +125,7 @@
 }
 .go-pay{
     position: absolute;
-    right: 0;
+    right: 20px;
     bottom: 0;
     top: 0;
     width: 100px;

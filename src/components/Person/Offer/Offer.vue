@@ -39,7 +39,7 @@
                     <p><span class="title">联系方式：</span><span class="content">{{item.contactphone}}</span></p>
                     <p><span class="title">信息有效期至：</span><span class="content">{{item.messagevalidity}}</span>
                     </p>
-                    <p class="footer"><span>编号：{{item.offerno}}</span><span v-if="item.isFocus==='1'" class="focus">已被关注</span></p>
+                    <p class="no-code"><span>编号：{{item.offerno}}</span><span v-if="item.isFocus==='1'" class="focus">已被关注</span></p>
                 </div>
                 <div slot="infinite-scroll-loading">加载中...</div>
             </VueDataLoading>

@@ -1,0 +1,176 @@
+.top-bar {
+    border-bottom: 5px solid #eeeeee;
+}
+
+.noaddress-container,
+.address-container {
+    padding: 10px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.address-container > span {
+    position: absolute;
+}
+
+.address-container > .icon-dingwei {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+
+.address-container > .shouhr {
+    color: #000;
+    left: 60px;
+    top: -10px;
+}
+
+.address-container > .phone {
+    color: #000;
+    left: 160px;
+    top: -10px;
+}
+
+.address-container > .dizhi {
+    left: 60px;
+    top: 10px;
+    font-size: 12px;
+}
+
+.address-container > .isMor {
+    right: 40px;
+    top: 5px;
+    font-size: 12px;
+    border: 1px solid #03A657;
+    border-radius: 4px;
+    height: 20px;
+    width: 36px;
+    line-height: 20px;
+    color: #03A657;
+}
+
+.address-container > .more {
+    position: absolute;
+    right: 10px;
+}
+
+.address-container > .type {
+    color: #03A657;
+    right: 60px;
+    bottom: -10px;
+}
+
+.border {
+    position: relative;
+    top: 2px;
+    border-bottom: none;
+    border-top: 5px solid transparent;
+    background: linear-gradient(white, white) padding-box, repeating-linear-gradient(-45deg, red 0, red 12.5%, transparent 0, transparent 25%, #58a 0, #58a 37.5%, transparent 0, transparent 50%) 0 / 5em 5em;
+}
+
+.cartList {
+    margin-top: 5px;
+    position: relative;
+}
+
+.goods-company {
+    height: 24px;
+    padding: 10px 0 10px 20px;
+    background-color: #fff;
+}
+
+.goods-info {
+    height: 160px;
+    padding: 5px 10px;
+    margin-top: 1px;
+    background-color: #fff;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+
+}
+
+.goods-img {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    background-size: 100% 120px;
+    background-repeat: no-repeat;
+}
+
+.goods-desription {
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.goods-name {
+    color: #000000;
+}
+
+.goods-specification {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.goods-price {
+    margin-top: 10px;
+    color: #f97433;
+}
+
+.goods-amount {
+    position: absolute;
+    right: 20px;
+    bottom: 60px;
+    color: #000000;
+    font-size: 16px;
+}
+
+.goods-price-container {
+    position: absolute;
+    border-top: 1px solid #eeeeee;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    line-height: 40px;
+    text-align: right;
+    padding-right: 20px;
+    font-size: 14px;
+}
+
+.footer {
+    height: 30px;
+    line-height: 30px;
+    padding: 5px 10px;
+    position: fixed;
+    z-index: 14;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #ccc;
+    background-color: #fff;
+    font-size: 14px;
+}
+
+.footer .confirm-btn {
+    position: absolute;
+    right: 20px;
+    bottom: 0;
+    top: 0;
+    width: 100px;
+    background-color: #03A657;
+    color: #fff;
+    text-align: center;
+    line-height: 40px;
+}
+
+.total-price {
+    position: absolute;
+    right: 150px;
+}
+
+.fc-red {
+    color: #f97433;
+}
