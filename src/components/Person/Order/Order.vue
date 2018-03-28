@@ -58,11 +58,46 @@
                 </div>
             </div>
         </div>
-        <div>
+        <div class="invoice-info pannel" @click="selectorShow = true">
             发票信息
+            <i class="icon iconfont icon-more fr"></i>
         </div>
-        <div>
-            卖家留言
+
+        <!--发票信息选择框-->
+        <div class="invoice-selector" v-if="selectorShow" >
+            <p class="title">发票信息</p>
+            <p class="btn-group">
+                <button :class="{selected:invoiceType===0}" @click="changeInvoiceType(0)">增值税普通发票</button>
+                <button :class="{selected:invoiceType===1}" @click="changeInvoiceType(1)">增值税专用发票</button>
+            </p>
+            <i class="icon iconfont icon-guanbi fr" @click="selectorShow=false"></i>
+            <div class="invoice-data-container" v-if="invoiceType===0">
+                <p v-if="invoiceData.generalInvoice">
+                    <span>公司名称 :</span><span>{{invoiceData.generalInvoice.companyname}}</span><br>
+                    <span>纳税人识别号 :</span><span>{{invoiceData.generalInvoice.tfn}}</span>
+                </p>
+                <p v-else @click="$router.push('invoiceNormal')">暂无增值税普通发票信息，点击添加</p>
+            </div>
+            <div class="invoice-data-container" v-else>
+                <p v-if="invoiceData.taxInvoice">
+                    <span>公司名称 :</span><span>{{invoiceData.taxInvoice.companyname}}</span><br>
+                    <span>纳税人识别号 :</span><span>{{invoiceData.taxInvoice.tfn}}</span><br>
+                    <span>注册地址 :</span><span>{{invoiceData.taxInvoice.address}}</span><br>
+                    <span>注册电话 :</span><span>{{invoiceData.taxInvoice.tel}}</span><br>
+                    <span>开户银行 :</span><span>{{invoiceData.taxInvoice.bank}}</span><br>
+                    <span>银行账号 :</span><span>{{invoiceData.taxInvoice.cardno}}</span>
+                </p>
+                <p v-else @click="$router.push('invoiceSpecial')">暂无增值税专用发票信息，点击添加</p>
+            </div>
+
+        </div>
+        <!--模态框 用来做遮罩-->
+        <div class="model" v-if="selectorShow" @click="selectorShow = false">
+
+        </div>
+        <div class="pannel note">
+            <p>买家留言：</p>
+            <textarea cols="30" rows="10" placeholder="对本次交易的说明（选填）"></textarea>
         </div>
         <div class="footer">
             <span class="total-price">合计：<span class="fc-red">{{totalPrice}}</span></span>
@@ -75,14 +110,25 @@
         name: 'dingdan',
         data() {
             return {
+                selectorShow:false,
+//                0普通发票  1增值税发票
+                invoiceType:0,
+                invoiceData:'',
+//                总价
                 totalPrice: '',
+//                购物车信息
                 carts: [],
+//                发票地址信息
                 invoiceAddress: [],
+//                收货地址信息
                 receiveAddress: []
             }
         },
         mounted() {
-            this.fetchData()
+//            获取订单信息
+            this.fetchData();
+//            获取发票信息
+            this.fetchInvoice()
         },
         computed: {
             ids() {
@@ -106,11 +152,28 @@
                         this.$message.error('网络错误')
                     });
             },
+            fetchInvoice(){
+                this.$http.post(this.$APIs.INVOICE_INFO,{
+                    userid:localStorage.getItem('uid'),
+                    invoiceType:this.invoiceType
+                })
+                    .then(res=>{
+                        console.log('发票信息',res);
+                        this.invoiceData = res.data.data
+                    })
+                    .catch(err=>{
+                        this.$message.error('网络错误')
+                    })
+            },
             gotoReceiveAddress() {
                 this.$router.push('receiveAddress')
             },
             gotoInvoiceAddress() {
                 this.$router.push('invoiceAddress')
+            },
+            changeInvoiceType(type){
+                this.invoiceType = type;
+                this.fetchInvoice()
             }
         }
     }

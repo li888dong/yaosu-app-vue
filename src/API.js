@@ -88,7 +88,10 @@ const APIs = {
     CREATE_ADDRESS:'/member/createAddress',
     // 地址列表
     ADDRESS_LIST:'/member/address',
-
+    // 获取发票信息
+    INVOICE_INFO:'/member/invoiceInfo',
+    // 获取发票信息
+    CREATE_INVOICE:'/member/createInvoiceInfo',
 
     // 报价列表
     OFFER_LIST:'/app/member/offerList',

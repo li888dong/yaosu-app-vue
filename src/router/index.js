@@ -1,32 +1,64 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+// 主页
 import Home from '../components/Home/Home.vue'
+// 登陆注册
 import Login from '../components/Login/Login.vue'
+// 个人中心
 import Person from '../components/Person/Person.vue'
+// 购物车
 import ShoppingCart from '../components/Person/ShoppingCart/ShoppingCart.vue'
+// 店铺
 import Shop from '../components/Shop/Shop.vue'
+// 订单
 import Order from '../components/Person/Order/Order.vue'
-import AddressList from '../components/Person/Order/AddressList.vue'
-import ReceiveAddress from '../components/Person/Order/ReceiveAddress.vue'
-import InvoiceAddress from '../components/Person/Order/InvoiceAddress.vue'
+// 地址列标
+import AddressList from '../components/Person/Address/AddressList.vue'
+// 收货地址
+import ReceiveAddress from '../components/Person/Address/ReceiveAddress.vue'
+// 收票地址
+import InvoiceAddress from '../components/Person/Address/InvoiceAddress.vue'
+// 普通发票
+import InvoiceNormal from '../components/Person/Invoice/InvoiceNormal.vue'
+// 专用发票
+import InvoiceSpecial from '../components/Person/Invoice/InvoiceSpecial.vue'
+// 报价
 import Offer from '../components/Person/Offer/Offer.vue'
+// 报价详情
 import OfferDetail from '../components/Person/Offer/OfferDetail.vue'
+// 添加报价
 import OfferAdd from '../components/Person/Offer/OfferAdd.vue'
+// 我的商品
 import OwnGoods from '../components/Person/OwnGoods/OwnGoods.vue'
+// 发布商品
 import PublishGoods from '../components/Goods/PublishGoods.vue'
+// 搜索
 import Search from '../components/Search/Search.vue'
+// 搜索历史
 import SearchHistory from '../components/Search/SearchHistory.vue'
+// 搜索结果
 import SearchResult from '../components/Search/SearchResult.vue'
+// 搜索中药详情列表
 import SearchZhongyaoDetailList from '../components/Search/SearchZhongyaoDetail.vue'
+// 搜索原料药详情列表
 import SearchYuanliaoDetailList from '../components/Search/SearchYuanliaoDetail.vue'
+// 搜索现货列表
 import SearchXianhuoDetailList from '../components/Search/SearchXianhuoDetailList.vue'
+// 供应商
 import Supplier from '../components/Search/Supplier.vue'
+// 采购
 import Procurement from '../components/Procurement/Procurement.vue'
+// 商品
 import Goods from '../components/Goods/Goods.vue'
+// 商品详情
 import GoodsDetail from '../components/Goods/GoodsDetail.vue'
+// 金融
 import Finance from '../components/Finance/Finance.vue'
+// 检测
 import Check from '../components/Check/Check.vue'
+// 服务列表
 import ServiceList from '../components/Service/ServiceList.vue'
+// 服务详情
 import ServiceDetail from '../components/Service/ServiceDetail.vue'
 
 Vue.use(Router)
@@ -110,6 +142,24 @@ export default new Router({
             component: InvoiceAddress,
             meta:{
                 title:'地址'
+            }
+        },
+        {
+            path: '/invoiceNormal',
+            name: 'invoiceNormal',
+            access:'login',
+            component: InvoiceNormal,
+            meta:{
+                title:'发票'
+            }
+        },
+        {
+            path: '/invoiceSpecial',
+            name: 'invoiceSpecial',
+            access:'login',
+            component: InvoiceSpecial,
+            meta:{
+                title:'发票'
             }
         },
         {

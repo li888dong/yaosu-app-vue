@@ -14,7 +14,7 @@
     body {
         margin: 0;
         padding: 0;
-        background-color: #efedee;
+        background-color: #efefef;
         color: #858585;
     }
 
@@ -43,6 +43,9 @@
     }
     #app>div{
         margin-top: 52px;
+    }
+    .fr{
+        float: right;
     }
     .home{
         margin-top: 0!important;
