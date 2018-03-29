@@ -32,7 +32,7 @@ const instance = axios.create({
         // 对 data 进行任意转换处理
         return qs.stringify(data);
     }],
-    baseURL: "http://localhost:3000",
+    // baseURL: "http://localhost:3000",
     // baseURL: "https://yxrhome.com",
     timeout: 15000
 });
