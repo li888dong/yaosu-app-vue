@@ -122,8 +122,10 @@
                 invoiceAddress: {},
 //                收货地址信息
                 receiveAddress: {},
-//                发票信息
-                vatSpecialInvoice:{}
+//                增值税专用发票信息
+                vatSpecialInvoice:{},
+//                增值税普通发票信息
+                plainInvoice:{}
             }
         },
         mounted() {
@@ -134,7 +136,7 @@
         },
         computed: {
             ids() {
-                return this.$route.query.ids
+                return this.$route.query.ids.replace(/,$/,'')
             }
         },
         methods: {
@@ -150,6 +152,7 @@
                         this.invoiceAddress = res.data.data.invoiceAddress;
                         this.receiveAddress = res.data.data.receiveAddress;
                         this.vatSpecialInvoice = res.data.data.vatSpecialInvoice;
+                        this.plainInvoice = res.data.data.plainInvoice;
                     })
                     .catch(err => {
                         this.$message.error('网络错误')
@@ -169,19 +172,25 @@
                     })
             },
             createOrder(){
+                let invoiceData = null;
+                if (this.invoiceType === 0){
+                    invoiceData = this.plainInvoice
+                }else {
+                    invoiceData = this.vatSpecialInvoice
+                }
                 this.$http.post(this.$APIs.CREATE_ORDER,{
                     userid:localStorage.getItem('uid'),
                     ids:this.ids,
                     consignee:this.receiveAddress.shouhr,
                     consigneephone:this.receiveAddress.phone,
                     deliveryaddress:this.receiveAddress.dizhi,
-                    invoicetype:this.invoicetype,
-                    companyname:this.vatSpecialInvoice.companyname,
-                    tfn:this.vatSpecialInvoice.tfn,
-                    address:this.vatSpecialInvoice.address,
-                    tel:this.vatSpecialInvoice.tel,
-                    bank:this.vatSpecialInvoice.bank,
-                    cardno:this.vatSpecialInvoice.cardno,
+                    invoicetype:this.invoiceType,
+                    companyname:invoiceData.companyname,
+                    tfn:invoiceData.tfn,
+                    address:invoiceData.address,
+                    tel:invoiceData.tel,
+                    bank:invoiceData.bank,
+                    cardno:invoiceData.cardno,
                     invoicereman:this.invoiceAddress.shouhr,
                     invoicephone:this.invoiceAddress.phone,
                     invoiceaddress:this.invoiceAddress.dizhi,

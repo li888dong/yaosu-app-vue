@@ -10,8 +10,10 @@ import Person from '../components/Person/Person.vue'
 import ShoppingCart from '../components/Person/ShoppingCart/ShoppingCart.vue'
 // 店铺
 import Shop from '../components/Shop/Shop.vue'
-// 订单
+// 生成订单
 import Order from '../components/Person/Order/Order.vue'
+// 订单列表
+import OrderList from '../components/Person/Order/OrderList.vue'
 // 地址列标
 import AddressList from '../components/Person/Address/AddressList.vue'
 // 收货地址
@@ -84,126 +86,135 @@ export default new Router({
         {
             path: '/person',
             name: 'person',
-            access:'login',
             component: Person,
             meta:{
+                access:'login',
                 title:'个人中心'
             }
         },
         {
             path: '/shopping_cart',
             name: 'shopping_cart',
-            access:'login',
             component: ShoppingCart,
             meta:{
+                access:'login',
                 title:'购物车'
             }
         },
         {
             path: '/shop',
             name: 'shop',
-            access:'login',
             component: Shop,
             meta:{
+                access:'login',
                 title:'店铺'
             }
         },
         {
             path: '/order',
             name: 'order',
-            access:'login',
             component: Order,
             meta:{
+                access:'login',
+                title:'订单'
+            }
+        },
+        {
+            path: '/order_list',
+            name: 'order_list',
+            component: OrderList,
+            meta:{
+                access:'login',
                 title:'订单'
             }
         },
         {
             path: '/address_list',
             name: 'address_list',
-            access:'login',
             component: AddressList,
             meta:{
+                access:'login',
                 title:'地址'
             }
         },
         {
             path: '/receiveAddress',
             name: 'receiveAddress',
-            access:'login',
             component: ReceiveAddress,
             meta:{
+                access:'login',
                 title:'地址'
             }
         },
         {
             path: '/invoiceAddress',
             name: 'invoiceAddress',
-            access:'login',
             component: InvoiceAddress,
             meta:{
+                access:'login',
                 title:'地址'
             }
         },
         {
             path: '/invoiceNormal',
             name: 'invoiceNormal',
-            access:'login',
             component: InvoiceNormal,
             meta:{
+                access:'login',
                 title:'发票'
             }
         },
         {
             path: '/invoiceSpecial',
             name: 'invoiceSpecial',
-            access:'login',
             component: InvoiceSpecial,
             meta:{
+                access:'login',
                 title:'发票'
             }
         },
         {
             path: '/offer',
             name: 'offer',
-            access:'login',
             component: Offer,
             meta:{
+                access:'login',
                 title:'报价'
             }
         },
         {
             path: '/offer_detail',
             name: 'offer_detail',
-            access:'login',
             component: OfferDetail,
             meta:{
+                access:'login',
                 title:'报价'
             }
         },
         {
             path: '/offer_add',
             name: 'offer_add',
-            access:'login',
             component: OfferAdd,
             meta:{
+                access:'login',
                 title:'药素网'
             }
         },
         {
             path: '/own_goods',
             name: 'own_goods',
-            access:'login',
             component: OwnGoods,
             meta:{
+                access:'login',
                 title:'药素网'
             }
         },
         {
             path: '/publish_goods',
             name: 'publish_goods',
-            access:'login',
             component: PublishGoods,
             meta:{
+                access:'login',
                 title:'药素网'
             }
         },

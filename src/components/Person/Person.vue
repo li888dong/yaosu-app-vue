@@ -15,7 +15,7 @@
             <div class="cart" @click="$router.push('shopping_cart')">
                 <span class="list-icon gouwuche"><i class="icon iconfont icon-gouwuche"></i> </span><p>购物车 </p>
             </div>
-            <div class="cart" @click="$router.push('order')">
+            <div class="cart" @click="$router.push('order_list')">
                 <span class="list-icon dingdan"><i class="icon iconfont icon-shenhe"></i> </span><p>我的订单</p>
             </div>
             <div class="cart" @click="$router.push('offer')">

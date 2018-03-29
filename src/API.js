@@ -83,7 +83,8 @@ const APIs = {
     // 生成订单
     CREATE_ORDER:'/app/order/createOrder',
     GO_BOOKING:'/app/order/go-booking',
-
+    // 订单列表
+    ORDER_LIST:'/app/order/list',
 
     // 新增地址
     CREATE_ADDRESS:'/member/createAddress',
