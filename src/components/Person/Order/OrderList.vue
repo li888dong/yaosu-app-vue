@@ -82,7 +82,7 @@
         </div>
         <div class="list-container">
             <VueDataLoading :loading="loading" :completed="completed" :listens="['infinite-scroll']" :init-scroll="true" @infinite-scroll="infiniteScroll">
-                <div class="cartList" v-for="cart in dataList">
+                <div class="cartList" v-for="cart in dataList" @click="$router.push({path:'order_detail',query:{orderno:cart.orderno}})">
                     <div class="goods-company">
                         <!--<i class="icon iconfont icon-gouxuan" :class="{'icon-selected':false}"-->
                         <!--@click="selectCompany(cart.shoppingCarts)"></i>-->

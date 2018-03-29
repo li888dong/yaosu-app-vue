@@ -14,6 +14,8 @@ import Shop from '../components/Shop/Shop.vue'
 import Order from '../components/Person/Order/Order.vue'
 // 订单列表
 import OrderList from '../components/Person/Order/OrderList.vue'
+// 订单详情
+import OrderDetail from '../components/Person/Order/OrderDetail.vue'
 // 地址列标
 import AddressList from '../components/Person/Address/AddressList.vue'
 // 收货地址
@@ -123,6 +125,15 @@ export default new Router({
             path: '/order_list',
             name: 'order_list',
             component: OrderList,
+            meta:{
+                access:'login',
+                title:'订单'
+            }
+        },
+        {
+            path: '/order_detail',
+            name: 'order_detail',
+            component: OrderDetail,
             meta:{
                 access:'login',
                 title:'订单'
