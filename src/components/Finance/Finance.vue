@@ -14,11 +14,11 @@
     .animate-item{
         position: absolute;
         left: 0;
-        top: 0;
+        top: 2px;
         right: 0;
         bottom: 0;
         vertical-align: top;
-        background-color: #e7e1cd;
+        background-color: #fff;
     }
 
     .slide-fade1-enter{
@@ -50,10 +50,10 @@
         <div class="animate-container">
 
             <transition name="slide-fade1">
-                <div class="animate-item" v-if="curSelected==='supply'">22222</div>
+                <div class="animate-item" v-if="curSelected==='supply'"></div>
             </transition>
             <transition name="slide-fade2">
-                <div class="animate-item" v-if="curSelected==='demand'">11111</div>
+                <div class="animate-item" v-if="curSelected==='demand'"></div>
             </transition>
         </div>
 

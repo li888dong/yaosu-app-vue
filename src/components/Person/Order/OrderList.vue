@@ -140,7 +140,8 @@
                             console.log(this.dataList);
                             this.page++
                         } else if(res.data.status===300){
-                            this.completed = true
+                            this.completed = true;
+                            this.$message.error({message:this.data.msg});
                         }else {
                             this.$message.error({message:this.data.msg});
                         }

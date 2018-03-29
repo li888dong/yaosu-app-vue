@@ -1,0 +1,121 @@
+.publish-goods-container {
+    font-size: 14px;
+
+}
+
+.publish-goods-container input {
+    border: none;
+    outline: none;
+    color: #000;
+    height: 38px;
+    width: 220px;
+    line-height: 38px;
+    float: right;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.form-item {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 20px;
+    border-bottom: 1px solid #eee;
+    position: relative;
+}
+
+.required {
+    color: #ff0000;
+    position: absolute;
+    left: 10px;
+}
+
+.catorage {
+    float: right;
+}
+
+.img-selector {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+    text-align: center;
+    border: 1px dashed #ccc;
+    font-size: 38px;
+    font-weight: 200;
+}
+
+.catorage-item {
+    height: 40px;
+}
+.delete-circle-btn{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border: 1px solid #df5000;
+    color: #df5000;
+    border-radius: 50%;
+    float: right;
+    font-size: 24px;
+    margin-top: 10px;
+    line-height: 18px;
+}
+#preview-container {
+    display: inline-block;
+    vertical-align: middle;
+    width: 300px;
+    height: 60px;
+}
+#preview-container>img{
+    width: 60px;
+    height: 45px;
+}
+.circle-border {
+    border: 1px solid #03A657;
+    color: #03A657;
+    border-radius: 50%;
+    float: right;
+    font-size: 20px;
+    margin-top: 10px;
+    line-height: 22px;
+}
+.not-container{
+    border-bottom: 1px solid #eee;
+    text-align: center;
+    padding: 10px 0;
+}
+.dialog-footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.dialog-footer > button {
+    width: 50%;
+    height: 40px;
+    color: #03A657;
+    background-color: #fff;
+    border: 1px solid #eee;
+}
+
+button.cancel-btn {
+    border-bottom-left-radius: 4px;
+    z-index: 999;
+}
+
+button.confirm-btn {
+    border-bottom-right-radius: 4px;
+}
+
+.dialog2 p {
+    margin-top: 15px;
+}
+
+.dialog2 input {
+    border-bottom: 1px solid #eee;
+}
+
+.dialog2 input.price,
+.dialog2 input.unit {
+    width: 90%;
+}
