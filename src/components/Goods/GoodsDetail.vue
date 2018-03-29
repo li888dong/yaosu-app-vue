@@ -214,6 +214,10 @@
             },
 //            添加至购物车
             addCart() {
+                if (!localStorage.getItem('uid')){
+                    this.$message.warning('请登录');
+                    return
+                }
                 this.$http.post(this.$APIs.CART_ADD, {
                     goodsNum: this.amount,
                     goodsid: this.goodsData.goodsid,

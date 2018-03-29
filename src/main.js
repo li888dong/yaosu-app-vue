@@ -11,7 +11,7 @@ import 'swiper/dist/css/swiper.css'
 // 滚动刷新
 import VueDataLoading from 'vue-data-loading'
 // 日期选择
-import {DatePicker, Dialog, Radio, RadioGroup, Message, Select} from 'element-ui';
+import {DatePicker, Dialog, Radio, RadioGroup, Message, Select,Loading } from 'element-ui';
 // 日期 城市 仿ios选择器
 import vuePicker from './util/vue-picker'
 // require styles
@@ -36,16 +36,26 @@ const instance = axios.create({
     // baseURL: "https://yxrhome.com",
     timeout: 15000
 });
+let loadingInstance;
 // 添加请求拦截器
 instance.interceptors.request.use(function (config) {
     // 在发送请求之前做些什么
-    console.log('请求发送之前')
+
+    loadingInstance = Loading.service({ fullscreen: true });
     return config;
 }, function (error) {
     // 对请求错误做些什么
     return Promise.reject(error);
 });
-
+// 添加响应拦截器
+instance.interceptors.response.use(function (response) {
+    // 对响应数据做点什么
+    loadingInstance.close();
+    return response;
+}, function (error) {
+    // 对响应错误做点什么
+    return Promise.reject(error);
+});
 
 Vue.APIs = Vue.prototype.$APIs = APIs;
 Vue.http = Vue.prototype.$http = instance;
@@ -56,6 +66,7 @@ Vue.use(Dialog);
 Vue.use(Radio);
 Vue.use(RadioGroup);
 Vue.use(Select);
+Vue.use(Loading);
 Vue.use(vuePicker);
 Vue.prototype.$message = Message;
 Vue.config.productionTip = false
@@ -66,11 +77,10 @@ router.beforeEach((to, from, next) => {
         document.title = to.meta.title
     }
     if (to.meta.access && !localStorage.getItem('uid')) {
-        Message.warning('请登录')
+        Message.warning('请登录');
+        return
     }
-    // if (to.access ==='access'&&){
-    //
-    // }
+
     next()
 });
 /* eslint-disable no-new */
