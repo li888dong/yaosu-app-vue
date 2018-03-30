@@ -126,14 +126,25 @@
                 completed: false,
             }
         },
+        computed:{
+            orderType(){
+                return this.$route.query.orderType
+            }
+        },
         methods:{
             fetchData(){
-                this.$http.post(this.$APIs.ORDER_LIST,{
+                let reqData = {
                     page:this.page,
                     pageSize:this.pageSize,
                     userid:localStorage.getItem('uid'),
                     type:'B'
-                })
+                };
+                if (this.orderType ==='in'){
+                    reqData.type = 'B'
+                }else {
+                    reqData.type = 'A'
+                }
+                this.$http.post(this.$APIs.ORDER_LIST,reqData)
                     .then(res=>{
                         if (res.data.status===200){
                             this.dataList = this.dataList.concat(res.data.data.rows);
@@ -141,9 +152,9 @@
                             this.page++
                         } else if(res.data.status===300){
                             this.completed = true;
-                            this.$message.error({message:this.data.msg});
+                            this.$message.warning(res.data.msg);
                         }else {
-                            this.$message.error({message:this.data.msg});
+                            this.$message.warning(res.data.msg);
                         }
 
                     })

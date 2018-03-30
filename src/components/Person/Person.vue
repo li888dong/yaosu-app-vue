@@ -9,18 +9,44 @@
             <p>{{uname}}</p>
         </div>
         <div class="item-list">
-            <div class="cart" @click="$router.push('own_goods')">
-                <span class="list-icon xin"><i class="icon iconfont icon-xin"></i> </span><p>我的产品 </p>
-            </div>
-            <div class="cart" @click="$router.push('shopping_cart')">
-                <span class="list-icon gouwuche"><i class="icon iconfont icon-gouwuche"></i> </span><p>购物车 </p>
-            </div>
-            <div class="cart" @click="$router.push('order_list')">
-                <span class="list-icon dingdan"><i class="icon iconfont icon-shenhe"></i> </span><p>我的订单</p>
-            </div>
-            <div class="cart" @click="$router.push('offer')">
-                <span class="list-icon baojia"><i class="icon iconfont icon-baojiadan"></i> </span><p>我的报价</p>
-            </div>
+            <table cellspacing="5" width="100%">
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="cart" @click="$router.push('own_goods')">
+                                <span class="list-icon xin"><i class="icon iconfont icon-xin"></i> </span><p>我的产品 </p>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cart" @click="$router.push('shopping_cart')">
+                                <span class="list-icon gouwuche"><i class="icon iconfont icon-gouwuche"></i> </span><p>购物车 </p>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cart" @click="$router.push({path:'order_list',query:{orderType:'in'}})">
+                                <span class="list-icon dingdan"><i class="icon iconfont icon-shenhe"></i> </span><p>我的订单</p>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cart" @click="$router.push({path:'order_list',query:{orderType:'out'}})">
+                                <span class="list-icon dingdanc"><i class="icon iconfont icon-ruku"></i> </span><p>卖出的订单</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="cart" @click="$router.push('offer')">
+                                <span class="list-icon baojia"><i class="icon iconfont icon-baojiadan"></i> </span><p>我的报价</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+
+
+
         </div>
         <div>
             <button class="logout" @click="logout">退出登陆</button>

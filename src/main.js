@@ -11,7 +11,7 @@ import 'swiper/dist/css/swiper.css'
 // 滚动刷新
 import VueDataLoading from 'vue-data-loading'
 // 日期选择
-import {DatePicker, Dialog, Radio, RadioGroup, Message, Select,Loading } from 'element-ui';
+import {DatePicker, Dialog, Radio, RadioGroup, Message,Notification , Select,Loading } from 'element-ui';
 // 日期 城市 仿ios选择器
 import vuePicker from './util/vue-picker'
 // require styles
@@ -68,7 +68,7 @@ Vue.use(RadioGroup);
 Vue.use(Select);
 Vue.use(Loading);
 Vue.use(vuePicker);
-Vue.prototype.$message = Message;
+Vue.prototype.$message = Notification;
 Vue.config.productionTip = false
 
 // 路由跳转规则

@@ -20,17 +20,15 @@
     font-size: 80px;
 }
 .item-list{
-    display: flex;
-    flex-flow: row;
-    justify-content:space-around;
-    padding: 10px 30px;
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    white-space:nowrap;
 }
 .item-list>.cart{
     width: 80px;
     height: 80px;
     margin-top: 20px;
-    text-align: center;
-    font-size: 14px;
 }
 .item-list>.cart>p{
     margin-top: 15px;
@@ -47,13 +45,16 @@
     font-size: 24px;
 }
 .item-list .list-icon.xin{
-    background-color: #FF7409;
+    background-color: #00BF75;
 }
 .item-list .list-icon.gouwuche{
     background-color: #00A5EA;
 }
 .item-list .list-icon.dingdan{
     background-color: #f97433;
+}
+.item-list .list-icon.dingdanc{
+    background-color: #FB00A7;
 }
 .item-list .list-icon.baojia{
     background-color: #F70300;
@@ -63,11 +64,12 @@
 }
 .logout{
     width: 200px;
+    position: fixed;
+    bottom: 60px;
     background-color: #df5000;
     color: #ffffff;
     margin-left: 50%;
     transform: translate(-50%);
     padding: 5px 10px;
-    margin-top: 15px;
     border-radius: 4px;
 }
