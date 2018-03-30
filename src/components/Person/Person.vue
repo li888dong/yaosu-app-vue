@@ -14,7 +14,7 @@
                     <tr>
                         <td>
                             <div class="cart" @click="$router.push('own_goods')">
-                                <span class="list-icon xin"><i class="icon iconfont icon-xin"></i> </span><p>我的产品 </p>
+                                <span class="list-icon xin"><i class="icon iconfont icon-shujuku1"></i> </span><p>我的产品 </p>
                             </div>
                         </td>
                         <td>
@@ -39,14 +39,14 @@
                                 <span class="list-icon baojia"><i class="icon iconfont icon-baojiadan"></i> </span><p>我的报价</p>
                             </div>
                         </td>
+                        <td>
+                            <div class="cart" @click="$router.push({path:'procurement',query:{procureType:'own'}})">
+                                <span class="list-icon baojia"><i class="icon iconfont icon-xin"></i> </span><p>我的采购</p>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
-
-
-
-
-
         </div>
         <div>
             <button class="logout" @click="logout">退出登陆</button>

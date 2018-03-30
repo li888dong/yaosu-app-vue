@@ -12,7 +12,7 @@
         <!--采购列表-->
         <div class="list-container">
             <VueDataLoading :loading="loading" :completed="completed" :listens="['infinite-scroll']" :init-scroll="true" @infinite-scroll="infiniteScroll">
-                <div class="list-item pannel" v-for="item in dataList" @click="$router.push({path:'offer_add',query:{procurementid:item.procurement.procurementid,publishType:'报价'}})">
+                <div class="list-item pannel" v-for="item in dataList" @click="gotoAdd(item)">
                     <div class="status">采购中</div>
                     <h4 class="name">{{item.procurement.goodname}}</h4>
                     <p><span class="title">采购编号：</span><span class="content">{{item.procurement.procurementno}}</span></p>
@@ -48,7 +48,21 @@
         },
         methods: {
             fetchData() {
-                this.$http.get(this.$APIs.PROCUREMENT_LIST + '?page=' + this.page + '&pageSize=' + this.pageSize)
+                let reqData;
+                if (this.$route.query.procureType === 'own'){
+                    reqData = {
+                        page:this.page,
+                        pageSize:this.pageSize,
+                        userId:localStorage.getItem('uid')
+                    }
+                }else {
+                    reqData = {
+                        page:this.page,
+                        pageSize:this.pageSize,
+                        userId:null
+                    }
+                }
+                this.$http.post(this.$APIs.PROCUREMENT_LIST,reqData)
                     .then((res) => {
                         if (res.data.status===200){
 
@@ -69,6 +83,12 @@
             infiniteScroll() {
                 this.fetchData();
             },
+            gotoAdd(item){
+                if (this.$route.query.procureType ==='own'){
+                    return
+                }
+                this.$router.push({path:'offer_add',query:{procurementid:item.procurement.procurementid,publishType:'报价'}})
+            }
         }
     }
 </script>

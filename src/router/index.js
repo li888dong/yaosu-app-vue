@@ -36,6 +36,8 @@ import OfferAdd from '../components/Person/Offer/OfferAdd.vue'
 import OwnGoods from '../components/Person/OwnGoods/OwnGoods.vue'
 // 发布商品
 import PublishGoods from '../components/Goods/PublishGoods.vue'
+// 我的采购
+import OwnProcurement from '../components/Person/OwnProcurement/OwnProcurement.vue'
 // 搜索
 import Search from '../components/Search/Search.vue'
 // 搜索历史
@@ -182,6 +184,15 @@ export default new Router({
             meta:{
                 access:'login',
                 title:'发票'
+            }
+        },
+        {
+            path: '/own_procurement',
+            name: 'own_procurement',
+            component: OwnProcurement,
+            meta:{
+                access:'login',
+                title:'采购'
             }
         },
         {
