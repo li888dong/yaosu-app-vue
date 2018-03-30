@@ -104,7 +104,7 @@
         mounted() {
             const _this = this;
             window.onscroll = function () {
-                _this.scrollTop = document.documentElement.scrollTop !== 0;
+                _this.scrollTop = window.scrollY !== 0;
             };
             this.$http.get(this.$APIs.INDEX_LIST)
                 .then(function (response) {

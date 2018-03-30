@@ -25,12 +25,11 @@
     font-size: 14px;
     white-space:nowrap;
 }
-.item-list>.cart{
-    width: 80px;
+.item-list .cart{
     height: 80px;
     margin-top: 20px;
 }
-.item-list>.cart p{
+.item-list .cart p{
     margin-top: 15px;
 }
 .item-list .list-icon{
