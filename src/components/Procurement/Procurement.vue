@@ -11,7 +11,12 @@
         </div>
         <!--采购列表-->
         <div class="list-container">
-            <VueDataLoading :loading="loading" :completed="completed" :listens="['infinite-scroll']" :init-scroll="true" @infinite-scroll="infiniteScroll">
+            <VueDataLoading
+                :loading="loading"
+                :completed="completed"
+                :listens="['infinite-scroll']"
+                :init-scroll="true"
+                @infinite-scroll="infiniteScroll">
                 <div class="list-item pannel" v-for="item in dataList" @click="gotoAdd(item)">
                     <div class="status">采购中</div>
                     <h4 class="name">{{item.procurement.goodname}}</h4>
@@ -96,6 +101,9 @@
                 }
                 this.$router.push({path:'offer_add',query:{procurementid:item.procurement.procurementid,publishType:'报价'}})
             }
+        },
+        beforeDestroy(){
+            this.dataList.length = 0
         }
     }
 </script>

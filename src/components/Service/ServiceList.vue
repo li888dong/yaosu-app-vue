@@ -253,6 +253,9 @@
         mounted() {
             this.reqUrl = this.getReqUrl(this.type);
         },
+        beforeDestroy(){
+            this.resData.length = 0
+        }
 
     }
 </script>
