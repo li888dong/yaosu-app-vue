@@ -40,15 +40,25 @@
 
 <script>
     import $ from 'jquery'
+//    banner图
     import Banner from '@/components/Home/Banner/Banner.vue'
+//    导航列表
     import NavList from '@/components/Home/NavList/NavList.vue'
+//    采购列表
     import ProductPriceList from '@/components/Home/ProductPriceList/ProductPriceList.vue'
+//    要现货
     import Xianhuo from '@/components/Home/Xianhuo/Xianhuo.vue'
+//    要采购
     import Caigou from '@/components/Home/Caigou/Caigou.vue'
+//    要外贸
     import Waimao from '@/components/Home/Waimao/Waimao.vue'
+//    要项目
     import Xiangmu from '@/components/Home/Xiangmu/Xiangmu.vue'
+//    要技术
     import Jishu from '@/components/Home/Jishu/Jishu.vue'
+//    要批文
     import Piwen from '@/components/Home/Piwen/Piwen.vue'
+//    广告条幅
     const advertsing ={
         urlList: [],
         init: function (data) {

@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
+import {Message} from 'element-ui'
 // 主页
 import Home from '../components/Home/Home.vue'
 // 登陆注册
@@ -67,9 +69,8 @@ import ServiceList from '../components/Service/ServiceList.vue'
 // 服务详情
 import ServiceDetail from '../components/Service/ServiceDetail.vue'
 
-Vue.use(Router)
-
-export default new Router({
+Vue.use(Router);
+const router = new Router({
     routes: [
         {
             path: '/home',
@@ -360,4 +361,19 @@ export default new Router({
             redirect: '/home'
         }
     ]
-})
+});
+
+// 路由跳转规则
+router.beforeEach((to, from, next) => {
+    if (to.meta.title) {
+        document.title = to.meta.title
+    }
+    if (to.meta.access && !localStorage.getItem('uid')) {
+        Message.warning('请登录');
+        return
+    }
+
+    next()
+});
+
+export default router
