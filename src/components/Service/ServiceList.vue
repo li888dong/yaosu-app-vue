@@ -19,8 +19,12 @@
 
                 <transition name="slide-fade1">
                     <div class="animate-item" v-if="curSelected==='supply'">
-                        <VueDataLoading :loading="loading" :completed="completed" :listens="['infinite-scroll']"
-                                        @infinite-scroll="infiniteScroll">
+                        <VueDataLoading
+                            :loading="loading"
+                            :completed="completed"
+                            :listens="['infinite-scroll']"
+                            @infinite-scroll="infiniteScroll"
+                            :init-scroll="true">
                             <ul class="list-container" v-if="supplyDataList.length>0">
                                 <li class="list-item" v-for="item in supplyDataList"
                                     @click="$router.push({path:'service_detail',query:{itemData:item,catorageType:type}})">
@@ -59,7 +63,7 @@
                                         </div>
                                         <div class="item-footer">
                                             <p class="hs-code">
-                                                编号 : <span>{{item.projectno}}</span><span>{{new Date(item.addtime).Format('yyyy-MM-dd')}}</span>
+                                                编号 : <span>{{item.technologyno}}</span><span>{{new Date(item.addtime).Format('yyyy-MM-dd')}}</span>
                                             </p>
                                         </div>
                                     </div>
@@ -86,8 +90,12 @@
                 </transition>
                 <transition name="slide-fade2">
                     <div class="animate-item" v-if="curSelected==='demand'">
-                        <VueDataLoading :loading="loading" :completed="completed" :listens="['infinite-scroll']"
-                                        @infinite-scroll="infiniteScroll">
+                        <VueDataLoading
+                            :loading="loading"
+                            :completed="completed"
+                            :listens="['infinite-scroll']"
+                            :init-scroll="true"
+                            @infinite-scroll="infiniteScroll">
                             <ul class="list-container" v-if="demandDataList.length>0">
                                 <li class="list-item" v-for="item in demandDataList"
                                     @click="$router.push({path:'service_detail',query:{itemData:item,catorageType:type}})">
@@ -126,7 +134,7 @@
                                         </div>
                                         <div class="item-footer">
                                             <p class="hs-code">
-                                                编号 : <span>{{item.projectno}}</span><span>{{new Date(item.addtime).Format('yyyy-MM-dd')}}</span>
+                                                编号 : <span>{{item.technologyno}}</span><span>{{new Date(item.addtime).Format('yyyy-MM-dd')}}</span>
                                             </p>
                                         </div>
                                     </div>
@@ -160,9 +168,6 @@
         name: 'servicelist',
         data() {
             return {
-                demand: '',
-                supply: '',
-                type: '',
                 reqUrl: '',
                 curSelected: 'demand',
                 resData: [],
@@ -192,7 +197,20 @@
                 }
             },
             fetchData() {
-                this.$http.get(this.reqUrl + '?page=' + this.page + '&pageSize=' + this.pageSize)
+                let reqData;
+                if (this.isOwn==='own'){
+                    reqData = {
+                        page:this.page,
+                        pageSize:this.pageSize,
+                        userid:localStorage.getItem('uid')
+                    }
+                }else {
+                    reqData = {
+                        page:this.page,
+                        pageSize:this.pageSize
+                    }
+                }
+                this.$http.post(this.reqUrl,reqData)
                     .then((res) => {
                         if (res.data.status === 200) {
                             this.page++;
@@ -218,27 +236,22 @@
             }
 
         },
+        computed:{
+            demand(){
+                return this.$route.query.demand
+            },
+            type(){
+                return this.$route.query.type
+            },
+            supply(){
+                return this.$route.query.supply
+            },
+            isOwn(){
+                return this.$route.query.isOwn
+            }
+        },
         mounted() {
-            this.demand = this.$route.query.demand;
-            this.type = this.$route.query.type;
-            this.supply = this.$route.query.supply;
             this.reqUrl = this.getReqUrl(this.type);
-            this.$http.get(this.reqUrl + '?page=1&pageSize=20')
-                .then((res) => {
-                    console.log('+++', res);
-                    this.resData = res.data.data.rows;
-                    this.supplyDataList = this.resData.filter((item) => {
-                        return item.type === 'B'
-                    });
-                    this.demandDataList = this.resData.filter((item) => {
-                        return item.type === 'A'
-                    });
-                    this.page++;
-                    this.changeCatorageType('demand')
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
         },
 
     }

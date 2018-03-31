@@ -115,7 +115,7 @@
                     this.addressData.city = e[1]||'';
                     this.addressData.district = e[2]||'';
                     this.addressData.area=e.join('-');
-                    console.log('11',e)
+                    console.log('选择城市',e)
 
                 }).catch(()=>{
 

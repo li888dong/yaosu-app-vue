@@ -21,7 +21,7 @@ function lunbo(container, content, size, delay, direction, alternation) {
             container.animate(animateObj, alternation);
         } else {
             curELe = 0;
-            animateObj[direction] = -(len * size) + 'px';
+            animateObj[direction] = -((len-1) * size) + 'px';
             container.animate(animateObj, alternation, function () {
                 $(this).css(direction, 0)
             })

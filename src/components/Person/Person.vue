@@ -14,7 +14,7 @@
                     <tr>
                         <td>
                             <div class="cart" @click="$router.push('own_goods')">
-                                <span class="list-icon xin"><i class="icon iconfont icon-shujuku1"></i> </span><p>我的产品 </p>
+                                <span class="list-icon chanpin"><i class="icon iconfont icon-shujuku1"></i></span><p>我的产品 </p>
                             </div>
                         </td>
                         <td>
@@ -36,12 +36,39 @@
                     <tr>
                         <td>
                             <div class="cart" @click="$router.push('offer')">
-                                <span class="list-icon baojia"><i class="icon iconfont icon-baojiadan"></i> </span><p>我的报价</p>
+                                <span class="list-icon baojia"></span><p>我的报价</p>
                             </div>
                         </td>
                         <td>
                             <div class="cart" @click="$router.push({path:'procurement',query:{procureType:'own'}})">
-                                <span class="list-icon baojia"><i class="icon iconfont icon-xin"></i> </span><p>我的采购</p>
+                                <span class="list-icon xin"></span><p>我的采购</p>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cart" @click="$router.push({path:'service_list',query:{type:'项目',demand:'要项目',supply:'项目供应',isOwn:'own'}})">
+                                <span class="list-icon xiangmu"></span><p>我的项目</p>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cart" @click="$router.push({path:'service_list',query:{type:'外贸',demand:'要产品',supply:'要渠道',isOwn:'own'}})">
+                                <span class="list-icon waimao"></span><p>我的外贸</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="cart" @click="$router.push({path:'check',query:{type:'检测',demand:'检测',supply:'要检测',isOwn:'own'}})">
+                                <span class="list-icon jiance"></span><p>我的检测</p>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cart" @click="$router.push({path:'service_list',query:{type:'技术',demand:'要技术',supply:'技术供应',isOwn:'own'}})">
+                                <span class="list-icon jishu"></span><p>我的技术</p>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cart" @click="$router.push({path:'service_list',query:{type:'批文',demand:'要批文',supply:'批文转让',isOwn:'own'}})">
+                                <span class="list-icon piwen"></span><p>我的批文</p>
                             </div>
                         </td>
                     </tr>

@@ -7,7 +7,6 @@
         <div class="top-bar fixedTop" v-if="scrollTop">
             <i class="icon iconfont icon-fanhui" @click="$router.go(-1)"></i>
             <p>详情</p>
-            <i class="icon iconfont icon-search right"></i>
         </div>
         <!--标题栏结束-->
         <div class="goods-summary">
@@ -27,7 +26,7 @@
             <!--商品名称、单价、公司-->
             <div class="goods-price pannel">
                 <h4>{{goodsData.chanpmc}}</h4>
-                <p style="color: #f00">￥{{specification.current ? specification.current.danj : ''}}</p>
+                <p style="color: #f00">￥{{specification.current.danj | defaultValue}}</p>
                 <p>{{goodsData.pinp}}</p>
             </div>
             <!--商品名称、单价、公司结束-->
@@ -84,11 +83,11 @@
                     <div class="logo"></div>
                     <div class="selected-info">
                         <p style="color: #df5000;font-size: 16px;">
-                            单价：<span>{{specification.current ? specification.current.danj : ''}}</span></p>
+                            单价：<span>{{specification.current.danj | defaultValue}}</span></p>
                         <p>
-                            库存：<span>{{specification.current ? specification.current.kucsl : ''}}</span>{{specification.current ? specification.current.kucdw : ''}}
+                            库存：<span>{{specification.current.kucsl | defaultValue}}</span>{{specification.current.kucdw | defaultValue}}
                         </p>
-                        <p>已选：<span>{{specification.current ? specification.current.guig : ''}}</span></p>
+                        <p>已选：<span>{{specification.current.guig | defaultValue}}</span></p>
                     </div>
                     <div class="close-btn"><i class="icon iconfont icon-guanbi" @click="selectorShow = false"></i></div>
                 </div>
