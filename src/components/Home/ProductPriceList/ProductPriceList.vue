@@ -21,9 +21,9 @@
                             <span>{{yuanliao[0].qualitystandard}}</span>
                         </p>
                         <p>
-                            <span class="product-name">{{yuanliao[1] ? yuanliao[1].productname : ''}}</span>
-                            <span class="price">{{yuanliao[1] ? yuanliao[1].price : ''}}</span>
-                            <span>{{yuanliao[1] ? yuanliao[1].qualitystandard : ''}}</span>
+                            <span class="product-name">{{yuanliao[1].productname | defaultValue}}</span>
+                            <span class="price">{{yuanliao[1].price | defaultValue}}</span>
+                            <span>{{yuanliao[1].qualitystandard | defaultValue}}</span>
                         </p>
                     </div>
                 </div>
