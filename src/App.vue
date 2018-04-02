@@ -68,6 +68,22 @@
         text-align: center;
         color: white;
     }
+
+    .circle-back {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 10;
+        width: 24px;
+        height: 24px;
+        text-align: center;
+        line-height: 24px;
+        background-color: #999;
+        border-radius: 50%;
+        color: #ffffff;
+        font-weight: bolder;
+    }
+
     .text-ellipsis{
         white-space: nowrap;
         overflow: hidden;

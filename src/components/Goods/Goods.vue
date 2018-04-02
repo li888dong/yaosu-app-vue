@@ -6,7 +6,6 @@
         <div class="top-bar" v-if="$route.path==='/goods_list'">
             <i class="icon iconfont icon-fanhui" @click="$router.go(-1)"></i>
             <p>现货</p>
-            <i class="icon iconfont icon-search right"></i>
         </div>
         <div class="item-header" :style="{marginTop:$route.path==='/goods_list'?'2px':0}">
             <slot></slot>

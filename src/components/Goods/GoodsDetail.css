@@ -14,21 +14,6 @@
     position: relative;
 }
 
-.goods-summary .circle-back {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 10;
-    width: 24px;
-    height: 24px;
-    text-align: center;
-    line-height: 24px;
-    background-color: #999;
-    border-radius: 50%;
-    color: #ffffff;
-    font-weight: bolder;
-}
-
 .banner-img {
     height: 150px;
     width: 100%;
@@ -87,10 +72,12 @@
     left: 0;
     right: 0;
     z-index: 13;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
 }
 
 .footer .btn-group button {
-    width: 50%;
     height: 40px;
     line-height: 40px;
     border: none;

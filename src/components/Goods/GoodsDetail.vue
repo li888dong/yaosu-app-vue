@@ -1,5 +1,10 @@
 <style scoped>
     @import "GoodsDetail.css";
+    a{
+        display: inline-block;
+        text-decoration: none;
+        color: white;
+    }
 </style>
 <template>
     <div class="goods-detail">
@@ -68,11 +73,17 @@
         <!--底部按钮-->
         <div class="footer">
             <div class="btn-group">
-                <button v-if="from === 'own_goods'" style="background-color: #03A657;width: 100%"
-                        @click="$router.push({path:'publish_goods',query:{from:'edit_goods',imgList:goodsData.pictures}})">编辑
-                </button><button style="background-color: #03A657;" v-if="!selectorShow&&from !== 'own_goods'">联系卖家</button><!--
-                --><button style="background-color: darkorange;" v-if="!selectorShow&&from !== 'own_goods'" @click="addCart">加入购物车</button><!--
-                --><button class="confirm-btn" v-if="selectorShow&&from !== 'own_goods'" @click="confirmSelect">确认</button>
+                <button
+                    v-if="from === 'own_goods'"
+                    style="background-color: #03A657;width: 100%"
+                    @click="$router.push({path:'publish_goods',query:{from:'edit_goods',imgList:goodsData.pictures}})">编辑
+                </button>
+
+                <button class="confirm-btn" v-if="selectorShow&&from !== 'own_goods'" @click="confirmSelect">确认</button>
+
+               <button style="background-color: #00B971;" v-if="!selectorShow&&from !== 'own_goods'" @click="gotoShop">店铺</button><!--
+                --><button style="background-color: #03A657;" v-if="!selectorShow&&from !== 'own_goods'"><a :href="'tel:'+contactphone">联系卖家</a></button><!--
+                --><button style="background-color: darkorange;" v-if="!selectorShow&&from !== 'own_goods'" @click="addCart">加入购物车</button>
             </div>
         </div>
         <!--底部按钮结束-->
@@ -119,6 +130,8 @@
         name: 'goodsdetail',
         data() {
             return {
+//                联系方式
+                contactphone:'',
 //                商品数据
                 goodsData: [],
 //                当前选择的商品规格
@@ -173,14 +186,17 @@
 
         },
         methods: {
-//            获取商品详情
+//            获取商品详情数据
             fetchData() {
-                this.$http.get(this.$APIs.GOODS_DETAIL + '?goodsid=' + this.$route.query.goodsId)
+                this.$http.post(this.$APIs.GOODS_DETAIL,{
+                    goodsid:this.$route.query.goodsId
+                })
                     .then(res => {
                         if (res.data.status === 200) {
-                            console.log('***', res.data.data.GoodsApi);
+                            console.log('***', res.data.data);
                             this.goodsData = res.data.data.GoodsApi;
-                            this.specification.list = res.data.data.GoodsApi.tbGoodsSpecifications;
+                            this.contactphone = res.data.data.contactphone;
+                            this.specification.list = this.goodsData.tbGoodsSpecifications;
                             this.specification.current = this.specification.list[0];
                             this.$store.commit('set_goodsApi_json',this.goodsData)
                         } else {
@@ -225,11 +241,14 @@
                 })
                     .then(res => {
                         console.log(res);
-                        this.$message.error({message: res.data.msg});
+                        this.$message.info({message: res.data.msg});
                     })
                     .catch(err => {
                         this.$message.error({message: err.data.msg});
                     })
+            },
+            gotoShop(){
+                this.$router.push({path:'shop',query:{companyid:this.goodsData.companyid}})
             }
         }
     }

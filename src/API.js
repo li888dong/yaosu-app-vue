@@ -26,7 +26,7 @@ const APIs = {
     GOODS_ADD:'/app/goods/add',
     // 商品修改接口
     GOODS_UPDATE:'/app/goods/update',
-
+    SHOP_VIEW:'/app/shop/shopView',
 
     // 要项目
     PROJECT_LIST: '/app/project/list',

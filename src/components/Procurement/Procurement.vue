@@ -3,14 +3,11 @@
 </style>
 <template>
     <div>
-
         <div class="top-bar">
             <i class="icon iconfont icon-fanhui" @click="$router.go(-1)"></i>
             <p>采购信息</p>
-            <i class="icon iconfont icon-search right"></i>
         </div>
         <!--采购列表-->
-        <div class="list-container">
             <VueDataLoading
                 :loading="loading"
                 :completed="completed"
@@ -36,7 +33,6 @@
                 <div slot="infinite-scroll-loading">加载中...</div>
             </VueDataLoading>
 
-        </div>
     </div>
 </template>
 <script>
@@ -71,8 +67,7 @@
                 }else {
                     reqData = {
                         page:this.page,
-                        pageSize:this.pageSize,
-                        userId:null
+                        pageSize:this.pageSize
                     }
                 }
                 this.$http.post(this.$APIs.PROCUREMENT_LIST,reqData)
@@ -101,9 +96,6 @@
                 }
                 this.$router.push({path:'offer_add',query:{procurementid:item.procurement.procurementid,publishType:'报价'}})
             }
-        },
-        beforeDestroy(){
-            this.dataList.length = 0
         }
     }
 </script>
