@@ -15,20 +15,6 @@
     padding-right: 10px;
 }
 
-.form-item {
-    height: 40px;
-    line-height: 40px;
-    padding: 0 20px;
-    border-bottom: 1px solid #eee;
-    position: relative;
-}
-
-.required {
-    color: #ff0000;
-    position: absolute;
-    left: 10px;
-}
-
 .catorage {
     float: right;
 }

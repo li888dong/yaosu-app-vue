@@ -1,74 +1,5 @@
 <style scoped>
-    .shop-container{
-        margin: 0!important;
-    }
-    .logo{
-        height: 200px;
-        background-size:100% 180px;
-        background-repeat:no-repeat;
-        background-color: #fff;
-    }
-    .icon-dingwei{
-        color: #cc0000;
-        margin-top: 25px;
-    }
-    .company-info{
-        font-size: 14px;
-        margin-top: 8px;
-        display: flex;
-        padding: 15px;
-        height: 70px;
-
-    }
-    .company-info p{
-        margin: 5px;
-    }
-    .company-info button{
-        background-color: #03A657;
-        color: #ffffff;
-        padding: 5px;
-        margin-top: 10px;
-        border-radius: 2px;
-        height: 42px;
-    }
-    .call{
-        padding: 8px;
-    }
-    .icon-76{
-        color: #007aff;
-        font-size: 22px;
-        vertical-align: middle;
-    }
-    a{
-        width: 100%;
-        display: inline-block;
-        color: #000000;
-        text-decoration: none;
-        font-size: 12px;
-    }
-    i{
-        vertical-align: middle;
-    }
-    .goods-list{
-        width: 48%;
-        display: inline-block;
-        border-radius: 4px;
-        margin: 1%;
-        font-size: 14px;
-        padding: 5px;
-        box-sizing: border-box;
-        color: #000000;
-    }
-    .chund{
-        font-size: 12px;
-    }
-    .pinp{
-        font-size: 12px;
-        color: #999;
-    }
-    .icon-huo{
-        color: #cc0000;
-    }
+@import "Shop.css";
 </style>
 <template>
     <div class="shop-container">
@@ -87,7 +18,7 @@
                 <p>{{companyData.company.qiymc}}</p>
                 <p>{{companyData.company.dizhi}}</p>
             </div>
-            <button>加入企业</button>
+            <button @click="$router.push({path:'join',query:{companyId:companyData.companyid,companyName:companyData.shopname}})">加入企业</button>
         </div>
         <a :href="'tel:'+companyData.company.tel">
             <div class="pannel call">

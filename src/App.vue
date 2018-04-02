@@ -227,4 +227,59 @@
         vertical-align: middle;
         transform: rotate(90deg);
     }
+
+    /*切换标签*/
+    .tabbar-container{
+        background-color: #fff;
+        padding-top: 10px;
+        margin: 0;
+    }
+    .animate-container{
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 92px;
+        bottom: 0;
+    }
+    .animate-item{
+        position: absolute;
+        left: 0;
+        top: 2px;
+        right: 0;
+        bottom: 0;
+        vertical-align: top;
+        background-color: #fff;
+    }
+
+    .slide-fade1-enter{
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    .slide-fade1-enter-active,
+    .slide-fade2-enter-active{
+        transition: all .2s ease;
+    }
+    .slide-fade2-enter{
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+
+    .form-item {
+        height: 40px;
+        line-height: 40px;
+        padding: 0 20px;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        font-size: 14px;
+    }
+
+    .required {
+        color: #ff0000;
+        position: absolute;
+        left: 10px;
+    }
+
 </style>
+

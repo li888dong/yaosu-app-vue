@@ -12,6 +12,8 @@ import Person from '../components/Person/Person.vue'
 import ShoppingCart from '../components/Person/ShoppingCart/ShoppingCart.vue'
 // 店铺
 import Shop from '../components/Shop/Shop.vue'
+// 店铺
+import JoinCompany from '../components/Shop/JoinCompany.vue'
 // 生成订单
 import Order from '../components/Person/Order/Order.vue'
 // 订单列表
@@ -113,6 +115,15 @@ const router = new Router({
             meta:{
                 access:'login',
                 title:'店铺'
+            }
+        },
+        {
+            path: '/join',
+            name: 'join',
+            component: JoinCompany,
+            meta:{
+                access:'login',
+                title:'加入企业'
             }
         },
         {

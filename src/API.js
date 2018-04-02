@@ -26,7 +26,13 @@ const APIs = {
     GOODS_ADD:'/app/goods/add',
     // 商品修改接口
     GOODS_UPDATE:'/app/goods/update',
+    // 店铺
     SHOP_VIEW:'/app/shop/shopView',
+
+    // 人工加入企业
+    JOIN_COMPANY_BY_PERSON:'/app/user/saveEntryFirm',
+    // 验证码加入企业
+    JOIN_COMPANY_BY_CODE:'/app/user/saveEntryFirmCode',
 
     // 要项目
     PROJECT_LIST: '/app/project/list',
