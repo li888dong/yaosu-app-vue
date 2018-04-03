@@ -13,15 +13,7 @@
         text-align: right;
         padding-right: 10px;
     }
-    .form-item{
-        height: 40px;
-        line-height: 40px;
-        padding:0 10px;
-        border-bottom: 1px solid #eee;
-    }
-    .required{
-        color: #ff0000;
-    }
+
     .unit{
         float: right;
         border-left: 1px solid #eee;

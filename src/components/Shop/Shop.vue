@@ -8,9 +8,11 @@
             <i class="icon iconfont icon-fanhui" @click="$router.go(-1)"></i>
             <p>店铺</p>
         </div>
-        <div class="logo" :style="{backgroundImage:'url(http://image.yaosuce.com'+companyData.company.logo+')'}">
+        <div class="logo" v-if="companyData.company.logo" :style="{backgroundImage:'url(http://image.yaosuce.com'+companyData.company.logo+')'}">
             <i class="icon iconfont icon-fanhui circle-back" @click="$router.go(-1)"></i>
-            <h3 v-if="!companyData.company.logo">此处logo可在后台添加</h3>
+        </div>
+        <div class="logo default" v-else>
+            <i class="icon iconfont icon-fanhui circle-back" @click="$router.go(-1)"></i>
         </div>
         <div class="pannel company-info h_70">
             <i class="icon iconfont icon-dingwei"></i>

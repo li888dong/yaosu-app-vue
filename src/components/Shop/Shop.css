@@ -7,6 +7,9 @@
     background-repeat:no-repeat;
     background-color: #fff;
 }
+.logo.default{
+    background-image: url("../../assets/dianputou.png");
+}
 .icon-dingwei{
     color: #cc0000;
     margin-top: 25px;
@@ -15,6 +18,7 @@
     font-size: 14px;
     margin-top: 8px;
     display: flex;
+    justify-content: space-between;
     padding: 15px;
     height: 70px;
 

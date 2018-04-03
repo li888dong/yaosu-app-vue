@@ -81,7 +81,7 @@
 
                 <button class="confirm-btn" v-if="selectorShow&&from !== 'own_goods'" @click="confirmSelect">确认</button>
 
-               <button style="background-color: #00B971;" v-if="!selectorShow&&from !== 'own_goods'" @click="gotoShop">店铺</button><!--
+               <button style="background-color: #00B971;" v-if="!selectorShow&&from !== 'own_goods'&&goodsData.companyid!=='0'" @click="gotoShop">店铺</button><!--
                 --><button style="background-color: #03A657;" v-if="!selectorShow&&from !== 'own_goods'"><a :href="'tel:'+contactphone">联系卖家</a></button><!--
                 --><button style="background-color: darkorange;" v-if="!selectorShow&&from !== 'own_goods'" @click="addCart">加入购物车</button>
             </div>
