@@ -11,7 +11,9 @@ const instance = axios.create({
         // 对 data 进行任意转换处理
         return qs.stringify(data);
     }],
+    // 开发地址
     // baseURL: "http://localhost:3000",
+    // 线上地址
     baseURL: "https://yxrhome.com",
     timeout: 15000
 });
@@ -30,7 +32,10 @@ instance.interceptors.request.use(function (config) {
 instance.interceptors.response.use(function (response) {
     // 对响应数据做点什么
     loadingInstance.close();
-    return {data:response};
+    // 开发数据
+    return data
+    // 线上数据
+    // return {data:response};
 }, function (error) {
     // 对响应错误做点什么
     return Promise.reject(error);
