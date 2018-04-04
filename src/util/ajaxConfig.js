@@ -12,7 +12,7 @@ const instance = axios.create({
         return qs.stringify(data);
     }],
     // 开发地址
-    // baseURL: "http://localhost:3000",
+    // baseURL: "http://192.168.10.4:8086",
     // 线上地址
     baseURL: "https://yxrhome.com",
     timeout: 15000
@@ -33,9 +33,7 @@ instance.interceptors.response.use(function (response) {
     // 对响应数据做点什么
     loadingInstance.close();
     // 开发数据
-    return data
-    // 线上数据
-    // return {data:response};
+    return response
 }, function (error) {
     // 对响应错误做点什么
     return Promise.reject(error);

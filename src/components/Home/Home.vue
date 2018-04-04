@@ -118,6 +118,7 @@
             };
             this.$http.get(this.$APIs.INDEX_LIST)
                 .then(function (response) {
+                    console.log(response)
                     const data = response.data.data;
                     _this.advertising = data.advertising;
                     _this.ANN1 = data.service.ANN[0].list;
