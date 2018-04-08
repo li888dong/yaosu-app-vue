@@ -12,9 +12,9 @@ const instance = axios.create({
         return qs.stringify(data);
     }],
     // 开发地址
-    // baseURL: "http://192.168.10.4:8086",
+    //  baseURL: "http://192.168.10.4:8086",
     // 线上地址
-    baseURL: "https://yxrhome.com",
+    // baseURL: "https://yxrhome.com",
     timeout: 15000
 });
 let loadingInstance;

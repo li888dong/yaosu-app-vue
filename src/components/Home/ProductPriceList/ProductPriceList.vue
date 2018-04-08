@@ -16,9 +16,9 @@
 
                     <div v-for="yuanliao in yuanliaoData" :key="yuanliao[0].productname">
                         <p>
-                            <span class="product-name">{{yuanliao[0].productname}}</span>
-                            <span class="price">{{yuanliao[0].price}}</span>
-                            <span>{{yuanliao[0].qualitystandard}}</span>
+                            <span class="product-name">{{yuanliao[0].productname | defaultValue}}</span>
+                            <span class="price">{{yuanliao[0].price | defaultValue}}</span>
+                            <span>{{yuanliao[0].qualitystandard | defaultValue}}</span>
                         </p>
                         <p>
                             <span class="product-name">{{yuanliao[1].productname | defaultValue}}</span>

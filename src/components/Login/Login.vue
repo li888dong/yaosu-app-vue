@@ -123,19 +123,13 @@
                     .then(res => {
                         console.log(res)
                         if(res.data.status===200){
-
-//                        this.uid = res.data.data.mall_cus.userid;
-//                        this.nic = res.data.data.mall_cus.nic;
-                            this.uid = res.data.data.tbCus.userid;
-                            this.nic = res.data.data.tbCus.nic;
-                            localStorage.setItem('uid', this.uid);
-                            localStorage.setItem('nic', this.nic);
-                            this.$router.push('person');
+                            this.loginSuccess(res);
                         }else {
                             this.$message.error({message:res.data.msg});
                         }
                     })
                     .catch(err => {
+                        console.log(err)
                         this.$message.error({message:'网络错误'});
                     })
             },
@@ -155,14 +149,7 @@
                     .then(res => {
                         console.log(res)
                         if(res.data.status===200){
-
-//                        this.uid = res.data.data.mall_cus.userid;
-//                        this.nic = res.data.data.mall_cus.nic;
-                            this.uid = res.data.data.tbCus.userid;
-                            this.nic = res.data.data.tbCus.nic;
-                            localStorage.setItem('uid', this.uid);
-                            localStorage.setItem('nic', this.nic);
-                            this.$router.push('person');
+                            this.loginSuccess(res);
                         }else {
                             this.$message.error({message:res.data.msg});
                         }
@@ -184,14 +171,7 @@
                     .then(res => {
                         console.log(res)
                         if(res.data.status===200){
-
-//                        this.uid = res.data.data.mall_cus.userid;
-//                        this.nic = res.data.data.mall_cus.nic;
-                            this.uid = res.data.data.tbCus.userid;
-                            this.nic = res.data.data.tbCus.nic;
-                            localStorage.setItem('uid', this.uid);
-                            localStorage.setItem('nic', this.nic);
-                            this.$router.push('person');
+                            this.loginSuccess(res);
                         }else {
                             this.$message.error({message:res.data.msg});
                         }
@@ -221,6 +201,13 @@
                     .catch(err => {
                         this.$message.error({message:'网络错误'});
                     })
+            },
+            loginSuccess(res){
+                this.uid = res.data.data.mall_cus.userid;
+                this.nic = res.data.data.mall_cus.nic;
+                localStorage.setItem('uid', this.uid);
+                localStorage.setItem('nic', this.nic);
+                this.$router.push('person');
             }
         }
     }
