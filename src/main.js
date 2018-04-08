@@ -10,7 +10,7 @@ import store from './store'
 import APIs from './API'
 
 // element-ui组件
-import { Dialog, Radio, RadioGroup,Notification , Select,Loading } from 'element-ui';
+import { Dialog, Radio, RadioGroup,Notification , Select } from 'element-ui';
 
 
 // iconfont图标样式
@@ -50,7 +50,6 @@ Vue.use(Dialog);
 Vue.use(Radio);
 Vue.use(RadioGroup);
 Vue.use(Select);
-Vue.use(Loading);
 Vue.use(vuePicker);
 Vue.prototype.$message = Notification;
 Vue.config.productionTip = false

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {Loading} from 'element-ui'
+import store from '../store'
 // ajax请求数据格式化
 import qs from 'qs'
 // 配置ajax请求
@@ -12,7 +13,7 @@ const instance = axios.create({
         return qs.stringify(data);
     }],
     // 开发地址
-    //  baseURL: "http://192.168.10.4:8086",
+     baseURL: "http://192.168.10.4:8086",
     // 线上地址
     // baseURL: "https://yxrhome.com",
     timeout: 15000
@@ -21,8 +22,7 @@ let loadingInstance;
 // 添加请求拦截器
 instance.interceptors.request.use(function (config) {
     // 在发送请求之前做些什么
-
-    loadingInstance = Loading.service({ fullscreen: true });
+    store.dispatch('loading', true);
     return config;
 }, function (error) {
     // 对请求错误做些什么
@@ -31,11 +31,12 @@ instance.interceptors.request.use(function (config) {
 // 添加响应拦截器
 instance.interceptors.response.use(function (response) {
     // 对响应数据做点什么
-    loadingInstance.close();
+    store.dispatch('loading', false);
     // 开发数据
     return response
 }, function (error) {
     // 对响应错误做点什么
     return Promise.reject(error);
 });
+console.log(store)
 export default instance

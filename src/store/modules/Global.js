@@ -15,7 +15,9 @@ const state = {
     TNO2:[],
     tcm:[],
     // 商品实体
-    goodsApi_json: {}
+    goodsApi_json: {},
+    // ajax加载等待
+    loading:false
 }
 
 const mutations = {
@@ -76,6 +78,9 @@ const mutations = {
     set_goodsApi_json(state, res) {
        state.goodsApi_json = Object.assign({},state.goodsApi_json,res)
     },
+    loading(state, res) {
+       state.loading = res
+    },
 
 }
 
@@ -134,6 +139,9 @@ const actions = {
     },
     'set_goodsApi_json': function ({commit}, res) {
         commit('set_goodsApi_json', res)
+    },
+    'loading': function ({commit}, res) {
+        commit('loading', res)
     }
 }
 
@@ -185,6 +193,9 @@ const getters = {
     },
     goodsApi_json: state => {
         return state.goodsApi_json
+    },
+    loading: state => {
+        return state.loading
     },
 }
 export default {
