@@ -1,4 +1,6 @@
 <style scoped>
+    @import "PriceSearch.css";
+
     .list-item{
         font-size: 14px;
         padding: 10px;
@@ -13,7 +15,13 @@
         <div class="top-bar">
             <i class="icon iconfont icon-fanhui" @click="$router.go(-1)"></i>
             <p>{{type}}参考价格</p>
-            <i class="icon iconfont icon-search right" @click="$router.push('search')"></i>
+            <i class="icon iconfont icon-search right" @click="toggle=true"></i>
+        </div>
+        <div v-if="toggle" class="empty-panel">
+            <div class="top-bar">
+                <i class="icon iconfont icon-search "></i>
+                <input type="search" v-model="keyword"><span class="search-btn" v-if="keyword" @click="doSearch">搜索</span><span class="search-btn" v-else @click="toggle=false">取消</span>
+            </div>
         </div>
         <!--采购列表-->
         <VueDataLoading
@@ -41,6 +49,8 @@
                 pageSize: 15,
                 loading: false,
                 completed: false,
+                toggle:false,
+                keyword:''
             }
         },
         mounted() {
@@ -79,6 +89,29 @@
                 console.log('0000',this.page);
                 this.page++
 
+            },
+            doSearch(){
+                this.page = 1;
+                let reqData= {
+                    page:this.page,
+                    pageSize:this.pageSize,
+                    productname:this.keyword
+                };
+                this.$http.post(this.$APIs.API_PRICE_LIST,reqData)
+                    .then((res) => {
+                        if (res.data.status===200){
+                            console.log(res);
+                            this.dataList.length = 0;
+                            this.dataList = res.data.data.rows;
+                            this.toggle = false;
+                        } else {
+                            this.$message.error({message:res.data.msg});
+                        }
+
+                    })
+                    .catch((err) => {
+                        this.$message.error({message:'网络错误'});
+                    })
             }
         }
     }
