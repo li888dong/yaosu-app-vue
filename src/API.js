@@ -66,6 +66,10 @@ const APIs = {
 
     // 要检测
     DETECTION_LIST: '/app/detection/listProduct',
+    // 检测机构列表
+    ORGANIZATION_LIST: '/app/detection/listOrganization',
+    // 检测机构列表
+    TESTING_ITEM_LIST: '/app/detection/listItem',
     // 要检测详情
     DETECTION_DETAIL: '/app/detection/detailsOrder',
 

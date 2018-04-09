@@ -53,10 +53,22 @@
         </div>
         <ul class="item-list">
 
-            <li class="data-list" v-if="keyword" v-for="data in filterList" :key="data.testingproductid" data-testid="data.testingproductid">
+            <li
+                class="data-list"
+                v-if="keyword"
+                v-for="data in filterList"
+                :key="data.testingproductid"
+                data-testid="data.testingproductid"
+                @click="gotoMakeTesting(data)">
                 {{data.testingproduct}}
             </li>
-            <li class="data-list" v-if="keyword===''" v-for="data in dataList" :key="data.testingproductid" data-testid="data.testingproductid">
+            <li
+                class="data-list"
+                v-if="keyword===''"
+                v-for="data in dataList"
+                :key="data.testingproductid"
+                data-testid="data.testingproductid"
+                @click="gotoMakeTesting(data)">
                 {{data.testingproduct}}
             </li>
         </ul>
@@ -99,6 +111,9 @@
                 this.filterList = this.dataList.filter(i=>{
                     this.keyword = i.testingproduct
                 })
+            },
+            gotoMakeTesting(data){
+                this.$router.push({path:'make_testing',query:{goodsName:data.testingproduct,testingproductid:data.testingproductid}})
             }
         }
     }

@@ -70,6 +70,8 @@ import GoodsDetail from '../components/Goods/GoodsDetail.vue'
 import Finance from '../components/Finance/Finance.vue'
 // 检测
 import Check from '../components/Check/Check.vue'
+// 生成检测订单
+import MakeTestingOrder from '../components/Check/MakeTestingOrder.vue'
 // 服务列表
 import ServiceList from '../components/Service/ServiceList.vue'
 // 服务详情
@@ -371,6 +373,15 @@ const router = new Router({
             component: Check,
             meta:{
                 title:'要检测'
+            }
+        },
+        {
+            path: '/make_testing',
+            name: 'make_testing',
+            component: MakeTestingOrder,
+            meta:{
+                access:'login',
+                title:'检测'
             }
         },
         {
