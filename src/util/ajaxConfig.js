@@ -1,5 +1,4 @@
 import axios from 'axios'
-import {Loading} from 'element-ui'
 import store from '../store'
 // ajax请求数据格式化
 import qs from 'qs'
@@ -18,7 +17,6 @@ const instance = axios.create({
     // baseURL: "https://yxrhome.com",
     timeout: 15000
 });
-let loadingInstance;
 // 添加请求拦截器
 instance.interceptors.request.use(function (config) {
     // 在发送请求之前做些什么
@@ -38,5 +36,4 @@ instance.interceptors.response.use(function (response) {
     // 对响应错误做点什么
     return Promise.reject(error);
 });
-console.log(store)
 export default instance

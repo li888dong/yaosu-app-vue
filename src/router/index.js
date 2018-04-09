@@ -10,6 +10,10 @@ import Login from '../components/Login/Login.vue'
 import Person from '../components/Person/Person.vue'
 // 购物车
 import ShoppingCart from '../components/Person/ShoppingCart/ShoppingCart.vue'
+// 中药参考价格列表
+import ZhongyaoPriceList from '../components/Home/ProductPriceList/ZhongyaoPriceList.vue'
+// 原料药参考价格列表
+import YuanliaoPriceList from '../components/Home/ProductPriceList/YuanliaoPriceList.vue'
 // 店铺
 import Shop from '../components/Shop/Shop.vue'
 // 店铺
@@ -106,6 +110,24 @@ const router = new Router({
             meta:{
                 access:'login',
                 title:'购物车'
+            }
+        },
+        {
+            path: '/zhongyao_price',
+            name: 'zhongyao_price',
+            component: ZhongyaoPriceList,
+            meta:{
+                access:'login',
+                title:'参考价格'
+            }
+        },
+        {
+            path: '/yuanliao_price',
+            name: 'yuanliao_price',
+            component: YuanliaoPriceList,
+            meta:{
+                access:'login',
+                title:'参考价格'
             }
         },
         {

@@ -34,6 +34,12 @@ const APIs = {
     // 验证码加入企业
     JOIN_COMPANY_BY_CODE:'/app/user/saveEntryFirmCode',
 
+
+    // 参考价格
+    API_PRICE_LIST:'/app/index/price_api/list',
+    TCM_PRICE_LIST:'/app/index/price_tcm/list',
+
+
     // 要项目
     PROJECT_LIST: '/app/project/list',
     // 要项目详情
