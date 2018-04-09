@@ -1,12 +1,13 @@
 <style scoped>
     .result-item {
-        height: 55px;
+        min-height: 55px;
         width: 100%;
         box-sizing: border-box;
         padding: 5px 15px;
         background-color: #fff;
         border-top: 1px solid #ccc;
         font-size: 14px;
+        line-height: 24px;
     }
 
     .name {
@@ -35,6 +36,10 @@
         background-color: #03A657;
         color: #ffffff;
     }
+    .goods-markets{
+        display: inline-block;
+        width: 50%;
+    }
 </style>
 <template>
     <div>
@@ -47,6 +52,15 @@
                         <span class="dosageForm" :class="{productType:result.productTypeDes=='现货'}">{{result.productTypeDes}}</span>
                         <span class="dosageForm">{{result.dosageForm}}</span>
                     </p>
+                    <div v-if="result.listProductMarketprice">
+                        <p>参考价格：</p>
+                        <div class="goods-markets" v-for="market in result.listProductMarketprice">{{market.markets}} {{market.price}}</div>
+                    </div>
+                    <div v-if="result.productApiPrice">
+                        <p>参考价格：</p>
+                        <div>参考价格：{{result.productApiPrice.price}}</div>
+                        <div>质量标准：{{result.productApiPrice.qualitystandard}}</div>
+                    </div>
                 </li>
             </ul>
         </VueDataLoading>
@@ -123,7 +137,6 @@
                     .then(res => {
                         if (res.data.status === 200) {
                             this.loading = false;
-                            this.page++;
                             this.$store.commit('set_resultList', res.data.data.rows);
                         } else if (res.data.status === 300) {
                             this.completed = true;
@@ -137,6 +150,8 @@
             },
             infiniteScroll() {
                 this.fetchData();
+                this.page++;
+                console.log(this.page)
             }
         }
     }

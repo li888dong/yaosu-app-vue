@@ -34,7 +34,6 @@
 </template>
 <script>
     export default {
-        name: 'caigou',
         data() {
             return {
                 dataList: [],
@@ -77,6 +76,7 @@
             },
             infiniteScroll() {
                 this.fetchData();
+                console.log('0000',this.page);
                 this.page++
 
             }

@@ -17,6 +17,9 @@
         display: inline-block;
         width: 50%;
     }
+    .fr{
+        font-size: 12px;
+    }
 </style>
 <template>
     <div>
@@ -48,7 +51,6 @@
 </template>
 <script>
     export default {
-        name: 'caigou',
         data() {
             return {
                 dataList: [],
