@@ -43,14 +43,6 @@
             <p class="form-item"><span class="required">* </span>联系方式：<input type="tel" placeholder="请输入联系方式" v-model="contact"></p>
             <p class="form-item"><span class="required">* </span>报价有效期至：
                 <input type="text" readonly @click="datepicker" v-model="messagevalidity">
-                <!--<el-date-picker-->
-                    <!--v-model="messagevalidity"-->
-                    <!--type="date"-->
-                    <!--format="yyyy 年 MM 月 dd 日"-->
-                    <!--value-format="yyyy-MM-dd"-->
-                    <!--style="float: right"-->
-                    <!--placeholder="选择日期">-->
-                <!--</el-date-picker>-->
             </p>
             <p>
                 <textarea name="note" id="note" cols="40" rows="10" v-model="note" placeholder="备注信息（选填）

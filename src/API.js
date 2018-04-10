@@ -68,8 +68,12 @@ const APIs = {
     DETECTION_LIST: '/app/detection/listProduct',
     // 检测机构列表
     ORGANIZATION_LIST: '/app/detection/listOrganization',
-    // 检测机构列表
+    // 检测项目列表
     TESTING_ITEM_LIST: '/app/detection/listItem',
+    // 检测订单生产
+    TESTING_SAVE_ORDER: '/app/detection/saveOrder',
+    // 检测订单列表
+    TESTING_LIST_ORDER: '/app/detection/listOrder',
     // 要检测详情
     DETECTION_DETAIL: '/app/detection/detailsOrder',
 
