@@ -160,7 +160,7 @@
                 </transition>
             </div>
         </div>
-        <div class="add-btn">+</div>
+        <div class="add-btn" @click="gotoPubilc(type)">+</div>
     </div>
 </template>
 <script>
@@ -233,6 +233,10 @@
             },
             infiniteScroll() {
                 this.fetchData()
+            },
+            gotoPubilc(type){
+                console.log(type);
+                this.$router.push({path:'service_public',query:{type:type}})
             }
 
         },

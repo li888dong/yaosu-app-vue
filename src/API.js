@@ -42,24 +42,32 @@ const APIs = {
 
     // 要项目
     PROJECT_LIST: '/app/project/list',
+    // 项目新增
+    PROJECT_SAVE: '/app/project/save',
     // 要项目详情
     PROJECT_DETAIL: '/app/project/details',
 
 
     // 要外贸
     FOREIGNTRADE_LIST: '/app/foreigntrade/list',
+    // 外贸新增
+    FOREIGNTRADE_SAVE: '/app/foreigntrade/save',
     // 外贸详情
     FOREIGNTRADE_DETAIL:'/app/foreigntrade/details',
 
 
     // 要技术
     TECHNOLOGY_LIST: '/app/technology/list',
+    // 技术新增
+    TECHNOLOGY_SAVE: '/app/technology/save',
     // 技术详情
     TECHNOLOGY_DETAIL:'/app/technology/details',
 
 
     // 要批文
     APPROVAL_NUMBER_LIST: '/app/approvalNumber/list',
+    // 批文新增
+    APPROVAL_NUMBER_SAVE: '/app/approvalNumber/save',
     // 要批文详情
     APPROVAL_NUMBER_DETAIL: '/app/approvalNumber/details',
 

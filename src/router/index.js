@@ -74,6 +74,8 @@ import Check from '../components/Check/Check.vue'
 import MakeTestingOrder from '../components/Check/MakeTestingOrder.vue'
 // 服务列表
 import ServiceList from '../components/Service/ServiceList.vue'
+// 服务发布
+import ServicePublic from '../components/Service/ServicePublic.vue'
 // 服务详情
 import ServiceDetail from '../components/Service/ServiceDetail.vue'
 
@@ -388,6 +390,14 @@ const router = new Router({
             path: '/service_list',
             name: 'service_list',
             component: ServiceList,
+            meta:{
+                title:'药素网'
+            }
+        },
+        {
+            path: '/service_public',
+            name: 'service_public',
+            component: ServicePublic,
             meta:{
                 title:'药素网'
             }
