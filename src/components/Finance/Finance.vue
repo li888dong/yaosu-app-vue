@@ -34,6 +34,9 @@
         transform: translateX(-100%);
         opacity: 0;
     }
+    .animate-item>img{
+        width: 100%;
+    }
 
 </style>
 <template>
@@ -50,10 +53,14 @@
         <div class="animate-container">
 
             <transition name="slide-fade1">
-                <div class="animate-item" v-if="curSelected==='supply'"></div>
+                <div class="animate-item supply" v-if="curSelected==='supply'">
+                    <img src="http://yaosuce.com/image/jinrong_zichan_app.jpg">
+                </div>
             </transition>
             <transition name="slide-fade2">
-                <div class="animate-item" v-if="curSelected==='demand'"></div>
+                <div class="animate-item demand" v-if="curSelected==='demand'">
+                    <img src="http://yaosuce.com/image/jinrong_zijin_app.jpg">
+                </div>
             </transition>
         </div>
 
