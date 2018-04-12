@@ -1,11 +1,13 @@
 <style scoped>
     @import "Procurement.css";
+    @import "../Home/SearchContainer.css";
 </style>
 <template>
     <div>
         <div class="top-bar">
             <i class="icon iconfont icon-fanhui" @click="$router.go(-1)"></i>
             <p>采购信息</p>
+            <i class="icon iconfont icon-search right" @click="showSearch"></i>
         </div>
         <!--采购列表-->
             <VueDataLoading
@@ -32,7 +34,13 @@
                 </div>
                 <div slot="infinite-scroll-loading">加载中...</div>
             </VueDataLoading>
-
+        <!--搜索框-->
+        <div v-if="toggle" class="empty-panel">
+            <div class="top-bar">
+                <i class="icon iconfont icon-search "></i>
+                <input type="search" v-model="keyword"><span class="search-btn" v-if="keyword" @click="doSearch">搜索</span><span class="search-btn" v-else @click="toggle=false">取消</span>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -45,6 +53,8 @@
                 pageSize: 15,
                 loading: false,
                 completed: false,
+                toggle:false,
+                keyword:'',
             }
         },
         mounted() {
@@ -95,7 +105,29 @@
                     return
                 }
                 this.$router.push({path:'offer_add',query:{procurementid:item.procurement.procurementid,publishType:'报价'}})
+            },
+            showSearch(){
+                this.toggle = true;
+            },
+            doSearch(){
+                this.page = 1;
+                let reqData = {
+                    page:this.page,
+                    pageSize:this.pageSize,
+                    search:this.keyword
+                };
+                this.$http.post(this.$APIs.PROCUREMENT_LIST,reqData)
+                    .then((res) => {
+                        if (res.data.status === 200) {
+                            this.toggle = false;
+                            this.dataList = res.data.data.rows;
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
             }
+
         }
     }
 </script>
