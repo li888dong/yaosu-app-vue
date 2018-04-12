@@ -1,5 +1,5 @@
 <style scoped>
-    @import "PriceSearch.css";
+    @import "../SearchContainer.css";
     .list-item{
         font-size: 14px;
         padding: 10px;

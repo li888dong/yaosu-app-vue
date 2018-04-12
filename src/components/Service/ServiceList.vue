@@ -1,5 +1,9 @@
 <style scoped>
 @import "ServiceList.css";
+@import "SearchContainer.css";
+    .search-list{
+        margin-top: 50px;
+    }
 </style>
 <template>
     <div>
@@ -7,7 +11,7 @@
             <div class="top-bar">
                 <i class="icon iconfont icon-fanhui" @click="$router.go(-1)"></i>
                 <p>{{type}}</p>
-                <i class="icon iconfont icon-search right"></i>
+                <i class="icon iconfont icon-search right" @click="showSearch"></i>
             </div>
             <div class="tabbar-container">
                 <span class="tabbar" :class="{ 'tabbar-selected':curSelected==='demand'}"
@@ -160,6 +164,79 @@
                 </transition>
             </div>
         </div>
+        <!--搜索框-->
+        <div v-if="toggle" class="empty-panel">
+            <div class="top-bar">
+                <i class="icon iconfont icon-search "></i>
+                <input type="search" v-model="keyword"><span class="search-btn" v-if="keyword" @click="doSearch">搜索</span><span class="search-btn" v-else @click="toggle=false">取消</span>
+            </div>
+            <div class="animate-item search-list">
+                <VueDataLoading
+                    :loading="loading"
+                    :completed="completed"
+                    :listens="['infinite-scroll']"
+                    :init-scroll="true"
+                    @infinite-scroll="infiniteScroll">
+                    <ul class="list-container">
+                        <li class="list-item" v-for="item in resData"
+                            @click="$router.push({path:'service_detail',query:{itemData:item,catorageType:type}})">
+                            <div v-if="type==='项目'">
+                                <div class="type" :class="{supply:item.type==='B'}">{{item.servicecategory.name}}
+                                </div>
+                                <div class="content">
+                                    <p class="hs-code">{{item.requirementdescription}}</p>
+                                    <p class="hs-code">{{item.companyname}}</p>
+                                </div>
+                                <div class="item-footer">
+                                    <p class="hs-code">
+                                        编号 : <span>{{item.projectno}}</span><span>{{new Date(item.addtime).Format('yyyy-MM-dd')}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div v-else-if="type==='外贸'">
+                                <div class="type" :class="{supply:item.type==='B'}">{{item.servicecategory.name}}
+                                </div>
+                                <div class="content">
+                                    <p class="hs-code">HS号:<span>{{item.hs}}</span></p>
+                                    <p class="hs-code">需求描述：<span>{{item.requirementdescription}}</span></p>
+                                </div>
+                                <div class="item-footer">
+                                    <p class="hs-code">
+                                        编号 : <span>{{item.foreigntradeno}}</span><span>{{new Date(item.addtime).Format('yyyy-MM-dd')}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div v-else-if="type==='技术'">
+                                <div class="type" :class="{supply:item.type==='B'}">{{item.servicecategory.name}}
+                                </div>
+                                <div class="content">
+                                    <p class="hs-code">{{item.requirementdescription}}</p>
+                                    <p class="hs-code">{{item.companyname}}</p>
+                                </div>
+                                <div class="item-footer">
+                                    <p class="hs-code">
+                                        编号 : <span>{{item.technologyno}}</span><span>{{new Date(item.addtime).Format('yyyy-MM-dd')}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div v-else-if="type==='批文'">
+                                <div class="type" :class="{supply:item.type==='B'}">{{item.servicecategory.name}}
+                                </div>
+                                <div class="content">
+                                    <p class="hs-code">需求描述：<span>{{item.requirementdescription}}</span></p>
+                                    <p class="hs-code"><span>{{item.companyname}}</span></p>
+                                </div>
+                                <div class="item-footer">
+                                    <p class="hs-code">
+                                        编号 : <span>{{item.approvalnumberno}}</span><span>{{new Date(item.addtime).Format('yyyy-MM-dd')}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </VueDataLoading>
+            </div>
+        </div>
         <div class="add-btn" @click="gotoPubilc(type)">+</div>
     </div>
 </template>
@@ -177,7 +254,10 @@
                 loading: false,
                 completed: false,
                 page: 1,
-                pageSize: 20
+                pageSize: 20,
+                toggle:false,
+                keyword:'',
+                searchhistorytypeid:''
             }
         },
         methods: {
@@ -194,6 +274,18 @@
                         return this.$APIs.TECHNOLOGY_LIST;
                     case '批文':
                         return this.$APIs.APPROVAL_NUMBER_LIST;
+                }
+            },
+            getReqSearchHistoryTypeId(type){
+                switch (type) {
+                    case '项目':
+                        return 40;
+                    case '外贸':
+                        return 39;
+                    case '技术':
+                        return 41;
+                    case '批文':
+                        return 42;
                 }
             },
             fetchData() {
@@ -213,7 +305,6 @@
                 this.$http.post(this.reqUrl,reqData)
                     .then((res) => {
                         if (res.data.status === 200) {
-                            this.page++;
                             this.resData = this.resData.concat(res.data.data.rows);
                             this.supplyDataList = this.resData.filter((item) => {
                                 return item.type === 'B'
@@ -232,11 +323,34 @@
                     });
             },
             infiniteScroll() {
-                this.fetchData()
+                this.fetchData();
+                this.page++;
             },
             gotoPubilc(type){
                 console.log(type);
                 this.$router.push({path:'service_public',query:{type:type}})
+            },
+            showSearch(){
+                this.toggle = true;
+                this.resData.length = 0;
+            },
+            doSearch(){
+                this.page = 1;
+                let reqData = {
+                    page:this.page,
+                    pageSize:this.pageSize,
+                    search:this.keyword,
+                    searchhistorytypeid:this.getReqSearchHistoryTypeId(this.type)
+                };
+                this.$http.post(this.reqUrl,reqData)
+                    .then((res) => {
+                        if (res.data.status === 200) {
+                            this.resData = res.data.data.rows;
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
             }
 
         },

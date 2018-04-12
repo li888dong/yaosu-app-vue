@@ -1,0 +1,33 @@
+.empty-panel{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background-color: #fff;
+    z-index: 14;
+}
+.empty-panel input{
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 70%;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 4px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    outline: none;
+    border: 1px solid transparent;
+    padding-left: 40px;
+    font-size: 14px;
+
+}
+.empty-panel .search-btn{
+    margin-left: 15px;
+}
+.empty-panel .icon-search{
+    position: relative;
+    left: 30px;
+    color: #03A657;
+}
