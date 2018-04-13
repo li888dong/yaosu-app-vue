@@ -121,7 +121,6 @@ const router = new Router({
             name: 'zhongyao_price',
             component: ZhongyaoPriceList,
             meta:{
-                access:'login',
                 title:'参考价格'
             }
         },
@@ -130,7 +129,6 @@ const router = new Router({
             name: 'yuanliao_price',
             component: YuanliaoPriceList,
             meta:{
-                access:'login',
                 title:'参考价格'
             }
         },
