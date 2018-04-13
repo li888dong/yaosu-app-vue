@@ -4,12 +4,12 @@
 <template>
     <div class="login-container">
         <div class="login-container-header">
-            <div v-if="curPage==='register'"><i class="icon iconfont icon-fanhui" @click="$router.go(-1)"></i></div>
+            <div v-if="curPage==='register'"><i class="icon iconfont icon-fanhui" @click="$router.push('home')"></i></div>
             <div v-if="curPage==='login'&&loginType==='password'"><i class="icon iconfont icon-fanhui"
-                                                                     @click="$router.go(-1)"></i><span
+                                                                     @click="$router.push('home')"></i><span
                 class="msg-login-btn" @click="loginType='msg'">短信登陆</span></div>
             <div v-if="curPage==='login'&&loginType==='msg'"><i class="icon iconfont icon-fanhui"
-                                                                @click="$router.go(-1)"></i><span class="msg-login-btn"
+                                                                @click="$router.push('home')"></i><span class="msg-login-btn"
                                                                                                   @click="loginType='password'">密码登陆</span>
             </div>
             <h2 v-if="curPage==='register'" class="title">欢迎注册</h2>

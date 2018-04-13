@@ -31,7 +31,11 @@
         <div class="detail-container">
             <p>编号：<span>{{itemData[itemNo]}}</span></p>
             <p>公司名称：<span>{{itemData.companyname}}</span></p>
-            <p>联系方式：<span>{{itemData.contactphone}}</span><span style="float: right;color: #03A657">查看联系方式</span></p>
+            <p>联系方式：
+                <span v-if="userId">{{itemData.contactphone}}</span>
+                <span v-else>*******</span>
+                <span v-if="!userId" style="float: right;color: #03A657" @click="$router.push('login')">登陆查看联系方式</span>
+            </p>
             <div class="title">需求描述</div>
             <p>{{itemData.requirementdescription}}</p>
             <div class="title">我的优势</div>
@@ -68,6 +72,9 @@
             },
             catorageType(){
                 return this.$route.query.catorageType
+            },
+            userId(){
+                return localStorage.getItem('uid')
             }
         },
         mounted() {
