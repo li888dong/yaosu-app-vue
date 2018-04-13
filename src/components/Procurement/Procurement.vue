@@ -114,7 +114,8 @@
                 let reqData = {
                     page:this.page,
                     pageSize:this.pageSize,
-                    search:this.keyword
+                    search:this.keyword,
+                    searchhistorytypeid:35
                 };
                 this.$http.post(this.$APIs.PROCUREMENT_LIST,reqData)
                     .then((res) => {

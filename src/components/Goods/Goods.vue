@@ -1,11 +1,16 @@
 <style scoped>
     @import "Goods.css";
+    @import "../Home/SearchContainer.css";
+    .search-list{
+        margin-top: 50px;
+    }
 </style>
 <template>
     <div class="pannel container">
         <div class="top-bar" v-if="$route.path==='/goods_list'">
             <i class="icon iconfont icon-fanhui" @click="$router.go(-1)"></i>
             <p>现货</p>
+            <i class="icon iconfont icon-search right" @click="showSearch"></i>
         </div>
         <div class="item-header" :style="{marginTop:$route.path==='/goods_list'?'2px':0}">
             <slot></slot>
@@ -45,6 +50,20 @@
                 </table>
             </div>
         </div>
+        <!--搜索框-->
+        <div v-if="toggle" class="empty-panel">
+            <div class="top-bar">
+                <i class="icon iconfont icon-search "></i>
+                <input type="search" v-model="keyword"><span class="search-btn" v-if="keyword" @click="doSearch">搜索</span><span class="search-btn" v-else @click="toggle=false">取消</span>
+            </div>
+            <div class="item-content goods-list search-list">
+                <div v-for="goodsItem in searchData" @click="$router.push({path:'goods_detail',query:{goodsId:goodsItem.goodId}})">
+                    <p>{{goodsItem.goodName}} <i class="icon iconfont icon-more"></i></p>
+                    <p>纯度:{{goodsItem.purity}}</p>
+                    <p><span>{{goodsItem.qiymc}}</span></p>
+                </div>
+            </div>
+        </div>
         <!--要现货列表-->
         <VueDataLoading v-if="$route.path==='/goods_list'" :loading="loading" :completed="completed" :listens="['infinite-scroll']" :init-scroll="true" @infinite-scroll="infiniteScroll">
             <div class="item-content goods-list">
@@ -77,7 +96,11 @@
                 loading: false,
                 completed: false,
                 page: 1,
-                pageSize:14
+                pageSize:14,
+                toggle:false,
+                keyword:'',
+                searchhistorytypeid:'',
+                searchData:[]
             }
         },
         computed: {
@@ -103,7 +126,11 @@
         methods: {
             fetchData() {
                 this.loading = true;
-                this.$http.get(this.$APIs.GOODS_LIST + '?categoryID=' + this.element.dataset.index+'&page='+this.page+'&pageSize='+this.pageSize)
+                this.$http.post(this.$APIs.GOODS_LIST,{
+                    categoryID:this.element.dataset.index,
+                    page:this.page,
+                    pageSize:this.pageSize
+                })
                     .then((res) => {
                         if (res.data.status === 200) {
                             this.$store.dispatch('set_goodsList',res.data.data.rows);
@@ -139,6 +166,28 @@
             infiniteScroll() {
                 this.fetchData();
             },
+            showSearch(){
+                this.toggle = true;
+                this.searchData.length = 0;
+            },
+            doSearch(){
+                this.page = 1;
+                let reqData = {
+                    page:this.page,
+                    pageSize:20,
+                    search:this.keyword,
+                    searchhistorytypeid:34
+                };
+                this.$http.post(this.$APIs.GOODS_LIST,reqData)
+                    .then((res) => {
+                        if (res.data.status === 200) {
+                            this.searchData = res.data.data.rows;
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
         }
     }
 </script>
