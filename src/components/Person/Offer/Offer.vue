@@ -70,7 +70,6 @@
                         if (res.data.status===200){
                             this.dataList = this.dataList.concat(res.data.data.rows);
                             console.log(this.dataList);
-                            this.page++
                         } else if(res.data.status===300){
                             this.completed = true
                         }else {
@@ -84,6 +83,7 @@
             },
             infiniteScroll() {
                 this.fetchData();
+                this.page++
             },
         }
     }
