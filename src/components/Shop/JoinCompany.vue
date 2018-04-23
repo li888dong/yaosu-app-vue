@@ -112,7 +112,6 @@
                 this.curSelected = type
             },
             submitByPerson(){
-                if (this)
                 this.$http.post(this.$APIs.JOIN_COMPANY_BY_PERSON,{
                     userId:localStorage.getItem('uid'),
                     companyId:this.companyId,
