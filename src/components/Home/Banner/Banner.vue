@@ -38,9 +38,6 @@
 
             }
         },
-        mounted() {
-            console.log('asd', this.$store.getters.banner)
-        },
         computed: {
             imgList() {
                 return this.$store.getters.banner.map(i => {

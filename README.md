@@ -31,7 +31,7 @@ npm run build --report
             -Finance 要金融
             -Goods 要现货
             -Home 首页
-                -Banner
+                -Banner 首页顶部banner
                 -Caigou 首页的采购
                 -jishu 首页的技术
                 -navlist 导航按钮
@@ -43,10 +43,18 @@ npm run build --report
             -Loading 加载中
             -Login 登陆注册
             -Person 个人中心
+                -Address 收货地址/收票地址
+                -Invoice 发票信息
+                -Offer 我的报价
+                -Order 订单
+                -OwnGoods 我的商品
+                -OwnProcurement 我的采购
+                -ShoppingCart 购物车
+                Person.vue 个人中心页
             -Procurement 要采购
             -Search 搜索
             -Service 服务（要技术，要项目，要外贸，要文号）
-            -Shop 购物车
+            -Shop 商铺
         -router 路由
         -store 在vuex中定义的全局变量
         -util 一些工具包
