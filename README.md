@@ -2,7 +2,7 @@
 
 > A Vue.js project
 
-## Build Setup
+## Build Setup（命令行构建指令）
 
 ``` bash
 # install dependencies
@@ -17,6 +17,8 @@ npm run build （项目打包指令）
 # build for production and view the bundle analyzer report
 npm run build --report
 
+
+```
 # 目录结构
     -build 开发环境配置
     -config 开发环境配置
@@ -65,6 +67,9 @@ npm run build --report
     -static 静态文件
     -index.html 页面入口
     -package.json 依赖包配置
-```
-
+# 和business静态页的合并
+    在两个项目内分别运行npm run build后，会生成dist目录，此目录内为打包
+    后的静态文件，将yaosu-vue-business内的dist里的index.html文件重命名为
+    static.html,然后复制static.html和static文件夹到yaosu-vue-webapp/dist内，
+    dist目录内的文件即为可用静态文件
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
